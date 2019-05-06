@@ -104,8 +104,14 @@ void Date::SetSec(int sec)
 #endif
 }*/ //----- Fin de Date (constructeur de copie)
 
+Date::Date()
+{
+	#ifdef MAP
+	    cout << "Appel au constructeur par défaut de <Date>" << endl;
+	#endif
+} //----- Fin de Date (constructeur par défaut)
 
-Date::Date (int annee, int mois, int jour, int heure, int min, int sec)
+Date::Date(int annee, int mois, int jour, int heure, int min, int sec)
 // Algorithme :
 //
 {
@@ -121,7 +127,7 @@ Date::Date (int annee, int mois, int jour, int heure, int min, int sec)
 } //----- Fin de Date
 
 
-Date::~Date ( )
+Date::~Date()
 // Algorithme :
 //
 {

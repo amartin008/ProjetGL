@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Date  -  description
+                           Mesure  -  description
                              -------------------
     début                : $06/05/2019$
     copyright            : (C) $2019$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Date> (fichier Date.h) ----------------
-#if ! defined ( Date_H )
-#define Date_H
+//---------- Interface de la classe <Mesure> (fichier Mesure.h) ----------------
+#if ! defined ( Mesure_H )
+#define Mesure_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,49 +17,26 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Date>
+// Rôle de la classe <Mesure>
 //
 //
 //------------------------------------------------------------------------
 
-class Date
+class Mesure
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
-    int GetAnnee();
+    // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
-    
-    void SetAnnee(int annee);
-    
-    int GetMois();
-    
-    void SetMois(int mois);
-    
-    int GetJour();
-    
-    void SetJour(int jour);
-    
-    int GetHeure();
-    
-    void SetHeure(int heure);
-    
-    int GetMin();
-    
-    void SetMin(int min);
-    
-    int GetSec();
-    
-    void SetSec(int sec);
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    //Date & operator = ( const Date & unDate );
+    //Mesure & operator = ( const Mesure & unMesure );
     // Mode d'emploi :
     //
     // Contrat :
@@ -67,21 +44,21 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    //Date ( const Date & unDate );
+    //Mesure ( const Mesure & unMesure );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
-    
-    Date();
 
-    Date(int annee, int mois, int jour, int heure, int min, int sec);
+    Mesure();
     // Mode d'emploi :
     //
     // Contrat :
     //
+    
+    Mesure(double valeur);
 
-    virtual ~Date ( );
+    virtual ~Mesure();
     // Mode d'emploi :
     //
     // Contrat :
@@ -93,16 +70,11 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	int annee;
-	int mois;
-	int jour;
-	int heure;
-	int min;
-	int sec;
+double valeur;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Date>
+//-------------------------------- Autres définitions dépendantes de <Mesure>
 
-#endif // Date_H
+#endif // Mesure_H
 
