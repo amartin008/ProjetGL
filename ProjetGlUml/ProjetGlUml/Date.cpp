@@ -106,24 +106,15 @@ void Date::SetSec(int sec)
 
 
 Date::Date (int annee, int mois, int jour, int heure, int min, int sec)
-// Algorithme :
-//
+	:annee(annee), mois(mois), jour(jour), heure(heure), min(min), sec(sec)
 {
 	#ifdef MAP
 	    cout << "Appel au constructeur de <Date>" << endl;
 	#endif
-	this->annee = annee;
-	this->mois = mois;
-	this-> jour = jour;
-	this->heure = heure;
-	this->min = min;
-	this->sec = sec;
 } //----- Fin de Date
 
 
 Date::~Date ( )
-// Algorithme :
-//
 {
 	#ifdef MAP
 		cout << "Appel au destructeur de <Date>" << endl;
@@ -131,8 +122,6 @@ Date::~Date ( )
 	
 } //----- Fin de ~Date
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

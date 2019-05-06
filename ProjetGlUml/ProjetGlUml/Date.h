@@ -97,7 +97,6 @@ protected:
 	int heure;
 	int min;
 	int sec;
-
 };
 
 //-------------------------------- Autres définitions dépendantes de <Date>

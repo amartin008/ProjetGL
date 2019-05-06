@@ -1,16 +1,78 @@
+/*************************************************************************
+						   Attribut  -  description
+							 -------------------
+	début                : $06/05/2019$
+	copyright            : (C) $2019$ par $AUTHOR$
+	e-mail               : $EMAIL$
+*************************************************************************/
+
+//---------- Interface de la classe <Attribut> (fichier Attribut.h) ----------------
+#if ! defined ( ATTRIBUT_H )
+#define ATTRIBUT_H
+
+//--------------------------------------------------- Interfaces utilisées
 #include <string>
-class Attribut{
-	public:
-		std::string getId();
-		std::string getUnit();
-		std::string getDescription();
+//------------------------------------------------------------- Constantes
 
-		Attribut(std::string Id, std::string unit, std::string description);
-		~Attribut();
+//------------------------------------------------------------------ Types
 
-	private:
-		std::string Id;
-		std::string unit;
-		std::string description;
+//------------------------------------------------------------------------
+// Rôle de la classe <Attribut>
+//
+//
+//------------------------------------------------------------------------
+
+class Attribut
+{
+	//----------------------------------------------------------------- PUBLIC
+
+public:
+	//----------------------------------------------------- Méthodes publiques
+
+	std::string GetId();
+
+	std::string GetUnit();
+
+	std::string GetDescription();
+
+	//------------------------------------------------- Surcharge d'opérateurs
+		//Attribut & operator = ( const Attribut & unAttribut );
+		// Mode d'emploi :
+		//
+		// Contrat :
+		//
+
+
+	//-------------------------------------------- Constructeurs - destructeur
+		//Attribut ( const Attribut & unAttribut );
+		// Mode d'emploi (constructeur de copie) :
+		//
+		// Contrat :
+		//
+
+	Attribut(std::string Id, std::string unit, std::string description);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+	virtual ~Attribut();
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
+//------------------------------------------------------------------ PRIVE
+
+protected:
+	//----------------------------------------------------- Méthodes protégées
+
+	//----------------------------------------------------- Attributs protégés
+	std::string Id;
+	std::string unit;
+	std::string description;
 };
 
+//-------------------------------- Autres définitions dépendantes de <Attribut>
+
+#endif // ATTRIBUT_H
