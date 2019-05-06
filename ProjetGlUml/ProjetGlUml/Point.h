@@ -37,6 +37,8 @@ public:
 
 	//-------------------------------------------- Constructeurs - destructeur
 	
+	Point();
+
 	Point(float latitude, float longitude);
 
 	~Point();

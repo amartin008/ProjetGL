@@ -38,6 +38,13 @@ string Attribut::GetDescription() {
 
 //-------------------------------------------- Constructeurs - destructeur
 
+Attribut::Attribut()
+{
+#ifdef MAP
+	cout << "Appel au constructeur par défaut de <Attribut>" << endl;
+#endif
+} //----- Fin de Attribut
+
 Attribut::Attribut(string Id, string unit, string description)
 	:Id(Id), unit(unit), description(description)
 {

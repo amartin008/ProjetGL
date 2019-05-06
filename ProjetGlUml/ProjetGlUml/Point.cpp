@@ -37,6 +37,14 @@ float Point::GetLongitude()
 
 //-------------------------------------------- Constructeurs - destructeur
 
+Point::Point()
+{
+#ifdef MAP
+	cout << "Appel au constructeur par défaut de <Point>" << endl;
+#endif
+} //----- Fin de Point
+
+
 Point::Point(float lat, float longi)
 	:latitude(lat), longitude(longi)
 {

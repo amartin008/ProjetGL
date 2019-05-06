@@ -26,7 +26,7 @@ double Mesure::GetValeur()
 // Algorithme :
 //
 {
-	return this->valeur;
+	return valeur;
 } //----- Fin de GetValeur
 
 void Mesure::SetValeur(double valeur)
@@ -55,20 +55,18 @@ void Mesure::SetValeur(double valeur)
 
 
 Mesure::Mesure()
-// Algorithme :
-//
 {
 	#ifdef MAP
 		cout << "Appel au constructeur par défaut de <Mesure>" << endl;
 	#endif
 } //----- Fin de Mesure (constructeur par défaut)
 
-Mesure::Mesure(double valeur)
+Mesure::Mesure(double valeur, Date date, string attribut)
+	:valeur(valeur), date(date), attributID(attribut)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <Mesure>" << endl;
 	#endif
-	this->valeur = valeur;
 } //----- Fin de Mesure
 
 

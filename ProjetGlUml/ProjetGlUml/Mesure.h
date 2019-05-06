@@ -7,11 +7,13 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Mesure> (fichier Mesure.h) ----------------
-#if ! defined ( Mesure_H )
-#define Mesure_H
+#if ! defined ( MESURE_H )
+#define MESURE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <string>
+#include "Date.h"
+#include "Attribut.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -29,13 +31,8 @@ class Mesure
 public:
 //----------------------------------------------------- Méthodes publiques
     double GetValeur();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     
     void SetValeur(double valeur);
-
 
 //------------------------------------------------- Surcharge d'opérateurs
     //Mesure & operator = ( const Mesure & unMesure );
@@ -53,30 +50,23 @@ public:
     //
 
     Mesure();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     
-    Mesure(double valeur);
+    Mesure(double valeur, Date date, string attributID);
 
     virtual ~Mesure();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+//----------------------------------------------------- Méthodes protégée
 
 //----------------------------------------------------- Attributs protégés
-double valeur;
-
+	double valeur;
+	Date date;
+	std::string attributID;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Mesure>
 
-#endif // Mesure_H
+#endif // MESURE_H
 

@@ -50,17 +50,11 @@ public:
 		// Contrat :
 		//
 
+	Attribut();
+
 	Attribut(std::string Id, std::string unit, std::string description);
-	// Mode d'emploi :
-	//
-	// Contrat :
-	//
 
 	virtual ~Attribut();
-	// Mode d'emploi :
-	//
-	// Contrat :
-	//
 
 //------------------------------------------------------------------ PRIVE
 
