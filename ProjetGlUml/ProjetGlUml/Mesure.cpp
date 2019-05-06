@@ -62,7 +62,7 @@ Mesure::Mesure()
 } //----- Fin de Mesure (constructeur par défaut)
 
 Mesure::Mesure(double valeur, Date date, string attribut)
-	:valeur(valeur), date(date), attributID(attribut)
+	:valeur(valeur), date(date), idAttribut(attribut)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <Mesure>" << endl;

@@ -7,12 +7,14 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Capteur> (fichier Capteur.h) ----------------
-#if ! defined ( Capteur_H )
-#define Capteur_H
+#if ! defined ( CAPTEUR_H )
+#define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include "string.h"
-
+#include <string>
+#include <vector>
+#include "Point.h"
+#include "Mesure.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -29,19 +31,19 @@ class Capteur
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    string GetId();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    std::string GetId();
     
-    void SetId(string id);
+    void SetId(std::string id);
     
-    string GetDescription();
+    std::string GetDescription();
     
-    void SetDescription(string description);
+    void SetDescription(std::string description);
 
+	Point GetLocalisation();
 
+	std::vector<Mesure> GetMesures();
+
+	void SetMesures(vector<Mesure> mes);
 //------------------------------------------------- Surcharge d'opérateurs
     //Capteur & operator = ( const Capteur & unCapteur );
     // Mode d'emploi :
@@ -58,18 +60,10 @@ public:
     //
 
     Capteur();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     
-    Capteur(string id, string description);
+    Capteur(std::string id, std::string description, Point local);
 
     virtual ~Capteur();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 
@@ -77,12 +71,13 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	string id;
-	string description;
-
+	std::string id;
+	std::string description;
+	Point localisation;
+	std::vector<Mesure> mesures;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Capteur>
 
-#endif // Capteur_H
+#endif // CAPTEUR_H
 

@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Attribut.h" />
+    <ClInclude Include="Capteur.h" />
     <ClInclude Include="Contexte.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Mesure.h" />
@@ -123,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Attribut.cpp" />
+    <ClCompile Include="Capteur.cpp" />
     <ClCompile Include="Contexte.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Mesure.cpp" />

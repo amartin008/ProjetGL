@@ -63,7 +63,7 @@ protected:
 //----------------------------------------------------- Attributs protégés
 	double valeur;
 	Date date;
-	std::string attributID;
+	std::string idAttribut;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Mesure>

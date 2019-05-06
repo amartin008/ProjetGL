@@ -44,6 +44,17 @@ void Capteur::SetDescription(string description)
 	this->description = description;
 } //----- Fin de SetDescription
 
+Point Capteur::GetLocalisation() {
+	return localisation;
+}
+
+vector<Mesure> Capteur::GetMesures() {
+	return mesures;
+}
+
+void Capteur::SetMesures(vector<Mesure> mes) {
+	mesures = mes;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 //Capteur & Capteur::operator = ( const Capteur & unCapteur )
@@ -73,8 +84,8 @@ Capteur::Capteur()
 	#endif
 } //----- Fin de Capteur (constructeur par défaut)
 
-Capteur::Capteur(string id, string description)
-	:id(id), description(description)
+Capteur::Capteur(string id, string description, Point p)
+	:id(id), description(description), localisation(p)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <Capteur>" << endl;
