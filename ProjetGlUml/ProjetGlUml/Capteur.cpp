@@ -1,0 +1,98 @@
+/*************************************************************************
+                           Capteur  -  description
+                             -------------------
+    début                : $06/05/2019$
+    copyright            : (C) $2019$ par $AUTHOR$
+    e-mail               : $EMAIL$
+*************************************************************************/
+
+//---------- Réalisation de la classe <Capteur> (fichier Capteur.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+#include <iostream>
+using namespace std;
+
+//------------------------------------------------------ Include personnel
+#include "Capteur.h"
+
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+string Capteur::GetId()
+// Algorithme :
+//
+{
+	return this->id;
+} //----- Fin de GetId
+
+void Capteur::SetId(string id)
+{
+	this->id = id;
+} //----- Fin de SetId
+
+string Capteur::GetDescription()
+{
+	return this->description;
+} //----- Fin de GetDescription
+
+void Capteur::SetDescription(string description)
+{
+	this->description = description;
+} //----- Fin de SetDescription
+
+
+//------------------------------------------------- Surcharge d'opérateurs
+//Capteur & Capteur::operator = ( const Capteur & unCapteur )
+// Algorithme :
+//
+/*{
+}*/ //----- Fin de operator =
+
+
+//-------------------------------------------- Constructeurs - destructeur
+//Capteur::Capteur ( const Capteur & unCapteur )
+// Algorithme :
+//
+/*{
+	#ifdef MAP
+		cout << "Appel au constructeur de copie de <Capteur>" << endl;
+	#endif
+}*/ //----- Fin de Capteur (constructeur de copie)
+
+
+Capteur::Capteur()
+// Algorithme :
+//
+{
+	#ifdef MAP
+		cout << "Appel au constructeur par défaut de <Capteur>" << endl;
+	#endif
+} //----- Fin de Capteur (constructeur par défaut)
+
+Capteur::Capteur(string id, string description)
+	:id(id), description(description)
+{
+	#ifdef MAP
+		cout << "Appel au constructeur de <Capteur>" << endl;
+	#endif
+} //----- Fin de Capteur
+
+
+Capteur::~Capteur()
+// Algorithme :
+//
+{
+	#ifdef MAP
+		cout << "Appel au destructeur de <Capteur>" << endl;
+	#endif
+} //----- Fin de ~Capteur
+
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées
+
