@@ -22,9 +22,37 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+
+void Outil::lancerOutil() {
+	int choix;
+	cout << "Bienvenue! Selectionne stp" << endl;
+	do{
+		cin >> choix;
+		if (cin.good()) {
+			switch(choix) {
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			default:
+				break;
+			}
+		}
+		else {
+			cout << "Entrée invalide!" << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	} while (choix != 12);
+}
+
 string Outil::GetFichierCapteurs()
-// Algorithme :
-//
 {
 	return this->fichierCapteurs;
 } //----- Fin de GetFichierCapteurs

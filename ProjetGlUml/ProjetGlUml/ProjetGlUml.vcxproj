@@ -120,6 +120,7 @@
     <ClInclude Include="Contexte.h" />
     <ClInclude Include="Date.h" />
     <ClInclude Include="Mesure.h" />
+    <ClInclude Include="Outil.h" />
     <ClInclude Include="Point.h" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +129,7 @@
     <ClCompile Include="Contexte.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Mesure.cpp" />
+    <ClCompile Include="Outil.cpp" />
     <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

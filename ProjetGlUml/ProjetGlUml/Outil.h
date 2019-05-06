@@ -13,7 +13,10 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <map>
+#include <vector>
 
+#include "Capteur.h"
+#include "Attribut.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -30,11 +33,9 @@ class Outil
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    std::string GetFichierCapteurs();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+	void lancerOutil();
+	
+	std::string GetFichierCapteurs();
     
     void SetFichierCapteurs(std::string fichierCapteurs);
     
@@ -85,6 +86,8 @@ protected:
 	std::string fichierAttributs;
 	std::map<string,int> moyenneCapteurs;
 
+	std::vector<Capteur> capteurs;
+	std::vector<Attribut> attributs;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Outil>
