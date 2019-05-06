@@ -28,11 +28,13 @@ class Mesure
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    double GetValeur();
     // Mode d'emploi :
     //
     // Contrat :
     //
+    
+    void SetValeur(double valeur);
 
 
 //------------------------------------------------- Surcharge d'opérateurs

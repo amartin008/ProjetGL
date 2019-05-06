@@ -22,11 +22,17 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Mesure::Méthode ( liste des paramètres )
+double Mesure::GetValeur()
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+	return this->valeur;
+} //----- Fin de GetValeur
+
+void Mesure::SetValeur(double valeur)
+{
+	this->valeur = valeur;
+} //----- Fin de SetValeur
 
 
 //------------------------------------------------- Surcharge d'opérateurs
