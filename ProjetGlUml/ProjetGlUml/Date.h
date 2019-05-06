@@ -72,8 +72,10 @@ public:
     //
     // Contrat :
     //
+    
+    Date();
 
-    Date (int annee, int mois, int jour, int heure, int min, int sec);
+    Date(int annee, int mois, int jour, int heure, int min, int sec);
     // Mode d'emploi :
     //
     // Contrat :

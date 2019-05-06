@@ -87,23 +87,17 @@ void Date::SetSec(int sec)
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-//Date & Date::operator = ( const Date & unDate )
-// Algorithme :
-//
-/*{
-}*/ //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-//Date::Date ( const Date & unDate )
-// Algorithme :
-//
-/*{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Date>" << endl;
-#endif
-}*/ //----- Fin de Date (constructeur de copie)
 
+
+Date::Date()
+{
+	#ifdef MAP
+	    cout << "Appel au constructeur par défaut de <Date>" << endl;
+	#endif
+} //----- Fin de Date (constructeur par défaut)
 
 Date::Date (int annee, int mois, int jour, int heure, int min, int sec)
 	:annee(annee), mois(mois), jour(jour), heure(heure), min(min), sec(sec)
