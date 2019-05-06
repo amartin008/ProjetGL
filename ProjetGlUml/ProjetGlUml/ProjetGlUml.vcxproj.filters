@@ -21,12 +21,18 @@
     <ClInclude Include="Point.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Date.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Attribut.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Point.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Date.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
