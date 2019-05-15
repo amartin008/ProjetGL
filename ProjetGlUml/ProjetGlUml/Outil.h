@@ -69,6 +69,12 @@ public:
     // Contrat :
     //
 
+	Outil(std::string fichierCapteurs, std::string fichierMesures, std::string fichierAttributs);
+	// Mode d'emploi :
+	//
+	// Contrat :
+	//
+
     virtual ~Outil();
     // Mode d'emploi :
     //
@@ -84,7 +90,8 @@ protected:
 	std::string fichierCapteurs;
 	std::string fichierMesures;
 	std::string fichierAttributs;
-	std::map<string,int> moyenneCapteurs;
+	std::map<string,float> moyenneCapteurs;
+	std::multimap<string, string> typeMesuresCapteurs;
 
 	std::vector<Capteur> capteurs;
 	std::vector<Attribut> attributs;

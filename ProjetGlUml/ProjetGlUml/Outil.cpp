@@ -24,32 +24,51 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 void Outil::lancerOutil() {
-	int choix;
-	cout << "Bienvenue! Selectionne stp" << endl;
-	do{
+	int choix = 0;
+	int confirmation = 0;
+	do {
+		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
+		cout << "1. Lancer le mode analyse" << endl;
+		cout << "2. Lancer le mode surveillance" << endl;
+		cout << "3. Quitter l'application" << endl;
+		cout << "Votre choix : ";
 		cin >> choix;
+		cout << endl;
 		if (cin.good()) {
 			switch(choix) {
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
-			case 5:
-				break;
-			default:
-				break;
+				case 1:
+					cout << "Mode analyse" << endl;
+					cout << endl;
+					break;
+				case 2:
+					cout << "Mode surveillance" << endl;
+					cout << endl;
+					break;
+				case 3:
+					do {
+						cout << "Etes-vous sur de vouloir quitter l'application ?" << endl;
+						cout << "1. Oui" << endl;
+						cout << "2. Non" << endl;
+						cout << "Votre choix : ";
+						cin >> confirmation;
+						cout << endl;
+						if(!cin.good()) {
+							cout << "Entree invalide !" << endl;
+							cout << endl;
+							confirmation = 0;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+					} while (confirmation!=1 && confirmation!=2);
+					break;
 			}
-		}
-		else {
-			cout << "Entrée invalide!" << endl;
+		} else {
+			cout << "Entree invalide !" << endl;
+			cout << endl;
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
-	} while (choix != 12);
+	} while (confirmation != 1);
 }
 
 string Outil::GetFichierCapteurs()
@@ -111,6 +130,14 @@ Outil::Outil()
 	#endif
 } //----- Fin de Outil (constructeur par défaut)
 
+Outil::Outil(string fichierCapteurs, string fichierMesures, string fichierAttributs)
+	:fichierCapteurs(fichierCapteurs), fichierMesures(fichierMesures), fichierAttributs(fichierAttributs)
+{
+	#ifdef MAP
+		cout << "Appel au constructeur de <Outil>" << endl;
+	#endif
+
+}
 
 Outil::~Outil()
 // Algorithme :
