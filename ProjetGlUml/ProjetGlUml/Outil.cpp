@@ -11,6 +11,7 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -52,18 +53,25 @@ void Outil::lancerOutil() {
 						cout << "Votre choix : ";
 						cin >> confirmation;
 						cout << endl;
-						if(!cin.good()) {
-							cout << "Entree invalide !" << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
 							cout << endl;
 							confirmation = 0;
 							cin.clear();
 							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						} else if (confirmation != 1 && confirmation != 2) {
+							cout << "Veuillez selectionner un chiffre entre 1 et 2." << endl;
+							cout << endl;
 						}
 					} while (confirmation!=1 && confirmation!=2);
 					break;
+				default:
+					cout << "Veuillez selectionner un chiffre entre 1 et 3." << endl;
+					cout << endl;
+					break;
 			}
 		} else {
-			cout << "Entree invalide !" << endl;
+			cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
 			cout << endl;
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -136,7 +144,22 @@ Outil::Outil(string fichierCapteurs, string fichierMesures, string fichierAttrib
 	#ifdef MAP
 		cout << "Appel au constructeur de <Outil>" << endl;
 	#endif
+	ifstream fluxCapteurs(fichierCapteurs.c_str());
+	string tmp;
+	getline(fluxCapteurs, tmp);
+	Capteur capteur;
+	while (fluxCapteurs >> capteur) {
+		capteurs.push_back(capteur);
+	}
 
+	ifstream fluxAttributs(fichierAttributs.c_str());
+	getline(fluxAttributs, tmp);
+	Attribut attribut;
+	while (fluxAttributs >> attribut) {
+		attributs.push_back(attribut);
+	}
+
+	//compléter les map et multimap...
 }
 
 Outil::~Outil()

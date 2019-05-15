@@ -31,7 +31,11 @@ public:
 
 	float GetLatitude();
 
+	void SetLatitude(float lat);
+
 	float GetLongitude();
+
+	void SetLongitude(float lng);
 
 	//------------------------------------------------- Surcharge d'opérateurs
 

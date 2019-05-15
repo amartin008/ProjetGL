@@ -23,18 +23,46 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 string Attribut::GetId() {
-	return Id;
+	return id;
+}
+
+void Attribut::SetId(string id) {
+	this->id = id;
 }
 
 string Attribut::GetUnit() {
 	return unit;
 }
 
+void Attribut::SetUnit(string unit) {
+	this->unit = unit;
+}
+
 string Attribut::GetDescription() {
 	return description;
 }
 
+void Attribut::SetDescription(string description) {
+	this->description = description;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
+istream & operator >> (istream & flux, Attribut & attribut)
+// Algorithme :
+//
+{
+	string tmp;
+
+	getline(flux, tmp, ';');
+	attribut.SetId(tmp);
+	getline(flux, tmp, ';');
+	attribut.SetUnit(tmp);
+	getline(flux, tmp, ';');
+	attribut.SetDescription(tmp);
+	getline(flux, tmp);
+
+	return flux;
+} //----- Fin de operator >>
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -45,8 +73,8 @@ Attribut::Attribut()
 #endif
 } //----- Fin de Attribut
 
-Attribut::Attribut(string Id, string unit, string description)
-	:Id(Id), unit(unit), description(description)
+Attribut::Attribut(string id, string unit, string description)
+	:id(id), unit(unit), description(description)
 {
 #ifdef MAP
 	cout << "Appel au constructeur de <Attribut>" << endl;

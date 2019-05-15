@@ -28,10 +28,21 @@ float Point::GetLatitude()
 	return latitude;
 }
 
+void Point::SetLatitude(float lat)
+{
+	latitude = lat;
+}
+
 float Point::GetLongitude()
 {
 	return longitude;
 }
+
+void Point::SetLongitude(float lng)
+{
+	longitude = lng;
+}
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 

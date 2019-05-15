@@ -45,11 +45,7 @@ public:
 
 	void SetMesures(vector<Mesure> mes);
 //------------------------------------------------- Surcharge d'opérateurs
-    //Capteur & operator = ( const Capteur & unCapteur );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+	friend std::istream & operator >> (std::istream & flux, Capteur & capteur);
 
 
 //-------------------------------------------- Constructeurs - destructeur

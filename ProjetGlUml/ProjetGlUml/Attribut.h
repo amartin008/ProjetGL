@@ -31,9 +31,15 @@ public:
 
 	std::string GetId();
 
+	void SetId(std::string id);
+
 	std::string GetUnit();
 
+	void SetUnit(std::string unit);
+
 	std::string GetDescription();
+
+	void SetDescription(std::string description);
 
 	//------------------------------------------------- Surcharge d'opérateurs
 		//Attribut & operator = ( const Attribut & unAttribut );
@@ -44,11 +50,7 @@ public:
 
 
 	//-------------------------------------------- Constructeurs - destructeur
-		//Attribut ( const Attribut & unAttribut );
-		// Mode d'emploi (constructeur de copie) :
-		//
-		// Contrat :
-		//
+	friend std::istream & operator >> (std::istream & flux, Attribut & attribut);
 
 	Attribut();
 
@@ -62,7 +64,7 @@ protected:
 	//----------------------------------------------------- Méthodes protégées
 
 	//----------------------------------------------------- Attributs protégés
-	std::string Id;
+	std::string id;
 	std::string unit;
 	std::string description;
 };

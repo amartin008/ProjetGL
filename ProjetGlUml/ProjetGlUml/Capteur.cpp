@@ -57,11 +57,23 @@ void Capteur::SetMesures(vector<Mesure> mes) {
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-//Capteur & Capteur::operator = ( const Capteur & unCapteur )
+istream & operator >> (istream & flux, Capteur & capteur)
 // Algorithme :
 //
-/*{
-}*/ //----- Fin de operator =
+{
+	string tmp;
+
+	getline(flux, tmp, ';');
+	capteur.SetId(tmp);
+	getline(flux, tmp, ';');
+	capteur.GetLocalisation().SetLatitude(atof(tmp.c_str()));
+	getline(flux, tmp, ';');
+	capteur.GetLocalisation().SetLongitude(atof(tmp.c_str()));
+	getline(flux, tmp);
+	capteur.SetDescription(tmp);
+
+	return flux;
+} //----- Fin de operator >>
 
 
 //-------------------------------------------- Constructeurs - destructeur
