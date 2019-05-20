@@ -1,9 +1,8 @@
 /*************************************************************************
-						   Point  -  description
-							 -------------------
-	début                : $06/05/2019$
-	copyright            : (C) $2019$ par $AUTHOR$
-	e-mail               : $EMAIL$
+                           Point - description
+                             -------------------
+    début                : 06/05/2019
+    copyright            : (C) Atmospher'IF par La Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Point> (fichier Point.h) ----------------
