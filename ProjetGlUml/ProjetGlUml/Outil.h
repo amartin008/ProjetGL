@@ -2,8 +2,7 @@
                            Outil  -  description
                              -------------------
     début                : $06/05/2019$
-    copyright            : (C) $2019$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    copyright            : (C) $2019$ par la Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Outil> (fichier Outil.h) ----------------
