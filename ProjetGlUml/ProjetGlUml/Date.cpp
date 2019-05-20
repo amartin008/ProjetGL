@@ -2,8 +2,8 @@
                            Date  -  description
                              -------------------
     début                : $06/05/2019$
-    copyright            : (C) $2019$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    copyright            : (C) Atmospher'IF par la Mims Team
+
 *************************************************************************/
 
 //---------- Réalisation de la classe <Date> (fichier Date.cpp) ------------
