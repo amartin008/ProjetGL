@@ -2,8 +2,7 @@
                            Capteur  -  description
                              -------------------
     début                : $06/05/2019$
-    copyright            : (C) $2019$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    copyright            : (C) Atmospher'IF par la Mims Team
 *************************************************************************/
 
 //---------- Réalisation de la classe <Capteur> (fichier Capteur.cpp) ------------
@@ -73,6 +72,14 @@ istream & operator >> (istream & flux, Capteur & capteur)
 	capteur.SetDescription(tmp);
 
 	return flux;
+} //----- Fin de operator >>
+
+ostream & operator << (ostream & out, Capteur & capteur)
+// Algorithme :
+//
+{
+	out << capteur.id << " " << capteur.description << endl;
+	return out;
 } //----- Fin de operator >>
 
 

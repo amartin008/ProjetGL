@@ -1,16 +1,15 @@
 /*************************************************************************
-						   Contexte  -  description
-							 -------------------
-	dÈbut                : $06/05/2019$
-	copyright            : (C) $2019$ par $AUTHOR$
-	e-mail               : $EMAIL$
+                           Contexte - description
+                             -------------------
+    d√©but                : 06/05/2019
+    copyright            : (C) Atmospher'IF par La Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Contexte> (fichier Contexte.h) ----------------
 #if ! defined ( CONTEXTE_H )
 #define CONTEXTE_H
 
-//--------------------------------------------------- Interfaces utilisÈes
+//--------------------------------------------------- Interfaces utilis√©es
 #include "Date.h"
 #include "Point.h"
 //------------------------------------------------------------- Constantes
@@ -18,8 +17,11 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// RÙle de la classe <Contexte>
-//
+// R√¥le de la classe <Contexte>
+//L‚Äôobjet <Contexte> permet de rassembler les contextes g√©ographique et temporel. 
+//Les attributs Point et Rayon permettent de d√©finir la zone g√©ographique.
+//Pour la p√©riode de v√©rification, l‚Äôobjet <Contexte> prend un ou deux objets 
+//<Date> suivant le choix d‚Äôune analyse √† un moment donn√© ou sur une p√©riode.
 //
 //------------------------------------------------------------------------
 
@@ -28,47 +30,52 @@ class Contexte
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- MÈthodes publiques
+	//----------------------------------------------------- M√©thodes publiques
 
-	bool EstDedans(Point p);
+	bool EstDedans(Point p) const;
 
-	bool EstDedans(Date d);
+	bool EstDedans(Date d) const;
 
-	float GetRayon();
+	float GetRayon() const;
 
-	Point GetPoint();
+	void setRayon(float rayon);
 
-	Date GetDebut();
+	Point GetPoint() const;
+	
+	void setPoint(Point &unPoint);
 
-	Date GetFin();
+	Date GetDebut() const;
 
-	//------------------------------------------------- Surcharge d'opÈrateurs
-		//Contexte & operator = ( const Contexte & unContexte );
-		// Mode d'emploi :
-		//
-		// Contrat :
-		//
+	void setDateDebut(Date &uneDateDebut);
 
+	Date GetFin() const;
+
+	void setDateFin(Date &uneDateFin);
 
 	//-------------------------------------------- Constructeurs - destructeur
-		//Contexte ( const Contexte & unContexte );
-		// Mode d'emploi (constructeur de copie) :
-		//
-		// Contrat :
-		//
 
 	Contexte();
+	//Mode d'emploi : 
+	//Constructeur par d√©faut de la classe Contexte
 
-	Contexte(float r, Point c, Date d, Date f);
+	Contexte(float r, Point c);
+	//Mode d'emploi :
+	//Constructeur de la classe contexte permettant de d√©finir un contexte
+	//g√©ographique
+
+	Contexte(Date d, Date f=0);
+	//Mode d'emploi :
+	//Constructeur de la classe contexte permettant de d√©finir un contexte
+	//temporel. La date de fin est optionnelle.
 
 	virtual ~Contexte();
+	//Mode d'emploi :
+	//Destructeur de la classe Contexte.
 
 	//------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- MÈthodes protÈgÈe
-
-	//----------------------------------------------------- Attributs protÈgÈs
+	//----------------------------------------------------- Attributs prot√©g√©s
 	float rayon;
 	Point centre;
 	
@@ -76,6 +83,6 @@ protected:
 	Date fin;
 };
 
-//-------------------------------- Autres dÈfinitions dÈpendantes de <Contexte>
+//-------------------------------- Autres d√©finitions d√©pendantes de <Contexte>
 
 #endif // CONTEXTE_H

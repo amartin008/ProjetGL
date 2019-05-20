@@ -11,6 +11,7 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#define _CRT_SECURE_NO_WARNINGS
 #include <fstream>
 #include <iostream>
 #include <set>
@@ -29,14 +30,23 @@ using namespace std;
 void Outil::lancerOutil() {
 	int choix = 0;
 	int confirmation = 0;
+
+	string input;
+	FILE* buffer;
+
+	Capteur capteur;
+	Attribut attribut;
+
 	do {
 		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
 		cout << "1. Lancer le mode analyse" << endl;
 		cout << "2. Lancer le mode surveillance" << endl;
-		cout << "3. Quitter l'application" << endl;
+		cout << "3. Specifiez l'emplacement fichiers" << endl;
+		cout << "4. Quitter l'application" << endl;
 		cout << "Votre choix : ";
 		cin >> choix;
 		cout << endl;
+		
 		if (cin.good()) {
 			switch(choix) {
 				case 1:
@@ -48,6 +58,82 @@ void Outil::lancerOutil() {
 					cout << endl;
 					break;
 				case 3:
+					cout << "Les fichiers doivent etre dans le repertoire data_folder" << endl;
+					cout << endl;
+					
+					do{
+						cout << "Fichier concernant les capteurs (N pour annuler): ";
+						cin >> input;
+
+						cout << endl;
+						buffer = fopen(("data_folder/"+input).c_str(), "r");
+						if (!input.compare("N")) {
+							break;
+						} else if(buffer == NULL){
+							cerr << "Fichier inexistant" << endl;
+							cout << endl;
+						} else {
+							SetFichierCapteurs("data_folder/" + input);
+							ifstream flux(fichierCapteurs);
+							getline(flux, input);
+							while (flux >> capteur) {
+								capteurs.push_back(capteur);
+							}
+						}
+					} while (buffer == NULL);
+					
+					if (buffer != NULL) {
+						fclose(buffer);
+					}					
+
+					do {
+						cout << "Fichier concernant les attributs (N pour annuler): ";
+						cin >> input;
+
+						cout << endl;
+						buffer = fopen(("data_folder/" + input).c_str(), "r");
+
+						if (!input.compare("N")) {
+							break;
+						} else if (buffer == NULL) {
+							cerr << "Fichier inexistant" << endl;
+							cout << endl;
+						} else {
+							SetFichierAttributs("data_folder/" + input);
+							ifstream flux(fichierAttributs);
+							getline(flux, input);
+							while (flux >> attribut) {
+								attributs.push_back(attribut);
+							}
+						}
+					} while (buffer == NULL);
+
+					if (buffer != NULL) {
+						fclose(buffer);
+					}
+
+					do{
+						cout << "Fichier concernant les mesures (N pour annuler): ";
+						cin >> input;
+
+						cout << endl;
+						buffer = fopen(("data_folder/" + input).c_str(), "r");
+						if (!input.compare("N")) {
+							break;
+						} else if (buffer == NULL){
+							cerr << "Fichier inexistant" << endl;
+							cout << endl;
+						} else {
+							SetFichierMesures("data_folder/" + input);
+						}
+					} while (buffer == NULL);
+					
+					if (buffer != NULL) {
+						fclose(buffer);
+					}
+
+					break;
+				case 4:
 					do {
 						cout << "Etes-vous sur de vouloir quitter l'application ?" << endl;
 						cout << "1. Oui" << endl;
@@ -91,7 +177,7 @@ void Outil::SetFichierCapteurs(string fichierCapteurs)
 	this->fichierCapteurs = fichierCapteurs;
 } //----- Fin de SetFichierCapteurs
 
-string Outil::GetFichierMesures()
+string Outil::GetFichierMesures() 
 {
 	return this->fichierMesures;
 } //----- Fin de GetFichierMesures
