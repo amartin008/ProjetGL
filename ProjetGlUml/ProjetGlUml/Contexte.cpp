@@ -2,8 +2,7 @@
 						   Contexte  -  description
 							 -------------------
 	début                : $06/05/2019$
-	copyright            : (C) $2019$ par $AUTHOR$
-	e-mail               : $EMAIL$
+	copyright            : (C) Atmospher'IF par la Mims Team
 *************************************************************************/
 
 //---------- Réalisation de la classe <Contexte> (fichier Contexte.cpp) ------------
@@ -81,13 +80,6 @@ Date Contexte::GetFin()
 {
 	return fin;
 }
-
-//------------------------------------------------- Surcharge d'opérateurs
-//Contexte & Contexte::operator = ( const Contexte & unContexte )
-// Algorithme :
-//
-/*{
-}*/ //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur

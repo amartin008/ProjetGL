@@ -2,8 +2,7 @@
 						   Contexte  -  description
 							 -------------------
 	début                : $06/05/2019$
-	copyright            : (C) $2019$ par $AUTHOR$
-	e-mail               : $EMAIL$
+	copyright            : (C) Atmospher'IF par la Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Contexte> (fichier Contexte.h) ----------------
@@ -19,7 +18,10 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Contexte>
-//
+//L’objet <Contexte> permet de rassembler les contextes géographique et temporel. 
+//Les attributs Point et Rayon permettent de définir la zone géographique.
+//Pour la période de vérification, l’objet <Contexte> prend un ou deux objets 
+//<Date> suivant le choix d’une analyse à un moment donné ou sur une période.
 //
 //------------------------------------------------------------------------
 
@@ -30,44 +32,49 @@ class Contexte
 public:
 	//----------------------------------------------------- Méthodes publiques
 
-	bool EstDedans(Point p);
+	bool EstDedans(Point p) const;
 
-	bool EstDedans(Date d);
+	bool EstDedans(Date d) const;
 
-	float GetRayon();
+	float GetRayon() const;
 
-	Point GetPoint();
+	void setRayon(float rayon);
 
-	Date GetDebut();
+	Point GetPoint() const;
+	
+	void setPoint(Point &unPoint);
 
-	Date GetFin();
+	Date GetDebut() const;
 
-	//------------------------------------------------- Surcharge d'opérateurs
-		//Contexte & operator = ( const Contexte & unContexte );
-		// Mode d'emploi :
-		//
-		// Contrat :
-		//
+	void setDateDebut(Date &uneDateDebut);
 
+	Date GetFin() const;
+
+	void setDateFin(Date &uneDateFin);
 
 	//-------------------------------------------- Constructeurs - destructeur
-		//Contexte ( const Contexte & unContexte );
-		// Mode d'emploi (constructeur de copie) :
-		//
-		// Contrat :
-		//
 
 	Contexte();
+	//Mode d'emploi : 
+	//Constructeur par défaut de la classe Contexte
 
-	Contexte(float r, Point c, Date d, Date f);
+	Contexte(float r, Point c);
+	//Mode d'emploi :
+	//Constructeur de la classe contexte permettant de définir un contexte
+	//géographique
+
+	Contexte(Date d, Date f=0);
+	//Mode d'emploi :
+	//Constructeur de la classe contexte permettant de définir un contexte
+	//temporel. La date de fin est optionnelle.
 
 	virtual ~Contexte();
+	//Mode d'emploi :
+	//Destructeur de la classe Contexte.
 
 	//------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- Méthodes protégée
-
 	//----------------------------------------------------- Attributs protégés
 	float rayon;
 	Point centre;
