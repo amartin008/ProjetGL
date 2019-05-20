@@ -1,9 +1,8 @@
 /*************************************************************************
-                           Mesure  -  description
+                           Mesure - description
                              -------------------
-    début                : $06/05/2019$
-    copyright            : (C) $2019$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 06/05/2019
+    copyright            : (C) Atmospher'IF par La Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Mesure> (fichier Mesure.h) ----------------
