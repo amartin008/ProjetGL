@@ -33,17 +33,18 @@ class Mesure
 public:
 //----------------------------------------------------- Méthodes publiques
     double GetValeur() const;
+
     void SetValeur(double valeur);
 
-	Date GetDate();
+	Date GetDate() const;
 
 	void SetDate(Date date);
 
-	string GetIdAttribut();
+	string GetIdAttribut() const;
 
 	void SetIdAttribut(string idAttribut);
 
-	string GetIdCapteur();
+	string GetIdCapteur() const;
 
 	void SetIdCapteur(string idCapteur);
 
@@ -51,11 +52,11 @@ public:
 	friend std::istream & operator >> (std::istream & flux, Mesure & mesure);
 
 //-------------------------------------------- Constructeurs - destructeur
-    	Mesure();
+    Mesure();
 	//Mode d'emploi : 
 	//Constructeur par défaut de la classe Mesure
 
-    	Mesure(double valeur, Date date, string attributID);
+    Mesure(double valeur, Date date, string attributID);
 	//Mode d'emploi : 
 	//Constructeur de la classe Mesure, 
 
@@ -69,9 +70,8 @@ protected:
 //----------------------------------------------------- Attributs protégés
 	double valeur;
 	Date date;
-	std::string idAttribut;
-	std::string idCapteur;
 	string idAttribut;
+	string idCapteur;
 };
 #endif // MESURE_H
 

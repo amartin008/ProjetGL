@@ -12,6 +12,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <map>
+#include <set>
 #include <vector>
 using namespace std;
 
@@ -51,29 +52,7 @@ public:
     
     string GetFichierAttributs() const;
     
-    void SetFichierAttributs(std::string fichierAttributs);
-	
-//----------------------------------------------------- Méthodes protégées
-    map<string,float> calculerQualiteMoyenne(Contexte * contexte);
-	
-    multimap<Capteur, Capteur> chercherCaptSimilaires(Contexte * contexte);
-	
-    map <string,float> trouverValeursCaract(Contexte * contexte);
-	
-    Capteur* verifierDonneesCapteurs(Contexte* contexte);
-	
-    set<string> * verifierCapteurs(Contexte * contexte);
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-    //Outil & operator = ( const Outil & unOutil );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     void SetFichierAttributs(string fichierAttributs);
-
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -97,7 +76,7 @@ protected:
 	//Elle retourne la liste des capteurs ayant effectué des mesures abherrantes
 	//sur cette période.
 
-	Capteur * verifierCapteurs(const Contexte * contexte);
+	set<string> * verifierCapteurs(const Contexte * contexte);
 	//Mode d'emploi :
 	//méthode permettant de vérifier le bon fonctionnement des capteurs
 	//durant la période définie dans l'objet Contexte passé en paramètre.

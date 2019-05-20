@@ -14,7 +14,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <fstream>
 #include <iostream>
-#include <set>
 
 using namespace std;
 
@@ -199,12 +198,12 @@ void Outil::SetFichierAttributs(string fichierAttributs)
 	this->fichierAttributs = fichierAttributs;
 } //----- Fin de SetFichierAttributs
 
-Capteur * Outil::verifierDonneesCapteurs(Contexte * contexte)
+Capteur * Outil::verifierDonneesCapteurs(const Contexte * contexte)
 {
 	return nullptr;
 }
 
-set<string> * Outil::verifierCapteurs(Contexte * contexte)
+set<string> * Outil::verifierCapteurs(const Contexte * contexte)
 {
 	set<string> capteursFonctionnels;
 	set<string> * capteursDefectueux = new set<string>();
