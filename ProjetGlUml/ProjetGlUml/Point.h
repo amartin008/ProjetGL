@@ -1,7 +1,7 @@
 /*************************************************************************
 						   Point  -  description
 							 -------------------
-	dÈbut                : $06/05/2019$
+	d√©but                : $06/05/2019$
 	copyright            : (C) $2019$ par $AUTHOR$
 	e-mail               : $EMAIL$
 *************************************************************************/
@@ -9,17 +9,12 @@
 //---------- Interface de la classe <Point> (fichier Point.h) ----------------
 #if ! defined ( POINT_H )
 #define POINT_H
-
-//--------------------------------------------------- Interfaces utilisÈes
-
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
+using namespace std;
 
 //------------------------------------------------------------------------
-// RÙle de la classe <Point>
-//
-//
+// R√¥le de la classe <Point>
+// La classe Point permet de d√©finir un point g√©ographique √† partir d'une
+// latitude et d'une longitude.
 //------------------------------------------------------------------------
 
 class Point
@@ -27,38 +22,33 @@ class Point
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- MÈthodes publiques
-
-	float GetLatitude();
-
+	//----------------------------------------------------- M√©thodes publiques
+	float GetLatitude() const;
 	void SetLatitude(float lat);
-
-	float GetLongitude();
-
+	float GetLongitude() const;
 	void SetLongitude(float lng);
 
-	//------------------------------------------------- Surcharge d'opÈrateurs
-
-	//-------------------------------------------- Constructeurs - destructeur
-	
+	//-------------------------------------------- Constructeurs - destructeurs
 	Point();
+	//Mode d'emploi :
+	//Constructeur par d√©faut de la classe Point
 
 	Point(float latitude, float longitude);
-
+	//Mode d'emploi :
+	//Constructuer de la classe Point. Initialise la latitude et la longitude
+	// caract√©risant les coordonn√©es g√©ographiques d'un point.
+	
 	~Point();
+	//Mode d'emploi :
+	//Destructeur par d√©faut de la classe Point
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- MÈthodes protÈgÈes
-
-	//----------------------------------------------------- Attributs protÈgÈs
+	//----------------------------------------------------- Attributs prot√©g√©s
 	float latitude;
 	float longitude;
 };
-
-//-------------------------------- Autres dÈfinitions dÈpendantes de <Point>
-
 #endif // POINT_H
 
 
