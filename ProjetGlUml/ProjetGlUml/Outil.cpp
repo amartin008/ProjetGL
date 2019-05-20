@@ -13,6 +13,8 @@
 //-------------------------------------------------------- Include système
 #include <fstream>
 #include <iostream>
+#include <set>
+
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -109,6 +111,20 @@ void Outil::SetFichierAttributs(string fichierAttributs)
 	this->fichierAttributs = fichierAttributs;
 } //----- Fin de SetFichierAttributs
 
+Capteur * Outil::verifierDonneesCapteurs(Contexte * contexte)
+{
+	return nullptr;
+}
+
+set<string> * Outil::verifierCapteurs(Contexte * contexte)
+{
+	set<string> capteursFonctionnels;
+	set<string> * capteursDefectueux = new set<string>();
+
+
+	return nullptr;
+}
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 //Outil & Outil::operator = ( const Outil & unOutil )
@@ -149,14 +165,14 @@ Outil::Outil(string fichierCapteurs, string fichierMesures, string fichierAttrib
 	getline(fluxCapteurs, tmp);
 	Capteur capteur;
 	while (fluxCapteurs >> capteur) {
-		capteurs.push_back(capteur);
+		listeCapteurs.push_back(capteur);
 	}
 
 	ifstream fluxAttributs(fichierAttributs.c_str());
 	getline(fluxAttributs, tmp);
 	Attribut attribut;
 	while (fluxAttributs >> attribut) {
-		attributs.push_back(attribut);
+		listeAttributs.push_back(attribut);
 	}
 
 	//compléter les map et multimap...

@@ -34,13 +34,68 @@ void Mesure::SetValeur(double valeur)
 	this->valeur = valeur;
 } //----- Fin de SetValeur
 
+Date Mesure::GetDate()
+{
+	return date;
+}
+
+void Mesure::SetDate(Date date)
+{
+	this->date = date;
+}
+
+string Mesure::GetIdAttribut()
+{
+	return idAttribut;
+}
+
+void Mesure::SetIdAttribut(string idAttribut)
+{
+	this->idAttribut = idAttribut;
+}
+
+string Mesure::GetIdCapteur()
+{
+	return idCapteur;
+}
+
+void Mesure::SetIdCapteur(string idCapteur)
+{
+	this->idCapteur = idCapteur;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
-//Mesure & Mesure::operator = ( const Mesure & unMesure )
+istream & operator >> (istream & flux, Mesure & mesure)
 // Algorithme :
 //
-/*{
-}*/ //----- Fin de operator =
+{
+	string tmp;
+
+	int annee, mois, jour, heure, min, sec;
+	getline(flux, tmp, '-');
+	annee = atoi(tmp.c_str());
+	getline(flux, tmp, '-');
+	mois = atoi(tmp.c_str());
+	getline(flux, tmp, 'T');
+	jour = atoi(tmp.c_str());
+	getline(flux, tmp, ':');
+	heure = atoi(tmp.c_str());
+	getline(flux, tmp, ':');
+	min = atoi(tmp.c_str());
+	getline(flux, tmp, ';');
+	sec = atoi(tmp.c_str());
+	Date date = Date(annee, mois, jour, heure, min, sec);
+	mesure.SetDate(date);
+	getline(flux, tmp, ';');
+	mesure.SetIdCapteur(tmp);
+	getline(flux, tmp, ';');
+	mesure.SetIdAttribut(tmp);
+	getline(flux, tmp, ';');
+	mesure.SetValeur(stod(tmp));
+	getline(flux, tmp);
+
+	return flux;
+} //----- Fin de operator >>
 
 
 //-------------------------------------------- Constructeurs - destructeur

@@ -18,6 +18,7 @@ using namespace std;
 
 #include "Capteur.h"
 #include "Attribut.h"
+#include "Contexte.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -55,9 +56,9 @@ public:
 	
     map <string,float> trouverValeursCaract(Contexte * contexte);
 	
-    Capteurs * verifierDonneesCapteurs(Contexte * contexte);
+    Capteur* verifierDonneesCapteurs(Contexte* contexte);
 	
-    Capteur * verifierCapteurs(Contexte * contexte);
+    set<string> * verifierCapteurs(Contexte * contexte);
 
 
 //------------------------------------------------- Surcharge d'opérateurs

@@ -14,6 +14,7 @@
 #include <string>
 #include "Date.h"
 #include "Attribut.h"
+#include "Capteur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -34,12 +35,20 @@ public:
     
     void SetValeur(double valeur);
 
+	Date GetDate();
+
+	void SetDate(Date date);
+
+	string GetIdAttribut();
+
+	void SetIdAttribut(string idAttribut);
+
+	string GetIdCapteur();
+
+	void SetIdCapteur(string idCapteur);
+
 //------------------------------------------------- Surcharge d'opérateurs
-    //Mesure & operator = ( const Mesure & unMesure );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+	friend std::istream & operator >> (std::istream & flux, Mesure & mesure);
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -64,6 +73,7 @@ protected:
 	double valeur;
 	Date date;
 	std::string idAttribut;
+	std::string idCapteur;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Mesure>
