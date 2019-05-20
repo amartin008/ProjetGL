@@ -2,17 +2,19 @@
                            Capteur  -  description
                              -------------------
     début                : $06/05/2019$
-    copyright            : (C) $2019$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    copyright            : (C) Atmospher'IF par la Mims Team
 *************************************************************************/
 
-//---------- Interface de la classe <Capteur> (fichier Capteur.h) ----------------
+//---------- Interface de la classe <Capteur> (fichier Capteur.h) --------
 #if ! defined ( CAPTEUR_H )
 #define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include <vector>
+#include "fstream"
+using namespace std;
+
 #include "Point.h"
 #include "Mesure.h"
 //------------------------------------------------------------- Constantes
@@ -21,7 +23,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Capteur>
-//
+// Cette classe permet de définir un objet Capteur avec toutes les informations 
+//utiles sur celui-ci (types de mesure effectuées, position, etc.)
 //
 //------------------------------------------------------------------------
 
@@ -31,46 +34,45 @@ class Capteur
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    std::string GetId();
+    string GetId() const;
     
     void SetId(std::string id);
     
-    std::string GetDescription();
+    string GetDescription() const;
     
     void SetDescription(std::string description);
 
-	Point GetLocalisation();
+	Point GetLocalisation() const;
 
-	std::vector<Mesure> GetMesures();
+	vector<Mesure> GetMesures() const;
 
 	void SetMesures(vector<Mesure> mes);
+
 //------------------------------------------------- Surcharge d'opérateurs
 	friend std::istream & operator >> (std::istream & flux, Capteur & capteur);
 
 	friend std::ostream & operator << (std::ostream & out, Capteur & capteur);
 //-------------------------------------------- Constructeurs - destructeur
-    //Capteur ( const Capteur & unCapteur );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
     Capteur();
+	//Mode d'emploi :
+	//Constructeur par défaut 
     
-    Capteur(std::string id, std::string description, Point local);
+    Capteur(string id, string description, Point local);
+	//Mode d'emploi :
+	//Constructeur de la classe Capteur
 
     virtual ~Capteur();
-
+	//Mode d'emploi :
+	//Destructeur de la classe Capteur
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	std::string id;
-	std::string description;
+	string id;
+	string description;
 	Point localisation;
-	std::vector<Mesure> mesures;
+	vector<Mesure> mesures;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Capteur>

@@ -1,25 +1,20 @@
 /*************************************************************************
-                           Date  -  description
+                           Date - description
                              -------------------
-    début                : $06/05/2019$
-    copyright            : (C) $2019$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 06/05/2019
+    copyright            : (C) Atmospher'IF par La Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Date> (fichier Date.h) ----------------
 #if ! defined ( Date_H )
 #define Date_H
-
-//--------------------------------------------------- Interfaces utilisées
-
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
+using namespace std; 
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Date>
-//
-//
+// La classe Date permet de générer un objet Date correspondant à un moment
+// donné. Il est constitué d'une date (année, mois, jour) et d'une heure
+// (heure, minutes, secondes).
 //------------------------------------------------------------------------
 
 class Date
@@ -28,69 +23,48 @@ class Date
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    
-    int GetAnnee();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-    
+    int GetAnnee() const;
+	
     void SetAnnee(int annee);
     
-    int GetMois();
+    int GetMois() const;
     
     void SetMois(int mois);
     
-    int GetJour();
+    int GetJour() const;
     
     void SetJour(int jour);
     
-    int GetHeure();
+    int GetHeure() const;
     
     void SetHeure(int heure);
     
-    int GetMin();
+    int GetMin() const;
     
     void SetMin(int min);
     
-    int GetSec();
+    int GetSec() const;
     
     void SetSec(int sec);
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-    //Date & operator = ( const Date & unDate );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-
 //-------------------------------------------- Constructeurs - destructeur
-    //Date ( const Date & unDate );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-    
+	
     Date();
-
+    // Mode d'emploi :
+    // Constructeur par défaut de la classe Date
+	
     Date(int annee, int mois, int jour, int heure, int min, int sec);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
+    // Constructeur de la classe Date. Initialise les attraibuts entrés 
+    // en paramètre
+	
     virtual ~Date ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Destructeur par défaut de la classe Date
 
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
 	int annee;
@@ -100,8 +74,6 @@ protected:
 	int min;
 	int sec;
 };
-
-//-------------------------------- Autres définitions dépendantes de <Date>
 
 #endif // Date_H
 
