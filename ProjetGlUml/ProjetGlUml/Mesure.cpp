@@ -34,7 +34,7 @@ void Mesure::SetValeur(double valeur)
 	this->valeur = valeur;
 } //----- Fin de SetValeur
 
-Date Mesure::GetDate()
+Date Mesure::GetDate() const
 {
 	return date;
 }
@@ -44,7 +44,7 @@ void Mesure::SetDate(Date date)
 	this->date = date;
 }
 
-string Mesure::GetIdAttribut()
+string Mesure::GetIdAttribut() const
 {
 	return idAttribut;
 }
@@ -54,7 +54,7 @@ void Mesure::SetIdAttribut(string idAttribut)
 	this->idAttribut = idAttribut;
 }
 
-string Mesure::GetIdCapteur()
+string Mesure::GetIdCapteur() const
 {
 	return idCapteur;
 }

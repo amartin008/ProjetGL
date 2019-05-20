@@ -47,14 +47,6 @@ Point Capteur::GetLocalisation() const {
 	return localisation;
 }
 
-vector<Mesure> Capteur::GetMesures() const {
-	return mesures;
-}
-
-void Capteur::SetMesures(vector<Mesure> mes) {
-	mesures = mes;
-}
-
 //------------------------------------------------- Surcharge d'opérateurs
 istream & operator >> (istream & flux, Capteur & capteur)
 // Algorithme :
@@ -65,9 +57,9 @@ istream & operator >> (istream & flux, Capteur & capteur)
 	getline(flux, tmp, ';');
 	capteur.SetId(tmp);
 	getline(flux, tmp, ';');
-	capteur.GetLocalisation().SetLatitude(atof(tmp.c_str()));
+	capteur.GetLocalisation().SetLatitude((float)atof(tmp.c_str()));
 	getline(flux, tmp, ';');
-	capteur.GetLocalisation().SetLongitude(atof(tmp.c_str()));
+	capteur.GetLocalisation().SetLongitude((float)atof(tmp.c_str()));
 	getline(flux, tmp);
 	capteur.SetDescription(tmp);
 

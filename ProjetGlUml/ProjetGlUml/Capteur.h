@@ -13,10 +13,12 @@
 #include <string>
 #include <vector>
 #include "fstream"
+
 using namespace std;
 
-#include "Point.h"
 #include "Mesure.h"
+#include "Point.h"
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -44,10 +46,6 @@ public:
 
 	Point GetLocalisation() const;
 
-	vector<Mesure> GetMesures() const;
-
-	void SetMesures(vector<Mesure> mes);
-
 //------------------------------------------------- Surcharge d'opérateurs
 	friend std::istream & operator >> (std::istream & flux, Capteur & capteur);
 
@@ -72,7 +70,6 @@ protected:
 	string id;
 	string description;
 	Point localisation;
-	vector<Mesure> mesures;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Capteur>
