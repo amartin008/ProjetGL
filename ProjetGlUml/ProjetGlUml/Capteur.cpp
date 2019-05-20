@@ -75,6 +75,14 @@ istream & operator >> (istream & flux, Capteur & capteur)
 	return flux;
 } //----- Fin de operator >>
 
+ostream & operator << (ostream & out, Capteur & capteur)
+// Algorithme :
+//
+{
+	out << capteur.id << " " << capteur.description << endl;
+	return out;
+} //----- Fin de operator >>
+
 
 //-------------------------------------------- Constructeurs - destructeur
 //Capteur::Capteur ( const Capteur & unCapteur )

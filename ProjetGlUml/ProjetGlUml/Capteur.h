@@ -47,7 +47,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
 	friend std::istream & operator >> (std::istream & flux, Capteur & capteur);
 
-
+	friend std::ostream & operator << (std::ostream & out, Capteur & capteur);
 //-------------------------------------------- Constructeurs - destructeur
     //Capteur ( const Capteur & unCapteur );
     // Mode d'emploi (constructeur de copie) :

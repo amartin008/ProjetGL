@@ -69,7 +69,6 @@ public:
     // Contrat :
     //
 
-	Outil(std::string fichierCapteurs, std::string fichierMesures, std::string fichierAttributs);
 	// Mode d'emploi :
 	//
 	// Contrat :
