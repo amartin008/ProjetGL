@@ -21,7 +21,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-string Capteur::GetId()
+string Capteur::GetId() const
 // Algorithme :
 //
 {
@@ -33,7 +33,7 @@ void Capteur::SetId(string id)
 	this->id = id;
 } //----- Fin de SetId
 
-string Capteur::GetDescription()
+string Capteur::GetDescription() const
 {
 	return this->description;
 } //----- Fin de GetDescription
@@ -43,11 +43,11 @@ void Capteur::SetDescription(string description)
 	this->description = description;
 } //----- Fin de SetDescription
 
-Point Capteur::GetLocalisation() {
+Point Capteur::GetLocalisation() const {
 	return localisation;
 }
 
-vector<Mesure> Capteur::GetMesures() {
+vector<Mesure> Capteur::GetMesures() const {
 	return mesures;
 }
 

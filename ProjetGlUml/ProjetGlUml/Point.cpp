@@ -23,7 +23,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-float Point::GetLatitude()
+float Point::GetLatitude() const
 {
 	return latitude;
 }
@@ -33,7 +33,7 @@ void Point::SetLatitude(float lat)
 	latitude = lat;
 }
 
-float Point::GetLongitude()
+float Point::GetLongitude() const
 {
 	return longitude;
 }
