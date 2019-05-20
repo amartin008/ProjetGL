@@ -198,47 +198,6 @@ void Outil::SetFichierAttributs(string fichierAttributs)
 	this->fichierAttributs = fichierAttributs;
 } //----- Fin de SetFichierAttributs
 
-Capteur * Outil::verifierDonneesCapteurs(const Contexte * contexte)
-{
-	return nullptr;
-}
-
-set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte)
-{
-	set<string> capteursFonctionnels;
-	set<Capteur> * capteursDefectueux = new set<Capteur>();
-	ifstream flux(fichierMesures);
-
-	Mesure mesure;
-	string tmp;
-	getline(flux, tmp);
-	while (flux >> mesure)
-	{
-		if (contexte->EstDedans(mesure.GetDate()))
-		{
-			capteursFonctionnels.insert(mesure.GetIdCapteur());
-		}
-	}
-	
-	/*
-	for (vector<Capteur>::const_iterator it = listeCapteurs.cbegin(); it != listeCapteurs.cend(); it++)
-	{
-		if (capteursFonctionnels.find(it->GetId()) == capteursFonctionnels.end())
-		{
-			capteursDefectueux->insert(*it);
-		}
-	}
-	
-	for (auto e : listeCapteurs)
-	{
-		if (capteursFonctionnels.find(e.GetId()) ==  capteursFonctionnels.end())
-		{
-			capteursDefectueux->insert(e);
-		}
-	}*/
-
-	return capteursDefectueux;
-}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -283,4 +242,44 @@ Outil::~Outil()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+Capteur * Outil::verifierDonneesCapteurs(const Contexte * contexte)
+{
+	return nullptr;
+}
 
+set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte)
+{
+	set<string> capteursFonctionnels;
+	set<Capteur> * capteursDefectueux = new set<Capteur>();
+	ifstream flux(fichierMesures);
+
+	Mesure mesure;
+	string tmp;
+	getline(flux, tmp);
+	while (flux >> mesure)
+	{
+		if (contexte->EstDedans(mesure.GetDate()))
+		{
+			capteursFonctionnels.insert(mesure.GetIdCapteur());
+		}
+	}
+	
+	/*
+	for (vector<Capteur>::const_iterator it = listeCapteurs.cbegin(); it != listeCapteurs.cend(); it++)
+	{
+		if (capteursFonctionnels.find(it->GetId()) == capteursFonctionnels.end())
+		{
+			capteursDefectueux->insert(*it);
+		}
+	}
+	
+	for (auto e : listeCapteurs)
+	{
+		if (capteursFonctionnels.find(e.GetId()) ==  capteursFonctionnels.end())
+		{
+			capteursDefectueux->insert(e);
+		}
+	}*/
+
+	return capteursDefectueux;
+}
