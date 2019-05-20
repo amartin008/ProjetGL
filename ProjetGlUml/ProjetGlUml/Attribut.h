@@ -1,25 +1,22 @@
 /*************************************************************************
-						   Attribut  -  description
-							 -------------------
-	début                : $06/05/2019$
-	copyright            : (C) $2019$ par $AUTHOR$
-	e-mail               : $EMAIL$
+                           Attribut - description
+                             -------------------
+    dÃ©but                : 06/05/2019
+    copyright            : (C) Atmospher'IF par La Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Attribut> (fichier Attribut.h) ----------------
 #if ! defined ( ATTRIBUT_H )
 #define ATTRIBUT_H
+using namespace std;
 
-//--------------------------------------------------- Interfaces utilisées
+//--------------------------------------------------- Interfaces utilisÃ©es
 #include <string>
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Attribut>
-//
-//
+// RÃ´le de la classe <Attribut>
+// Un objet Attribut correspondant au type de gaz, c'est-Ã -dire Ã  un type 
+// de mesure effectuÃ©e par un capteur
 //------------------------------------------------------------------------
 
 class Attribut
@@ -27,48 +24,43 @@ class Attribut
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- Méthodes publiques
+	//----------------------------------------------------- MÃ©thodes publiques
 
-	std::string GetId();
+	string GetId() const;
 
-	void SetId(std::string id);
+	void SetId(string id);
 
-	std::string GetUnit();
+	string GetUnit() const;
 
-	void SetUnit(std::string unit);
+	void SetUnit(string unit);
 
-	std::string GetDescription();
+	string GetDescription() const;
 
-	void SetDescription(std::string description);
+	void SetDescription(string description);
 
-	//------------------------------------------------- Surcharge d'opérateurs
-		//Attribut & operator = ( const Attribut & unAttribut );
-		// Mode d'emploi :
-		//
-		// Contrat :
-		//
-
+	//------------------------------------------------- Surcharge d'opÃ©rateurs
+	friend istream & operator >> (istream & flux, Attribut & attribut);
 
 	//-------------------------------------------- Constructeurs - destructeur
-	friend std::istream & operator >> (std::istream & flux, Attribut & attribut);
-
+	
 	Attribut();
-
-	Attribut(std::string Id, std::string unit, std::string description);
-
+	// Mode d'emploi :
+	// Constructeur par dÃ©faut de la classe Attribut
+	
+	Attribut(string Id, string unit, string description);
+	// Mode d'emploi :
+	// Constructeur de la classe Attribut
+	
 	virtual ~Attribut();
-
+	// Mode d'emploi :
+	// Destructeur par dÃ©faut de la classe Attribut
+	
 //------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- Méthodes protégées
-
-	//----------------------------------------------------- Attributs protégés
-	std::string id;
-	std::string unit;
-	std::string description;
+	//----------------------------------------------------- Attributs protÃ©gÃ©s
+	string id;
+	string unit;
+	string description;
 };
-
-//-------------------------------- Autres définitions dépendantes de <Attribut>
-
 #endif // ATTRIBUT_H
