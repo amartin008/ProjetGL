@@ -14,6 +14,7 @@
 #include <string>
 #include <map>
 #include <vector>
+using namespace std;
 
 #include "Capteur.h"
 #include "Attribut.h"
@@ -33,9 +34,9 @@ class Outil
 
 public:
 //----------------------------------------------------- Méthodes publiques
-	void lancerOutil();
+    void lancerOutil();
 	
-	std::string GetFichierCapteurs();
+    std::string GetFichierCapteurs();
     
     void SetFichierCapteurs(std::string fichierCapteurs);
     
@@ -46,6 +47,17 @@ public:
     std::string GetFichierAttributs();
     
     void SetFichierAttributs(std::string fichierAttributs);
+	
+//----------------------------------------------------- Méthodes protégées
+    map<string,float> calculerQualiteMoyenne(Contexte * contexte);
+	
+    multimap<Capteur, Capteur> chercherCaptSimilaires(Contexte * contexte);
+	
+    map <string,float> trouverValeursCaract(Contexte * contexte);
+	
+    Capteurs * verifierDonneesCapteurs(Contexte * contexte);
+	
+    Capteur * verifierCapteurs(Contexte * contexte);
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -69,11 +81,11 @@ public:
     // Contrat :
     //
 
-	Outil(std::string fichierCapteurs, std::string fichierMesures, std::string fichierAttributs);
-	// Mode d'emploi :
-	//
-	// Contrat :
-	//
+    Outil(std::string fichierCapteurs, std::string fichierMesures, std::string fichierAttributs);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     virtual ~Outil();
     // Mode d'emploi :
@@ -93,8 +105,8 @@ protected:
 	std::map<string,float> moyenneCapteurs;
 	std::multimap<string, string> typeMesuresCapteurs;
 
-	std::vector<Capteur> capteurs;
-	std::vector<Attribut> attributs;
+	std::vector<Capteur> listeCapteurs;
+	std::vector<Attribut> listeAttributs;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Outil>
