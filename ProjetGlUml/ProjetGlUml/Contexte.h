@@ -1,15 +1,15 @@
 /*************************************************************************
-						   Contexte  -  description
-							 -------------------
-	début                : $06/05/2019$
-	copyright            : (C) Atmospher'IF par la Mims Team
+                           Contexte - description
+                             -------------------
+    dÃ©but                : 06/05/2019
+    copyright            : (C) Atmospher'IF par La Mims Team
 *************************************************************************/
 
 //---------- Interface de la classe <Contexte> (fichier Contexte.h) ----------------
 #if ! defined ( CONTEXTE_H )
 #define CONTEXTE_H
 
-//--------------------------------------------------- Interfaces utilisées
+//--------------------------------------------------- Interfaces utilisÃ©es
 #include "Date.h"
 #include "Point.h"
 //------------------------------------------------------------- Constantes
@@ -17,11 +17,11 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Contexte>
-//L’objet <Contexte> permet de rassembler les contextes géographique et temporel. 
-//Les attributs Point et Rayon permettent de définir la zone géographique.
-//Pour la période de vérification, l’objet <Contexte> prend un ou deux objets 
-//<Date> suivant le choix d’une analyse à un moment donné ou sur une période.
+// RÃ´le de la classe <Contexte>
+//Lâ€™objet <Contexte> permet de rassembler les contextes gÃ©ographique et temporel. 
+//Les attributs Point et Rayon permettent de dÃ©finir la zone gÃ©ographique.
+//Pour la pÃ©riode de vÃ©rification, lâ€™objet <Contexte> prend un ou deux objets 
+//<Date> suivant le choix dâ€™une analyse Ã  un moment donnÃ© ou sur une pÃ©riode.
 //
 //------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ class Contexte
 	//----------------------------------------------------------------- PUBLIC
 
 public:
-	//----------------------------------------------------- Méthodes publiques
+	//----------------------------------------------------- MÃ©thodes publiques
 
 	bool EstDedans(Point p) const;
 
@@ -56,16 +56,16 @@ public:
 
 	Contexte();
 	//Mode d'emploi : 
-	//Constructeur par défaut de la classe Contexte
+	//Constructeur par dÃ©faut de la classe Contexte
 
 	Contexte(float r, Point c);
 	//Mode d'emploi :
-	//Constructeur de la classe contexte permettant de définir un contexte
-	//géographique
+	//Constructeur de la classe contexte permettant de dÃ©finir un contexte
+	//gÃ©ographique
 
 	Contexte(Date d, Date f=0);
 	//Mode d'emploi :
-	//Constructeur de la classe contexte permettant de définir un contexte
+	//Constructeur de la classe contexte permettant de dÃ©finir un contexte
 	//temporel. La date de fin est optionnelle.
 
 	virtual ~Contexte();
@@ -75,7 +75,7 @@ public:
 	//------------------------------------------------------------------ PRIVE
 
 protected:
-	//----------------------------------------------------- Attributs protégés
+	//----------------------------------------------------- Attributs protÃ©gÃ©s
 	float rayon;
 	Point centre;
 	
@@ -83,6 +83,6 @@ protected:
 	Date fin;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Contexte>
+//-------------------------------- Autres dÃ©finitions dÃ©pendantes de <Contexte>
 
 #endif // CONTEXTE_H
