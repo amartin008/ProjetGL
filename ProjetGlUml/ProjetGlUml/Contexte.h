@@ -34,7 +34,7 @@ public:
 
 	bool EstDedans(Point p) const;
 
-	bool EstDedans(Date d) const;
+	bool EstDedans(const Date d) const;
 
 	float GetRayon() const;
 

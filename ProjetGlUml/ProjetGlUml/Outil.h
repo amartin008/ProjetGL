@@ -76,7 +76,7 @@ protected:
 	//Elle retourne la liste des capteurs ayant effectué des mesures abherrantes
 	//sur cette période.
 
-	set<string> * verifierCapteurs(const Contexte * contexte);
+	set<Capteur> * verifierCapteurs(const Contexte * contexte);
 	//Mode d'emploi :
 	//méthode permettant de vérifier le bon fonctionnement des capteurs
 	//durant la période définie dans l'objet Contexte passé en paramètre.

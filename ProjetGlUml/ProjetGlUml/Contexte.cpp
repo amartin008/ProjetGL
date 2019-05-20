@@ -28,7 +28,7 @@ bool Contexte::EstDedans(Point p) const
 	return (rayon >= dist);
 }
 
-bool Contexte::EstDedans(Date d) const
+bool Contexte::EstDedans(const Date d) const
 {
 	if (debut.GetAnnee() < d.GetAnnee() && fin.GetAnnee() > d.GetAnnee()) {
 		return true;
