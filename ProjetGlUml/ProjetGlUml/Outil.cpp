@@ -77,7 +77,7 @@ void Outil::lancerOutil() {
 							ifstream flux(fichierCapteurs);
 							getline(flux, input);
 							while (flux >> capteur) {
-								capteurs.push_back(capteur);
+								listeCapteurs.push_back(capteur);
 							}
 						}
 					} while (buffer == NULL);
@@ -103,7 +103,7 @@ void Outil::lancerOutil() {
 							ifstream flux(fichierAttributs);
 							getline(flux, input);
 							while (flux >> attribut) {
-								attributs.push_back(attribut);
+								listeAttributs.push_back(attribut);
 							}
 						}
 					} while (buffer == NULL);
@@ -167,7 +167,7 @@ void Outil::lancerOutil() {
 	} while (confirmation != 1);
 }
 
-string Outil::GetFichierCapteurs()
+string Outil::GetFichierCapteurs() const
 {
 	return this->fichierCapteurs;
 } //----- Fin de GetFichierCapteurs
@@ -177,7 +177,9 @@ void Outil::SetFichierCapteurs(string fichierCapteurs)
 	this->fichierCapteurs = fichierCapteurs;
 } //----- Fin de SetFichierCapteurs
 
-string Outil::GetFichierMesures() 
+
+string Outil::GetFichierMesures() const
+
 {
 	return this->fichierMesures;
 } //----- Fin de GetFichierMesures
@@ -187,7 +189,7 @@ void Outil::SetFichierMesures(string fichierMesures)
 	this->fichierMesures = fichierMesures;
 } //----- Fin de SetFichierMesures
 
-string Outil::GetFichierAttributs()
+string Outil::GetFichierAttributs() const
 {
 	return this->fichierAttributs;
 } //----- Fin de GetFichierAttributs
@@ -240,29 +242,6 @@ Outil::Outil()
 	#endif
 } //----- Fin de Outil (constructeur par défaut)
 
-Outil::Outil(string fichierCapteurs, string fichierMesures, string fichierAttributs)
-	:fichierCapteurs(fichierCapteurs), fichierMesures(fichierMesures), fichierAttributs(fichierAttributs)
-{
-	#ifdef MAP
-		cout << "Appel au constructeur de <Outil>" << endl;
-	#endif
-	ifstream fluxCapteurs(fichierCapteurs.c_str());
-	string tmp;
-	getline(fluxCapteurs, tmp);
-	Capteur capteur;
-	while (fluxCapteurs >> capteur) {
-		listeCapteurs.push_back(capteur);
-	}
-
-	ifstream fluxAttributs(fichierAttributs.c_str());
-	getline(fluxAttributs, tmp);
-	Attribut attribut;
-	while (fluxAttributs >> attribut) {
-		listeAttributs.push_back(attribut);
-	}
-
-	//compléter les map et multimap...
-}
 
 Outil::~Outil()
 // Algorithme :

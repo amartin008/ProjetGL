@@ -22,7 +22,7 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-string Attribut::GetId() {
+string Attribut::GetId() const {
 	return id;
 }
 
@@ -30,7 +30,7 @@ void Attribut::SetId(string id) {
 	this->id = id;
 }
 
-string Attribut::GetUnit() {
+string Attribut::GetUnit() const {
 	return unit;
 }
 
@@ -38,7 +38,7 @@ void Attribut::SetUnit(string unit) {
 	this->unit = unit;
 }
 
-string Attribut::GetDescription() {
+string Attribut::GetDescription() const {
 	return description;
 }
 

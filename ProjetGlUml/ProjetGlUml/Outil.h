@@ -133,7 +133,10 @@ protected:
 	//emplacement du fichier décrivant l’ensemble des capteurs
 
 	string fichierAttributs;
-	//emplacement du fichier décrivant les différents types de mesure
+	//emplacement du fichier décrivant les différents types de mesures
+
+	string fichierMesures;
+	//emplacement du fichier contenant les mesures des capteurs
 
 	map<string,float> moyenneCapteurs;
 	//conteneur map qui associe à chaque capteur d’id sensorID(string), 

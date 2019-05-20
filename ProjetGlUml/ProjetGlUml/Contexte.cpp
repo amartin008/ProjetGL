@@ -22,13 +22,13 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-bool Contexte::EstDedans(Point p) 
+bool Contexte::EstDedans(Point p) const
 {
 	double dist = sqrt(pow(p.GetLatitude() - centre.GetLatitude(), 2) + pow(p.GetLongitude() - centre.GetLongitude(), 2));
 	return (rayon >= dist);
 }
 
-bool Contexte::EstDedans(Date d)
+bool Contexte::EstDedans(Date d) const
 {
 	if (debut.GetAnnee() < d.GetAnnee() && fin.GetAnnee() > d.GetAnnee()) {
 		return true;
@@ -61,24 +61,40 @@ bool Contexte::EstDedans(Date d)
 	return false;
 }
 
-float Contexte::GetRayon()
+float Contexte::GetRayon() const
 {
 	return rayon;
 }
 
-Point Contexte::GetPoint()
+Point Contexte::GetPoint() const
 {
 	return centre;
 }
 
-Date Contexte::GetDebut()
+Date Contexte::GetDebut() const
 {
 	return debut;
 }
 
-Date Contexte::GetFin()
+Date Contexte::GetFin() const
 {
 	return fin;
+}
+
+void Contexte::SetRayon(float rayon) {
+	this->rayon = rayon;
+}
+
+void Contexte::SetPoint(Point &unPoint) {
+	this->centre = unPoint;
+}
+
+void Contexte::SetDateDebut(Date &uneDateDebut) {
+	this->debut = uneDateDebut;
+}
+
+void Contexte::SetDateFin(Date &uneDateFin) {
+	this->fin = uneDateFin;
 }
 
 
@@ -99,14 +115,22 @@ Contexte::Contexte()
 #endif
 } //----- Fin de Contexte (constructeur par défaut)
 
-Contexte::Contexte(float rayon, Point centre, Date debut, Date fin)
-	:rayon(rayon), centre(centre), debut(debut), fin(fin)
+Contexte::Contexte(float rayon, Point centre)
+	:rayon(rayon), centre(centre)
 {
 #ifdef MAP
 	cout << "Appel au constructeur de <Contexte>" << endl;
 #endif
 } //----- Fin de Contexte
 
+
+Contexte::Contexte(Date debut, Date fin)
+	:debut(debut), fin(fin)
+{
+#ifdef MAP
+	cout << "Appel au constructeur de <Contexte>" << endl;
+#endif
+}
 
 Contexte::~Contexte() 
 {

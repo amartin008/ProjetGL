@@ -38,19 +38,19 @@ public:
 
 	float GetRayon() const;
 
-	void setRayon(float rayon);
+	void SetRayon(float rayon);
 
 	Point GetPoint() const;
 	
-	void setPoint(Point &unPoint);
+	void SetPoint(Point &unPoint);
 
 	Date GetDebut() const;
 
-	void setDateDebut(Date &uneDateDebut);
+	void SetDateDebut(Date &uneDateDebut);
 
 	Date GetFin() const;
 
-	void setDateFin(Date &uneDateFin);
+	void SetDateFin(Date &uneDateFin);
 
 	//-------------------------------------------- Constructeurs - destructeur
 
@@ -63,7 +63,7 @@ public:
 	//Constructeur de la classe contexte permettant de définir un contexte
 	//géographique
 
-	Contexte(Date d, Date f=0);
+	Contexte(Date d, Date f = Date());
 	//Mode d'emploi :
 	//Constructeur de la classe contexte permettant de définir un contexte
 	//temporel. La date de fin est optionnelle.

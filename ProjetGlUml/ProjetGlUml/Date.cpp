@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-int Date::GetAnnee()
+int Date::GetAnnee() const
 // Algorithme :
 //
 {
@@ -34,7 +34,7 @@ void Date::SetAnnee(int annee)
 	this->annee = annee;
 } //----- Fin de SetAnnee
 
-int Date::GetMois()
+int Date::GetMois() const
 {
 	return this->mois;
 } //----- Fin de GetMois
@@ -44,7 +44,7 @@ void Date::SetMois(int mois)
 	this->mois = mois;
 } //----- Fin de SetMois
 
-int Date::GetJour()
+int Date::GetJour() const
 {
 	return this->jour;
 } //----- Fin de GetJour
@@ -54,7 +54,7 @@ void Date::SetJour(int jour)
 	this->jour = jour;
 } //----- Fin de SetJour
 
-int Date::GetHeure()
+int Date::GetHeure() const
 {
 	return this->heure;
 } //----- Fin de GetHeure
@@ -64,7 +64,7 @@ void Date::SetHeure(int heure)
 	this->heure = heure;
 } //----- Fin de SetHeure
 
-int Date::GetMin()
+int Date::GetMin() const
 {
 	return this->min;
 } //----- Fin de GetMin
@@ -74,7 +74,7 @@ void Date::SetMin(int min)
 	this->min = min;
 } //----- Fin de SetMin
 
-int Date::GetSec()
+int Date::GetSec() const
 {
 	return this->sec;
 } //----- Fin de GetSec

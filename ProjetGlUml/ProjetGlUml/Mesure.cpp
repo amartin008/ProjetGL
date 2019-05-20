@@ -22,7 +22,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-double Mesure::GetValeur()
+double Mesure::GetValeur() const
 // Algorithme :
 //
 {
