@@ -12,10 +12,10 @@
 
 /////////////////////////////////////////////////////////////////  INCLUDE
 //-------------------------------------------------------- Include système
-#include <string>
-#include <cstring>
 #include <iostream>
 using namespace std;
+#include <string>
+#include <cstring>
 
 //------------------------------------------------------ Include personnel
 #include "Main.h"
