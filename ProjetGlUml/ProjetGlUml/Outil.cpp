@@ -264,23 +264,14 @@ set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte)
 			capteursFonctionnels.insert(mesure.GetIdCapteur());
 		}
 	}
-	
-	/*
-	for (vector<Capteur>::const_iterator it = listeCapteurs.cbegin(); it != listeCapteurs.cend(); it++)
+
+	for (vector<Capteur>::const_iterator it = listeCapteurs.cbegin(); it != listeCapteurs.cend(); ++it)
 	{
 		if (capteursFonctionnels.find(it->GetId()) == capteursFonctionnels.end())
 		{
 			capteursDefectueux->insert(*it);
 		}
 	}
-	
-	for (auto e : listeCapteurs)
-	{
-		if (capteursFonctionnels.find(e.GetId()) ==  capteursFonctionnels.end())
-		{
-			capteursDefectueux->insert(e);
-		}
-	}*/
 
 	return capteursDefectueux;
 }

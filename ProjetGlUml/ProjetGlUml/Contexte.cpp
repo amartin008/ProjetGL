@@ -109,6 +109,7 @@ void Contexte::SetDateFin(Date &uneDateFin) {
 }*/ //----- Fin de Contexte (constructeur de copie)
 
 Contexte::Contexte()
+	:rayon(0.0)
 {
 #ifdef MAP
 	cout << "Appel au constructeur par défaut de <Contexte>" << endl;
@@ -125,7 +126,7 @@ Contexte::Contexte(float rayon, Point centre)
 
 
 Contexte::Contexte(Date debut, Date fin)
-	:debut(debut), fin(fin)
+	:debut(debut), fin(fin), rayon(0.0)
 {
 #ifdef MAP
 	cout << "Appel au constructeur de <Contexte>" << endl;

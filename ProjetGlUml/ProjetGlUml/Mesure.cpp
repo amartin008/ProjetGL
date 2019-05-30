@@ -110,6 +110,7 @@ istream & operator >> (istream & flux, Mesure & mesure)
 
 
 Mesure::Mesure()
+	:valeur(0.0)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur par défaut de <Mesure>" << endl;
