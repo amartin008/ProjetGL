@@ -8,9 +8,11 @@
 //---------- Interface de la classe <Attribut> (fichier Attribut.h) ----------------
 #if ! defined ( ATTRIBUT_H )
 #define ATTRIBUT_H
-using namespace std;
+
 
 //--------------------------------------------------- Interfaces utilisées
+#include <iostream>
+using namespace std;
 #include <string>
 
 //------------------------------------------------------------------------

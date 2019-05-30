@@ -8,9 +8,10 @@
 //---------- Interface de la classe <Mesure> (fichier Mesure.h) ----------------
 #if ! defined ( MESURE_H )
 #define MESURE_H
-using namespace std;
 
 //--------------------------------------------------- Interfaces utilisées
+#include <iostream>
+using namespace std;
 #include <string>
 #include "Date.h"
 #include "Attribut.h"

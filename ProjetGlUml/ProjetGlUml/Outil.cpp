@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 /*************************************************************************
                            Outil  -  description
                              -------------------
@@ -11,7 +13,6 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
-#define _CRT_SECURE_NO_WARNINGS
 #include <fstream>
 #include <iostream>
 
@@ -40,7 +41,7 @@ void Outil::lancerOutil() {
 		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
 		cout << "1. Lancer le mode analyse" << endl;
 		cout << "2. Lancer le mode surveillance" << endl;
-		cout << "3. Specifiez l'emplacement fichiers" << endl;
+		cout << "3. Specifiez l'emplacement des fichiers" << endl;
 		cout << "4. Quitter l'application" << endl;
 		cout << "Votre choix : ";
 		cin >> choix;

@@ -10,11 +10,11 @@
 #define CAPTEUR_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <iostream>
+using namespace std;
 #include <string>
 #include <vector>
 #include "fstream"
-
-using namespace std;
 
 #include "Mesure.h"
 #include "Point.h"

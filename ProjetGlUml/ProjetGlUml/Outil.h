@@ -10,11 +10,12 @@
 #define OUTIL_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <iostream>
+using namespace std;
 #include <string>
 #include <map>
 #include <set>
 #include <vector>
-using namespace std;
 
 #include "Capteur.h"
 #include "Attribut.h"
