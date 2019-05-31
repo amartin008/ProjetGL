@@ -52,6 +52,7 @@ public:
 	friend std::ostream & operator << (std::ostream & out, const Capteur & capteur);
 
 	friend bool operator < (const Capteur & c1, const Capteur & c2);
+
 //-------------------------------------------- Constructeurs - destructeur
     Capteur();
 	//Mode d'emploi :

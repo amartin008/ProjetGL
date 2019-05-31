@@ -535,18 +535,29 @@ set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte)
 {
 	set<string> capteursFonctionnels;
 	set<Capteur> * capteursDefectueux = new set<Capteur>();
+
 	ifstream flux(fichierMesures);
+	flux.seekg(0, ios::end);
+	long long int length = flux.tellg();
+	flux.seekg(0, ios::beg);
+	int pos = -1;
 
 	Mesure mesure;
 	string tmp;
 	getline(flux, tmp);
 	while (flux >> mesure)
 	{
+		if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
+			pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
+			cout << pos << "%" << endl;
+		}
 		if (contexte->EstDedans(mesure.GetDate()))
 		{
+			cout << "HEY" << endl;
 			capteursFonctionnels.insert(mesure.GetIdCapteur());
 		}
 	}
+	cout << endl;
 
 	for (vector<Capteur>::const_iterator it = listeCapteurs.cbegin(); it != listeCapteurs.cend(); ++it)
 	{

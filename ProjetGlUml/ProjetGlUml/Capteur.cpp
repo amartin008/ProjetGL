@@ -76,9 +76,12 @@ ostream & operator << (ostream & out, const Capteur & capteur)
 
 bool operator < (const Capteur & c1, const Capteur & c2)
 {
-	return c1.GetId().compare(c2.GetId());
+	if (c1.GetId().compare(c2.GetId()) < 0) {
+		return true;
+	} else {
+		return false;
+	}
 }
-
 
 //-------------------------------------------- Constructeurs - destructeur
 //Capteur::Capteur ( const Capteur & unCapteur )

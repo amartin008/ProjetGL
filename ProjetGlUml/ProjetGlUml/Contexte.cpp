@@ -32,25 +32,20 @@ bool Contexte::EstDedans(const Date d) const
 {
 	if (debut.GetAnnee() < d.GetAnnee() && fin.GetAnnee() > d.GetAnnee()) {
 		return true;
-	}
-	else if (debut.GetAnnee() == d.GetAnnee() || fin.GetAnnee() == d.GetAnnee()) {
+	} else if (debut.GetAnnee() == d.GetAnnee() || fin.GetAnnee() == d.GetAnnee()) {
 		if (debut.GetMois() < d.GetMois() && fin.GetMois() > d.GetMois()) {
 			return true;
-		}
-		else if (debut.GetMois() == d.GetMois() || fin.GetMois() == d.GetMois()) {
+		} else if (debut.GetMois() == d.GetMois() || fin.GetMois() == d.GetMois()) {
 			if (debut.GetJour() < d.GetJour() && fin.GetJour() > d.GetJour()) {
 				return true;
-			}
-			else if (debut.GetJour() == d.GetJour() || fin.GetJour() == d.GetJour()) {
+			} else if (debut.GetJour() == d.GetJour() || fin.GetJour() == d.GetJour()) {
 				if (debut.GetHeure() < d.GetHeure() && fin.GetHeure() > d.GetHeure()) {
 					return true;
-				}
-				else if (debut.GetHeure() == d.GetHeure() && fin.GetHeure() == d.GetHeure()) {
+				} else if (debut.GetHeure() == d.GetHeure() || fin.GetHeure() == d.GetHeure()) {
 					if (debut.GetMin() < d.GetMin() && fin.GetMin() > d.GetMin()) {
 						return true;
-					}
-					else if (debut.GetMin() == d.GetMin() && fin.GetMin() == d.GetMin()) {
-						if (debut.GetSec() < d.GetSec() && fin.GetSec() > d.GetSec()) {
+					} else if (debut.GetMin() == d.GetMin() || fin.GetMin() == d.GetMin()) {
+						if ((debut.GetSec() < d.GetSec() && fin.GetSec() > d.GetSec()) || (debut.GetSec() == d.GetSec() || fin.GetSec() == d.GetSec())) {
 							return true;
 						}
 					}
