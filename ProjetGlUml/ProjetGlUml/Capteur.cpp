@@ -66,7 +66,7 @@ istream & operator >> (istream & flux, Capteur & capteur)
 	return flux;
 } //----- Fin de operator >>
 
-ostream & operator << (ostream & out, Capteur & capteur)
+ostream & operator << (ostream & out, const Capteur & capteur)
 // Algorithme :
 //
 {

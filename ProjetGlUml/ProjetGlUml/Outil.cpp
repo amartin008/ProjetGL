@@ -38,6 +38,8 @@ void Outil::lancerOutil() {
 	FILE* buffer;
 
 	Contexte * contexte;
+	set<Capteur>* capteursDefectueux;
+
 	Capteur capteur;
 	Attribut attribut;
 
@@ -45,7 +47,7 @@ void Outil::lancerOutil() {
 		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
 		cout << "1. Lancer le mode analyse" << endl;
 		cout << "2. Lancer le mode surveillance" << endl;
-		cout << "3. Specifiez l'emplacement des fichiers" << endl;
+		cout << "3. Specifiez le nom des fichiers" << endl;
 		cout << "4. Quitter l'application" << endl;
 		cout << "Votre choix : ";
 		cin >> choix;
@@ -308,19 +310,18 @@ void Outil::lancerOutil() {
 									cout << endl;
 									break;
 								case 2:
-									set<Capteur> * capteursDefectueux = verifierCapteurs(contexte);
+									capteursDefectueux = verifierCapteurs(contexte);
 									if (capteursDefectueux->empty()) {
-										cout << "Aucun capteur n'est defectueux sur la periode choisie"
+										cout << "Aucun capteur n'est defectueux sur la periode choisie" << endl;
 										cout << endl;
 									} else {
 										cout << "Ci-dessous la liste des capteurs defectueux : " << endl;
-										for (vector<Capteur>::const_iterator it = capteursDefectueux) {
-											cout << *it; //A FINIR
+										for (set<Capteur>::const_iterator it = capteursDefectueux->cbegin(); it != capteursDefectueux->cend(); ++it) {
+											cout << *it;
 										}
 										cout << endl;
 									}
 									delete capteursDefectueux;
-									delete contexte;
 									break;
 								case 3:
 									quitterSurveillance = 1;
@@ -337,6 +338,7 @@ void Outil::lancerOutil() {
 							cin.ignore(numeric_limits<streamsize>::max(), '\n');
 						}
 					} while (quitterSurveillance != 1);
+					delete contexte;
 					break;
 				case 3:
 					cout << "Les fichiers doivent etre dans le repertoire data_folder" << endl;

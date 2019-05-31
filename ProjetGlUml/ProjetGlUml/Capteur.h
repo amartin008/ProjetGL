@@ -49,7 +49,7 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
 	friend std::istream & operator >> (std::istream & flux, Capteur & capteur);
 
-	friend std::ostream & operator << (std::ostream & out, Capteur & capteur);
+	friend std::ostream & operator << (std::ostream & out, const Capteur & capteur);
 
 	friend bool operator < (const Capteur & c1, const Capteur & c2);
 //-------------------------------------------- Constructeurs - destructeur

@@ -73,25 +73,34 @@ istream & operator >> (istream & flux, Mesure & mesure)
 
 	int annee, mois, jour, heure, min, sec;
 	getline(flux, tmp, '-');
+	cerr << tmp << endl; //DEBUG
 	annee = atoi(tmp.c_str());
 	getline(flux, tmp, '-');
+	cerr << tmp << endl; //DEBUG
 	mois = atoi(tmp.c_str());
 	getline(flux, tmp, 'T');
+	cerr << tmp << endl; //DEBUG
 	jour = atoi(tmp.c_str());
 	getline(flux, tmp, ':');
+	cerr << tmp << endl; //DEBUG
 	heure = atoi(tmp.c_str());
 	getline(flux, tmp, ':');
+	cerr << tmp << endl; //DEBUG
 	min = atoi(tmp.c_str());
 	getline(flux, tmp, ';');
+	cerr << tmp << endl; //DEBUG
 	sec = atoi(tmp.c_str());
 	Date date = Date(annee, mois, jour, heure, min, sec);
 	mesure.SetDate(date);
 	getline(flux, tmp, ';');
+	cerr << tmp << endl; //DEBUG
 	mesure.SetIdCapteur(tmp);
 	getline(flux, tmp, ';');
+	cerr << tmp << endl; //DEBUG
 	mesure.SetIdAttribut(tmp);
 	getline(flux, tmp, ';');
-	mesure.SetValeur(stod(tmp));
+	cerr << tmp << endl; //DEBUG
+	mesure.SetValeur(atof(tmp.c_str()));
 	getline(flux, tmp);
 
 	return flux;
