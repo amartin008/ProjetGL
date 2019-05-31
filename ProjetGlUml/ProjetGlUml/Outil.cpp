@@ -30,10 +30,14 @@ using namespace std;
 void Outil::lancerOutil() {
 	int choix = 0;
 	int confirmation = 0;
+	int quitterAnalyse = 0;
+	int quitterSurveillance = 0;
+	int ok = 0;
 
 	string input;
 	FILE* buffer;
 
+	Contexte * contexte;
 	Capteur capteur;
 	Attribut attribut;
 
@@ -50,12 +54,289 @@ void Outil::lancerOutil() {
 		if (cin.good()) {
 			switch(choix) {
 				case 1:
-					cout << "Mode analyse" << endl;
-					cout << endl;
+					quitterAnalyse = 0;
+					do {
+						cout << "Mode analyse - Que voulez-vous faire ?" << endl;
+						cout << "1. Calcul de la qualite de l'air" << endl;
+						cout << "2. Recherche des comportements de capteurs similaires" << endl;
+						cout << "3. Recherche des caracteristiques de l'air a un point donne" << endl;
+						cout << "4. Quitter le mode analyse" << endl;
+						cout << "Votre choix : ";
+						cin >> choix;
+						cout << endl;
+
+						if (cin.good()) {
+							switch (choix) {
+								case 1:
+									cout << "Calcul de la qualite de l'air" << endl;
+									cout << endl;
+									break;
+								case 2:
+									cout << "Recherche des comportements de capteurs similaires" << endl;
+									cout << endl;
+									break;
+								case 3:
+									cout << "Recherche des caracteristiques de l'air a un point donne" << endl;
+									cout << endl;
+									break;
+								case 4:
+									quitterAnalyse = 1;
+									break;
+								default :
+									cout << "Veuillez selectionner un chiffre entre 1 et 4." << endl;
+									cout << endl;
+									break;
+							}
+						} else {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+					} while (quitterAnalyse != 1);
 					break;
 				case 2:
-					cout << "Mode surveillance" << endl;
-					cout << endl;
+					cout << "Veuillez selectionner la periode souhaitee" << endl;
+					ok = 0;
+					int anneeDebut;
+					do {
+						cout << "[DEBUT] Annee : " << endl;
+						cin >> anneeDebut;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int moisDebut;
+					do {
+						cout << "[DEBUT] Mois : " << endl;
+						cin >> moisDebut;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int jourDebut;
+					do {
+						cout << "[DEBUT] Jour : " << endl;
+						cin >> jourDebut;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int heureDebut;
+					do {
+						cout << "[DEBUT] Heure : " << endl;
+						cin >> heureDebut;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int minDebut;
+					do {
+						cout << "[DEBUT] Minute : " << endl;
+						cin >> minDebut;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int secDebut;
+					do {
+						cout << "[DEBUT] Seconde : " << endl;
+						cin >> secDebut;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int anneeFin;
+					do {
+						cout << "[FIN] Annee : " << endl;
+						cin >> anneeFin;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int moisFin;
+					do {
+						cout << "[FIN] Mois : " << endl;
+						cin >> moisFin;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int jourFin;
+					do {
+						cout << "[FIN] Jour : " << endl;
+						cin >> jourFin;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int heureFin;
+					do {
+						cout << "[FIN] Heure : " << endl;
+						cin >> heureFin;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int minFin;
+					do {
+						cout << "[FIN] Minute : " << endl;
+						cin >> minFin;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					ok = 0;
+					int secFin;
+					do {
+						cout << "[FIN] Seconde : " << endl;
+						cin >> secFin;
+						cout << endl;
+						if (!cin.good()) {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+						else {
+							ok = 1;
+						}
+					} while (ok != 1);
+					contexte = new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
+
+					quitterSurveillance = 0;
+					do {
+						cout << "Mode surveillance - Que voulez-vous faire ?" << endl;
+						cout << "1. Verification fiabilite des donnees" << endl;
+						cout << "2. Verification fonctionnement des capteurs" << endl;
+						cout << "3. Quitter le mode surveillance" << endl;
+						cout << "Votre choix : ";
+						cin >> choix;
+						cout << endl;
+
+						if (cin.good()) {
+							switch (choix) {
+								case 1:
+									cout << "Verification fiabilite des donnees" << endl;
+									cout << endl;
+									break;
+								case 2:
+									set<Capteur> * capteursDefectueux = verifierCapteurs(contexte);
+									if (capteursDefectueux->empty()) {
+										cout << "Aucun capteur n'est defectueux sur la periode choisie"
+										cout << endl;
+									} else {
+										cout << "Ci-dessous la liste des capteurs defectueux : " << endl;
+										for (vector<Capteur>::const_iterator it = capteursDefectueux) {
+											cout << *it; //A FINIR
+										}
+										cout << endl;
+									}
+									delete capteursDefectueux;
+									delete contexte;
+									break;
+								case 3:
+									quitterSurveillance = 1;
+									break;
+								default:
+									cout << "Veuillez selectionner un chiffre entre 1 et 3." << endl;
+									cout << endl;
+									break;
+							}
+						} else {
+							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
+							cout << endl;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						}
+					} while (quitterSurveillance != 1);
 					break;
 				case 3:
 					cout << "Les fichiers doivent etre dans le repertoire data_folder" << endl;
@@ -154,7 +435,7 @@ void Outil::lancerOutil() {
 					} while (confirmation!=1 && confirmation!=2);
 					break;
 				default:
-					cout << "Veuillez selectionner un chiffre entre 1 et 3." << endl;
+					cout << "Veuillez selectionner un chiffre entre 1 et 4." << endl;
 					cout << endl;
 					break;
 			}
