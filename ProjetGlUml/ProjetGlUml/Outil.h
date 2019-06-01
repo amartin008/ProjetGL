@@ -70,14 +70,14 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	Capteur * verifierDonneesCapteurs(const Contexte * contexte);
+	set<Capteur> * verifierDonneesCapteurs(const Contexte * contexte) const;
 	//Mode d'emploi :
 	//méthode permettant de vérifier les données envoyées par les capteurs
 	//durant la période définie dans l'objet Contexte passé en paramètre.
 	//Elle retourne la liste des capteurs ayant effectué des mesures abherrantes
 	//sur cette période.
 
-	set<Capteur> * verifierCapteurs(const Contexte * contexte);
+	set<Capteur> * verifierCapteurs(const Contexte * contexte) const;
 	//Mode d'emploi :
 	//méthode permettant de vérifier le bon fonctionnement des capteurs
 	//durant la période définie dans l'objet Contexte passé en paramètre.
@@ -118,7 +118,7 @@ protected:
 	string fichierMesures;
 	//emplacement du fichier contenant les mesures des capteurs
 
-	map<string,float> moyenneCapteurs;
+	map<string,double> moyenneCapteurs;
 	//conteneur map qui associe à chaque capteur d’id sensorID(string), 
 	//la moyenne des mesures effectuées par celui - ci(int).
 	//Cet attribut sera utilisé par la suite pour la vérification de la

@@ -32,7 +32,6 @@ void Outil::lancerOutil() {
 	int confirmation = 0;
 	int quitterAnalyse = 0;
 	int quitterSurveillance = 0;
-	int ok = 0;
 
 	string input;
 	FILE* buffer;
@@ -98,199 +97,26 @@ void Outil::lancerOutil() {
 					} while (quitterAnalyse != 1);
 					break;
 				case 2:
-					cout << "Veuillez selectionner la periode souhaitee" << endl;
-					ok = 0;
-					int anneeDebut;
-					do {
-						cout << "[DEBUT] Annee : " << endl;
-						cin >> anneeDebut;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int moisDebut;
-					do {
-						cout << "[DEBUT] Mois : " << endl;
-						cin >> moisDebut;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int jourDebut;
-					do {
-						cout << "[DEBUT] Jour : " << endl;
-						cin >> jourDebut;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int heureDebut;
-					do {
-						cout << "[DEBUT] Heure : " << endl;
-						cin >> heureDebut;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int minDebut;
-					do {
-						cout << "[DEBUT] Minute : " << endl;
-						cin >> minDebut;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int secDebut;
-					do {
-						cout << "[DEBUT] Seconde : " << endl;
-						cin >> secDebut;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int anneeFin;
-					do {
-						cout << "[FIN] Annee : " << endl;
-						cin >> anneeFin;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int moisFin;
-					do {
-						cout << "[FIN] Mois : " << endl;
-						cin >> moisFin;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int jourFin;
-					do {
-						cout << "[FIN] Jour : " << endl;
-						cin >> jourFin;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int heureFin;
-					do {
-						cout << "[FIN] Heure : " << endl;
-						cin >> heureFin;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int minFin;
-					do {
-						cout << "[FIN] Minute : " << endl;
-						cin >> minFin;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
-					ok = 0;
-					int secFin;
-					do {
-						cout << "[FIN] Seconde : " << endl;
-						cin >> secFin;
-						cout << endl;
-						if (!cin.good()) {
-							cout << "Entree invalide ! Veuillez selectionner un chiffre." << endl;
-							cout << endl;
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						else {
-							ok = 1;
-						}
-					} while (ok != 1);
+					int anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut, anneeFin, moisFin, jourFin, heureFin, minFin, secFin;
+					cout << "Mode surveillance - veuillez selectionner la periode souhaitee" << endl;
+					cout << "Date de debut de periode (AAAA/MM/JJ-hh:mm:ss) : ";
+					cin >> input;
+					anneeDebut = atoi(input.substr(0,4).c_str());
+					moisDebut = atoi(input.substr(5,2).c_str());
+					jourDebut = atoi(input.substr(8,2).c_str());
+					heureDebut = atoi(input.substr(11,2).c_str());
+					minDebut = atoi(input.substr(14,2).c_str());
+					secDebut = atoi(input.substr(17,2).c_str());
+					cout << "Date de fin de periode (AAAA/MM/JJ-hh:mm:ss) : ";
+					cin >> input;
+					cout << endl;
+					anneeFin = atoi(input.substr(0, 4).c_str());
+					moisFin = atoi(input.substr(5, 2).c_str());
+					jourFin = atoi(input.substr(8, 2).c_str());
+					heureFin = atoi(input.substr(11, 2).c_str());
+					minFin = atoi(input.substr(14, 2).c_str());
+					secFin = atoi(input.substr(17, 2).c_str());
+
 					contexte = new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
 
 					quitterSurveillance = 0;
@@ -306,8 +132,18 @@ void Outil::lancerOutil() {
 						if (cin.good()) {
 							switch (choix) {
 								case 1:
-									cout << "Verification fiabilite des donnees" << endl;
-									cout << endl;
+									capteursDefectueux = verifierDonneesCapteurs(contexte);
+									if (capteursDefectueux->empty()) {
+										cout << "Aucun capteur n'est defectueux sur la periode choisie" << endl;
+										cout << endl;
+									} else {
+										cout << "Ci-dessous la liste des capteurs defectueux : " << endl;
+										for (set<Capteur>::const_iterator it = capteursDefectueux->cbegin(); it != capteursDefectueux->cend(); ++it) {
+											cout << *it;
+										}
+										cout << endl;
+									}
+									delete capteursDefectueux;
 									break;
 								case 2:
 									capteursDefectueux = verifierCapteurs(contexte);
@@ -526,12 +362,45 @@ Outil::~Outil()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-Capteur * Outil::verifierDonneesCapteurs(const Contexte * contexte)
+set<Capteur> * Outil::verifierDonneesCapteurs(const Contexte * contexte) const
 {
-	return nullptr;
+	set<string> idCapteursDefectueux;
+	set<Capteur> * capteursDefectueux = new set<Capteur>();
+
+	ifstream flux(fichierMesures);
+	flux.seekg(0, ios::end);
+	long long int length = flux.tellg();
+	flux.seekg(0, ios::beg);
+	int pos = -1;
+
+	Mesure mesure;
+	string tmp;
+	getline(flux, tmp);
+	while (flux >> mesure)
+	{
+		if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
+			pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
+			cout << "Analyse des capteurs en cours : " << pos << " %\r";
+		}
+		if (contexte->EstDedans(mesure.GetDate()) && (mesure.GetValeur() < moyenneCapteurs.find(mesure.GetIdCapteur())->second - 10.0 || mesure.GetValeur() > moyenneCapteurs.find(mesure.GetIdCapteur())->second + 10.0))
+		{
+			idCapteursDefectueux.insert(mesure.GetIdCapteur());
+		}
+	}
+	cout << endl;
+
+	for (vector<Capteur>::const_iterator it = listeCapteurs.cbegin(); it != listeCapteurs.cend(); ++it)
+	{
+		if (idCapteursDefectueux.find(it->GetId()) != idCapteursDefectueux.end())
+		{
+			capteursDefectueux->insert(*it);
+		}
+	}
+
+	return capteursDefectueux;
 }
 
-set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte)
+set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte) const
 {
 	set<string> capteursFonctionnels;
 	set<Capteur> * capteursDefectueux = new set<Capteur>();
