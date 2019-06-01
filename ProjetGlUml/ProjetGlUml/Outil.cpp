@@ -41,6 +41,7 @@ void Outil::lancerOutil() {
 
 	Capteur capteur;
 	Attribut attribut;
+	Mesure mesure;
 
 	do {
 		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
@@ -237,6 +238,7 @@ void Outil::lancerOutil() {
 
 						cout << endl;
 						buffer = fopen(("data_folder/" + input).c_str(), "r");
+
 						if (!input.compare("N")) {
 							break;
 						} else if (buffer == NULL){
@@ -244,6 +246,22 @@ void Outil::lancerOutil() {
 							cout << endl;
 						} else {
 							SetFichierMesures("data_folder/" + input);
+							ifstream flux(fichierMesures);
+							flux.seekg(0, ios::end);
+							long long int length = flux.tellg();
+							flux.seekg(0, ios::beg);
+							int pos = -1;
+							multimap<string, double> valeursCapteurs;
+							getline(flux, input);
+							while (flux >> mesure) {
+								if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
+									pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
+									cout << "Initialisation de l'application en cours : " << pos << " %\r";
+								}
+								valeursCapteurs.insert(make_pair(mesure.GetIdCapteur(),mesure.GetValeur()));
+							}
+							cout << endl << endl;
+
 						}
 					} while (buffer == NULL);
 					
