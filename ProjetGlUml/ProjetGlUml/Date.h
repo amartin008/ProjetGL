@@ -47,6 +47,10 @@ public:
     
     void SetSec(int sec);
 
+//------------------------------------------------- Surcharge d'opérateurs
+
+	friend bool operator <= (const Date & d1, const Date & d2);
+
 //-------------------------------------------- Constructeurs - destructeur
 	
     Date();

@@ -88,6 +88,34 @@ void Date::SetSec(int sec)
 
 //------------------------------------------------- Surcharge d'opérateurs
 
+bool operator <= (const Date & d1, const Date & d2)
+{
+	if (d1.annee < d2.annee) {
+		return true;
+	} else if (d1.annee == d2.annee) {
+		if (d1.mois < d2.mois) {
+			return true;
+		} else if (d1.mois == d2.mois) {
+			if (d1.jour < d2.jour) {
+				return true;
+			} else if (d1.jour == d2.jour) {
+				if (d1.heure < d2.heure) {
+					return true;
+				} else if (d1.heure == d2.heure) {
+					if (d1.min < d2.min) {
+						return true;
+					} else if (d1.min == d2.min) {
+						if (d1.sec <= d2.sec) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+
 
 //-------------------------------------------- Constructeurs - destructeur
 

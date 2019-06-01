@@ -549,11 +549,10 @@ set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte)
 	{
 		if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
 			pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
-			cout << pos << "%" << endl;
+			cout << "Analyse des capteurs en cours : " << pos << " %\r";
 		}
 		if (contexte->EstDedans(mesure.GetDate()))
 		{
-			cout << "HEY" << endl;
 			capteursFonctionnels.insert(mesure.GetIdCapteur());
 		}
 	}
