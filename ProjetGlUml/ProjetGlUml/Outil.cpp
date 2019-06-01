@@ -251,17 +251,29 @@ void Outil::lancerOutil() {
 							long long int length = flux.tellg();
 							flux.seekg(0, ios::beg);
 							int pos = -1;
-							multimap<string, double> valeursCapteurs;
+							map<pair<string,string>, long int> nbValeursCapteurs;
+							map<pair<string, string>, double>::iterator itMoyenneCapteurs;
+							pair<string, string> pairTmp;
 							getline(flux, input);
 							while (flux >> mesure) {
 								if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
 									pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
 									cout << "Initialisation de l'application en cours : " << pos << " %\r";
 								}
-								valeursCapteurs.insert(make_pair(mesure.GetIdCapteur(),mesure.GetValeur()));
+								pairTmp = make_pair(mesure.GetIdCapteur(), mesure.GetIdAttribut());
+								itMoyenneCapteurs = moyenneCapteurs.find(pairTmp);
+								if (itMoyenneCapteurs == moyenneCapteurs.end()) {
+									moyenneCapteurs.insert(make_pair(pairTmp, mesure.GetValeur()));
+									nbValeursCapteurs.insert(make_pair(pairTmp, 1));
+								} else {
+									itMoyenneCapteurs->second += mesure.GetValeur();
+									nbValeursCapteurs.find(pairTmp)->second += 1;
+								}
 							}
 							cout << endl << endl;
-
+							for (itMoyenneCapteurs = moyenneCapteurs.begin(); itMoyenneCapteurs != moyenneCapteurs.end(); ++itMoyenneCapteurs) {
+								itMoyenneCapteurs->second /= nbValeursCapteurs.find(itMoyenneCapteurs->first)->second;
+							}
 						}
 					} while (buffer == NULL);
 					
@@ -398,9 +410,9 @@ set<Capteur> * Outil::verifierDonneesCapteurs(const Contexte * contexte) const
 	{
 		if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
 			pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
-			cout << "Analyse des capteurs en cours : " << pos << " %\r";
+			cout << "Analyse des donnees des capteurs en cours : " << pos << " %\r";
 		}
-		if (contexte->EstDedans(mesure.GetDate()) && (mesure.GetValeur() < moyenneCapteurs.find(mesure.GetIdCapteur())->second - 10.0 || mesure.GetValeur() > moyenneCapteurs.find(mesure.GetIdCapteur())->second + 10.0))
+		if (contexte->EstDedans(mesure.GetDate()) && (mesure.GetValeur() < moyenneCapteurs.find(make_pair(mesure.GetIdCapteur(),mesure.GetIdAttribut()))->second - 300.0 || mesure.GetValeur() > moyenneCapteurs.find(make_pair(mesure.GetIdCapteur(),mesure.GetIdAttribut()))->second + 300.0))
 		{
 			idCapteursDefectueux.insert(mesure.GetIdCapteur());
 		}

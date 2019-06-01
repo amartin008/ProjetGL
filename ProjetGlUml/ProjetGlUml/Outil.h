@@ -118,7 +118,7 @@ protected:
 	string fichierMesures;
 	//emplacement du fichier contenant les mesures des capteurs
 
-	map<string,double> moyenneCapteurs;
+	map<pair<string,string>,double> moyenneCapteurs;
 	//conteneur map qui associe à chaque capteur d’id sensorID(string), 
 	//la moyenne des mesures effectuées par celui - ci(int).
 	//Cet attribut sera utilisé par la suite pour la vérification de la
