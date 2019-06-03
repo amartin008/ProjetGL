@@ -70,10 +70,53 @@ void Outil::lancerOutil() {
 						if (cin.good()) {
 							switch (choix) {
 								case 1:
-									cout << "Calcul de la qualite de l'air" << endl;
+									float lat, lng, rayon;
+
+									cout << "Saisie du point - " << endl;
+									cout << "Longitude: ";
+									cin >> input;
+									lng = stof(input);
+									
+									cout << "Latitude : ";
+									cin >> input;
+									lat = stof(input);
+
+									cout << "Rayon : ";
+									cin >> input;
+									rayon = stof(input);
+
+									int anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut, anneeFin, moisFin, jourFin, heureFin, minFin, secFin;
+									cout << "Mode surveillance - veuillez selectionner la periode souhaitee" << endl;
+									cout << "Date de debut de periode (AAAA/MM/JJ-hh:mm:ss) : ";
+									cin >> input;
+									anneeDebut = atoi(input.substr(0, 4).c_str());
+									moisDebut = atoi(input.substr(5, 2).c_str());
+									jourDebut = atoi(input.substr(8, 2).c_str());
+									heureDebut = atoi(input.substr(11, 2).c_str());
+									minDebut = atoi(input.substr(14, 2).c_str());
+									secDebut = atoi(input.substr(17, 2).c_str());
+									cout << "Date de fin de periode (AAAA/MM/JJ-hh:mm:ss) : ";
+									cin >> input;
+									cout << endl;
+									anneeFin = atoi(input.substr(0, 4).c_str());
+									moisFin = atoi(input.substr(5, 2).c_str());
+									jourFin = atoi(input.substr(8, 2).c_str());
+									heureFin = atoi(input.substr(11, 2).c_str());
+									minFin = atoi(input.substr(14, 2).c_str());
+									secFin = atoi(input.substr(17, 2).c_str());
+
+									contexte = new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
+									contexte->SetPoint(*(new Point(lat, lng)));
+									contexte->SetRayon(rayon);
+
+									for (pair<string, float> p : calculerQualiteMoyenne(contexte)) {
+										cout << p.first << " : " << p.second << endl;
+									}
+
 									cout << endl;
 									break;
 								case 2:
+
 									cout << "Recherche des comportements de capteurs similaires" << endl;
 									cout << endl;
 									break;
@@ -467,3 +510,42 @@ set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte) const
 
 	return capteursDefectueux;
 }
+
+map<string, float> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
+	ifstream flux(fichierMesures);
+	set<string> capteurConcernee;
+	map<string, int> nbMesures;
+	map<string, float> moyenneValeurs;
+
+	map<string, float>::iterator it;
+
+	Mesure mesure;
+	string tmp;
+
+	for (Capteur c : listeCapteurs){
+		if (contexte->EstDedans(c.GetLocalisation())) {
+			capteurConcernee.insert(c.GetId());
+		}
+	}
+
+	getline(flux, tmp);
+	while (flux >> mesure) {
+		if (capteurConcernee.find(mesure.GetIdCapteur()) != capteurConcernee.end() && contexte->EstDedans(mesure.GetDate())) {
+			it = moyenneValeurs.find(mesure.GetIdAttribut());
+			if (it != moyenneValeurs.end()) {
+				it->second += (float)mesure.GetValeur();
+				nbMesures.find(mesure.GetIdAttribut())->second++;
+			}
+			else {
+				moyenneValeurs[mesure.GetIdAttribut()] = (float)mesure.GetValeur();
+			}
+		}
+	}
+	for (pair<string,float> p : moyenneValeurs) {
+		p.second /= nbMesures.find(p.first)->second;
+	}
+
+	return moyenneValeurs;
+}
+
+
