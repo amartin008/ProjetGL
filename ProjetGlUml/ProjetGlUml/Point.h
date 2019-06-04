@@ -22,17 +22,17 @@ class Point
 
 public:
 	//----------------------------------------------------- Méthodes publiques
-	float GetLatitude() const;
-	void SetLatitude(float lat);
-	float GetLongitude() const;
-	void SetLongitude(float lng);
+	double GetLatitude() const;
+	void SetLatitude(double lat);
+	double GetLongitude() const;
+	void SetLongitude(double lng);
 
 	//-------------------------------------------- Constructeurs - destructeurs
 	Point();
 	//Mode d'emploi :
 	//Constructeur par défaut de la classe Point
 
-	Point(float latitude, float longitude);
+	Point(double latitude, double longitude);
 	//Mode d'emploi :
 	//Constructuer de la classe Point. Initialise la latitude et la longitude
 	// caractérisant les coordonnées géographiques d'un point.
@@ -45,8 +45,8 @@ public:
 
 protected:
 	//----------------------------------------------------- Attributs protégés
-	float latitude;
-	float longitude;
+	double latitude;
+	double longitude;
 };
 #endif // POINT_H
 

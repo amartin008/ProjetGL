@@ -23,22 +23,22 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-float Point::GetLatitude() const
+double Point::GetLatitude() const
 {
 	return latitude;
 }
 
-void Point::SetLatitude(float lat)
+void Point::SetLatitude(double lat)
 {
 	latitude = lat;
 }
 
-float Point::GetLongitude() const
+double Point::GetLongitude() const
 {
 	return longitude;
 }
 
-void Point::SetLongitude(float lng)
+void Point::SetLongitude(double lng)
 {
 	longitude = lng;
 }
@@ -56,7 +56,7 @@ Point::Point()
 } //----- Fin de Point
 
 
-Point::Point(float lat, float longi)
+Point::Point(double lat, double longi)
 	:latitude(lat), longitude(longi)
 {
 #ifdef MAP
