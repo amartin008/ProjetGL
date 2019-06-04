@@ -33,7 +33,6 @@ void Outil::lancerOutil() {
 
 	bool quitterAnalyse = false;
 	bool quitterSurveillance = false;
-	bool fichiersSpecifies = false;
 
 	string input;
 
@@ -43,10 +42,8 @@ void Outil::lancerOutil() {
 	do {
 		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
 
-		while (!fichiersSpecifies) {
-			cout << "Veuillez specifier les fichiers avant de commencer." << endl;
-			specifierFichiers(fichiersSpecifies);
-		}
+		cout << "Veuillez specifier les fichiers avant de commencer." << endl;
+		specifierFichiers();
 
 		cout << "1. Lancer le mode analyse" << endl;
 		cout << "2. Lancer le mode surveillance" << endl;
@@ -84,6 +81,7 @@ void Outil::lancerOutil() {
 
 									contexte->SetRayon(rayon);
 
+									cout << "Fin d'analyse." << endl;
 									for (pair<string, double> p : calculerQualiteMoyenne(contexte)) {
 										cout << p.first << " : " << p.second << endl;
 									}
@@ -340,7 +338,7 @@ Contexte* Outil::saisieDate() {
 		}
 		cout << "Minute : ";
 		cin >> minDebut;
-	} while (!cin.good() || minDebut < 0 || minDebut > 69);
+	} while (!cin.good() || minDebut < 0 || minDebut > 59);
 
 	do {
 		if (!cin.good()) {
@@ -352,6 +350,8 @@ Contexte* Outil::saisieDate() {
 		cin >> secDebut;
 	} while (!cin.good() || secDebut < 0 || secDebut > 59);
 
+	cout << endl;
+	cout << "Date de fin de periode : " << endl;
 	
 	do {
 		if (!cin.good()) {
@@ -401,7 +401,7 @@ Contexte* Outil::saisieDate() {
 		}
 		cout << "Minute : ";
 		cin >> minFin;
-	} while (!cin.good() || minFin < 0 || minFin > 69);
+	} while (!cin.good() || minFin < 0 || minFin > 59);
 
 	do {
 		if (!cin.good()) {
@@ -412,6 +412,8 @@ Contexte* Outil::saisieDate() {
 		cout << "Seconde : ";
 		cin >> secFin;
 	} while (!cin.good() || secFin < 0 || secFin > 59);
+
+	cout << endl;
 
 	return new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
 }
@@ -428,9 +430,7 @@ Point * Outil::saisiePoint() {
 	return new Point(lat, lng);
 }
 
-void Outil::specifierFichiers(bool & fichierSpecifies) {
-	bool succes = true;
-
+void Outil::specifierFichiers() {
 	string input;
 	FILE* buffer;
 
@@ -442,16 +442,12 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	cout << endl;
 
 	do {
-		cout << "Fichier concernant les capteurs (N pour annuler): ";
+		cout << "Fichier concernant les capteurs : ";
 		cin >> input;
 
 		cout << endl;
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
-		if (!input.compare("N")) {
-			succes = false;
-			break;
-		}
-		else if (buffer == NULL) {
+		if (buffer == NULL) {
 			cerr << "Fichier inexistant" << endl;
 			cout << endl;
 		}
@@ -470,17 +466,13 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	}
 
 	do {
-		cout << "Fichier concernant les attributs (N pour annuler): ";
+		cout << "Fichier concernant les attributs : ";
 		cin >> input;
 
 		cout << endl;
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
 
-		if (!input.compare("N")) {
-			succes = false;
-			break;
-	}
-		else if (buffer == NULL) {
+		if (buffer == NULL) {
 			cerr << "Fichier inexistant" << endl;
 			cout << endl;
 		}
@@ -499,17 +491,13 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	}
 
 	do {
-		cout << "Fichier concernant les mesures (N pour annuler): ";
+		cout << "Fichier concernant les mesures : ";
 		cin >> input;
 
 		cout << endl;
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
 
-		if (!input.compare("N")) {
-			succes = false;
-			break;
-		}
-		else if (buffer == NULL) {
+		if (buffer == NULL) {
 			cerr << "Fichier inexistant" << endl;
 			cout << endl;
 		}
@@ -550,8 +538,6 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	if (buffer != NULL) {
 		fclose(buffer);
 	}
-
-	fichierSpecifies = succes;
 }
 
 set<Capteur> * Outil::verifierDonneesCapteurs(const Contexte * contexte) const
@@ -647,13 +633,17 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 		}
 	}
 
+	for (string s : capteurConcernee) {
+		cout << s << endl;
+	}
+
 	getline(flux, tmp);
 	while (flux >> mesure) {
 		if (capteurConcernee.find(mesure.GetIdCapteur()) != capteurConcernee.end() && contexte->EstDedans(mesure.GetDate())) {
 			it = moyenneValeurs.find(mesure.GetIdAttribut());
 			if (it != moyenneValeurs.end()) {
 				it->second += mesure.GetValeur();
-				nbMesures.find(mesure.GetIdAttribut())->second++;
+				nbMesures[mesure.GetIdAttribut()]++;
 			}
 			else {
 				moyenneValeurs[mesure.GetIdAttribut()] = mesure.GetValeur();
@@ -661,10 +651,19 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 		}
 	}
 	for (pair<string,double> p : moyenneValeurs) {
+		cout << p.second << endl;
+		cout << nbMesures.find(p.first)->second << endl;
 		p.second /= nbMesures.find(p.first)->second;
+		moyenneValeurs[p.first] = p.second;
 	}
 
 	return moyenneValeurs;
 }
+
+//map <string, double> Outil::trouverValeursCaract(const Point* point) {
+
+//}
+
+
 
 

@@ -46,6 +46,8 @@ public:
 
 	Point GetLocalisation() const;
 
+	void SetLocalisation(Point & p);
+
 //------------------------------------------------- Surcharge d'opérateurs
 	friend std::istream & operator >> (std::istream & flux, Capteur & capteur);
 
