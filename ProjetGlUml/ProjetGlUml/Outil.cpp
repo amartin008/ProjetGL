@@ -110,6 +110,11 @@ void Outil::lancerOutil() {
 											cout<<(p.first).first<<" a un comportement similaire à "<<(p.first).second<<"dans la mesure de "<<p.second<<endl;
 										}
 									}
+									else 
+									{
+										cout<<"Aucun couple de capteurs n'a un comportement similaire dans cette zone"<<endl;
+									}
+									
 									
 									break;
 								case 3:
