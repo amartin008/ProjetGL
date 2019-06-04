@@ -94,6 +94,23 @@ void Outil::lancerOutil() {
 
 									cout << "Recherche des comportements de capteurs similaires" << endl;
 									cout << endl;
+									cout<<"Saisie du centre :"<<endl;
+									
+									contexte->setPoint(*saisiePoint());
+									cout << "Rayon (km) : ";
+									cin >> rayon;
+									
+									contexte->SetRayon(rayon);
+									
+									multimap<pair<Capteur,Capteur>,string> captSimilaires = chercherCaptSimilaires(contexte);
+									if (captSimilaires.size()!=0) 
+									{
+										for (pair<pair<Capteur,Capteur>,string> p : captSimilaires)
+										{
+											cout<<(p.first).first<<" a un comportement similaire à "<<(p.first).second<<"dans la mesure de "<<p.second<<endl;
+										}
+									}
+									
 									break;
 								case 3:
 									cout << "Recherche des caracteristiques de l'air a un point donne" << endl;
@@ -674,6 +691,69 @@ map <string, double> Outil::trouverValeursCaract(const Contexte* contexte) {
 	}
 
 	return valeursCaract;
+}
+
+multimap<pair<Capteur, Capteur>, string> Outil::chercherCaptSimilaires(const Contexte * contexte)
+{
+	ifstream flux(fichierMesures);
+	set<Capteur> capteursConcernes;
+	multimap <pair<Capteur, Capteur>, string> capteursSimilaires;
+	map<pair<string, string>, double> moyenneCapteursConcernes;
+
+	set<Capteur>::iterator itSet1;
+	set<Capteur>::iterator itSet2;
+	map<pair<string, string>, double>::iterator itMoyenneValeurs;
+	map<pair<string, string>, double>::iterator itMoyenneValeurs2;
+
+	Mesure mesure;
+	string tmp;
+
+	for (Capteur c : listeCapteurs) {
+		if (contexte->EstDedans(c.GetLocalisation()))
+		{
+			capteursConcernes.insert(c);
+			for (pair<pair<string, string>, double> p : moyenneCapteurs)
+			{
+				if ((p.first).first == c.GetId())
+				{
+					moyenneCapteursConcernes.insert(p);
+				}
+			}
+		}
+	}
+
+	bool comportSimilaire = false;
+	for (itSet1 = capteursConcernes.begin(); itSet1 != capteursConcernes.end(); ++itSet1)
+	{
+		for (Attribut attr : listeAttributs)
+		{
+			//Recup de la moyenne des mesures pour cet attribut
+			itMoyenneValeurs = moyenneCapteursConcernes.find(make_pair(itSet1->GetId(), attr.GetId()));
+			if (itMoyenneValeurs != moyenneCapteursConcernes.end()) //s'il existe une mesure pour cet attribut
+			{
+				double valeurMoy = itMoyenneValeurs->second;
+
+				//Comparaison avec les autres capteurs
+				for (itSet2 = capteursConcernes.begin(); itSet2 != capteursConcernes.end(); ++itSet2)
+				{
+					if (itSet2->GetId() != itSet1->GetId())
+					{
+						itMoyenneValeurs2 = moyenneCapteursConcernes.find(make_pair(itSet2->GetId(), attr.GetId()));
+						if (itMoyenneValeurs2 != moyenneCapteursConcernes.end())
+						{
+							double valeurMoy2 = itMoyenneValeurs2->second;
+							if (abs(valeurMoy2 - valeurMoy) <= 1)
+							{
+								capteursSimilaires.insert(make_pair(make_pair(*itSet1, *itSet2), attr.GetId()));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return capteursSimilaires;
+
 }
 
 
