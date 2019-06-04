@@ -16,6 +16,7 @@ using namespace std;
 #include <map>
 #include <set>
 #include <vector>
+#include <time.h>
 
 #include "Capteur.h"
 #include "Attribut.h"

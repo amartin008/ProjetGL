@@ -79,6 +79,7 @@ void Outil::lancerOutil() {
 									contexte->SetPoint(*saisiePoint());
 
 									float rayon;
+									cout << "Rayon (km) : ";
 									cin >> rayon;
 
 									contexte->SetRayon(rayon);
@@ -284,35 +285,133 @@ Outil::~Outil()
 //----------------------------------------------------- Méthodes protégées
 
 Contexte* Outil::saisieDate() {
+	time_t temps = time(NULL);
+	struct tm* aujourdhui = localtime(&temps);
+
 	int anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut, anneeFin, moisFin, jourFin, heureFin, minFin, secFin;
 	
 	cout << "Date de debut de periode : " << endl;
-	cout << "Annee : ";
-	cin >> anneeDebut;
-	cout << "Mois : ";
-	cin >> moisDebut;
-	cout << "Jour : ";
-	cin >> jourDebut;
-	cout << "Heure : ";
-	cin >> heureDebut;
-	cout << "Minute : ";
-	cin >> minDebut;
-	cout << "Seconde : ";
-	cin >> secDebut;
+	
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Annee : ";
+		cin >> anneeDebut;
+	} while (!cin.good() || anneeDebut < 0 || anneeDebut > aujourdhui->tm_year + 1900);
 
-	cout << "Date de fin de periode : " << endl;
-	cout << "Annee : ";
-	cin >> anneeFin;
-	cout << "Mois : ";
-	cin >> moisFin;
-	cout << "Jour : ";
-	cin >> jourFin;
-	cout << "Heure : ";
-	cin >> heureFin;
-	cout << "Minute : ";
-	cin >> minFin;
-	cout << "Seconde : ";
-	cin >> secFin;
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Mois : ";
+		cin >> moisDebut;
+	} while (!cin.good() || moisDebut < 1 || moisDebut > 12);
+		
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Jour : ";
+		cin >> jourDebut;
+	} while (!cin.good() || jourDebut < 1 || jourDebut > 31);
+	
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Heure : ";
+		cin >> heureDebut;
+	} while (!cin.good() || heureDebut < 0 || heureDebut > 23);
+
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Minute : ";
+		cin >> minDebut;
+	} while (!cin.good() || minDebut < 0 || minDebut > 69);
+
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Seconde : ";
+		cin >> secDebut;
+	} while (!cin.good() || secDebut < 0 || secDebut > 59);
+
+	
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Annee : ";
+		cin >> anneeFin;
+	} while (!cin.good() || anneeFin < 0 || anneeFin > aujourdhui->tm_year + 1900 || anneeFin > anneeDebut);
+
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Mois : ";
+		cin >> moisFin;
+	} while (!cin.good() || moisFin < 1 || moisFin > 12);
+
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Jour : ";
+		cin >> jourFin;
+	} while (!cin.good() || jourFin < 1 || jourFin > 31);
+
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Heure : ";
+		cin >> heureFin;
+	} while (!cin.good() || heureFin < 0 || heureFin > 23);
+
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Minute : ";
+		cin >> minFin;
+	} while (!cin.good() || minFin < 0 || minFin > 69);
+
+	do {
+		if (!cin.good()) {
+			cout << "Saisie incorrecte." << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		cout << "Seconde : ";
+		cin >> secFin;
+	} while (!cin.good() || secFin < 0 || secFin > 59);
 
 	return new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
 }
