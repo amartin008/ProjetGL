@@ -74,7 +74,7 @@ protected:
 
 	Point * saisiePoint();
 
-	void specifierFichiers();
+	void specifierFichiers(bool & fichiersSpecifies);
 
 	set<Capteur> * verifierDonneesCapteurs(const Contexte * contexte) const;
 	//Mode d'emploi :
@@ -90,7 +90,7 @@ protected:
 	//Elle retourne la liste des capteurs n'ayant pas effectué de mesures
 	//pendant cette période.
 
-	map<string, float> calculerQualiteMoyenne(const Contexte * contexte);
+	map<string, double> calculerQualiteMoyenne(const Contexte * contexte);
 	//Mode d'emploi :
 	//méthode permettant de calculer la qualité moyenne de l'air dans la zone
 	//définie par le contexte passé en paramètre.

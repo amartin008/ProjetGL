@@ -30,8 +30,10 @@ using namespace std;
 void Outil::lancerOutil() {
 	int choix = 0;
 	int confirmation = 0;
-	int quitterAnalyse = 0;
-	int quitterSurveillance = 0;
+
+	bool quitterAnalyse = false;
+	bool quitterSurveillance = false;
+	bool fichiersSpecifies = false;
 
 	string input;
 
@@ -40,18 +42,26 @@ void Outil::lancerOutil() {
 
 	do {
 		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
+
+		while (!fichiersSpecifies) {
+			cout << "Veuillez specifier les fichiers avant de commencer." << endl;
+			specifierFichiers(fichiersSpecifies);
+		}
+
 		cout << "1. Lancer le mode analyse" << endl;
 		cout << "2. Lancer le mode surveillance" << endl;
-		cout << "3. Specifiez le nom des fichiers" << endl;
-		cout << "4. Quitter l'application" << endl;
+		cout << "3. Quitter l'application" << endl;
 		cout << "Votre choix : ";
 		cin >> choix;
 		cout << endl;
 		
 		if (cin.good()) {
+
+			quitterAnalyse = 0;
+			quitterSurveillance = 0;
+
 			switch(choix) {
 				case 1:
-					quitterAnalyse = 0;
 					do {
 						cout << "Mode analyse - Que voulez-vous faire ?" << endl;
 						cout << "1. Calcul de la qualite de l'air" << endl;
@@ -73,7 +83,7 @@ void Outil::lancerOutil() {
 
 									contexte->SetRayon(rayon);
 
-									for (pair<string, float> p : calculerQualiteMoyenne(contexte)) {
+									for (pair<string, double> p : calculerQualiteMoyenne(contexte)) {
 										cout << p.first << " : " << p.second << endl;
 									}
 
@@ -106,8 +116,6 @@ void Outil::lancerOutil() {
 					break;
 				case 2:
 					contexte = saisieDate();
-
-					quitterSurveillance = 0;
 					do {
 						cout << "Mode surveillance - Que voulez-vous faire ?" << endl;
 						cout << "1. Verification fiabilite des donnees" << endl;
@@ -165,9 +173,6 @@ void Outil::lancerOutil() {
 					delete contexte;
 					break;
 				case 3:
-					specifierFichiers();
-					break;
-				case 4:
 					do {
 						cout << "Etes-vous sur de vouloir quitter l'application ?" << endl;
 						cout << "1. Oui" << endl;
@@ -188,7 +193,7 @@ void Outil::lancerOutil() {
 					} while (confirmation!=1 && confirmation!=2);
 					break;
 				default:
-					cout << "Veuillez selectionner un chiffre entre 1 et 4." << endl;
+					cout << "Veuillez selectionner un chiffre entre 1 et 3." << endl;
 					cout << endl;
 					break;
 			}
@@ -295,7 +300,7 @@ Contexte* Outil::saisieDate() {
 	cout << "Seconde : ";
 	cin >> secDebut;
 
-	cout << "Date de fin de periode : ";
+	cout << "Date de fin de periode : " << endl;
 	cout << "Annee : ";
 	cin >> anneeFin;
 	cout << "Mois : ";
@@ -324,7 +329,9 @@ Point * Outil::saisiePoint() {
 	return new Point(lat, lng);
 }
 
-void Outil::specifierFichiers() {
+void Outil::specifierFichiers(bool & fichierSpecifies) {
+	bool succes = true;
+
 	string input;
 	FILE* buffer;
 
@@ -342,6 +349,7 @@ void Outil::specifierFichiers() {
 		cout << endl;
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
 		if (!input.compare("N")) {
+			succes = false;
 			break;
 		}
 		else if (buffer == NULL) {
@@ -370,6 +378,7 @@ void Outil::specifierFichiers() {
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
 
 		if (!input.compare("N")) {
+			succes = false;
 			break;
 	}
 		else if (buffer == NULL) {
@@ -398,6 +407,7 @@ void Outil::specifierFichiers() {
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
 
 		if (!input.compare("N")) {
+			succes = false;
 			break;
 		}
 		else if (buffer == NULL) {
@@ -441,6 +451,8 @@ void Outil::specifierFichiers() {
 	if (buffer != NULL) {
 		fclose(buffer);
 	}
+
+	fichierSpecifies = succes;
 }
 
 set<Capteur> * Outil::verifierDonneesCapteurs(const Contexte * contexte) const
@@ -519,13 +531,13 @@ set<Capteur> * Outil::verifierCapteurs(const Contexte * contexte) const
 	return capteursDefectueux;
 }
 
-map<string, float> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
+map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 	ifstream flux(fichierMesures);
 	set<string> capteurConcernee;
 	map<string, int> nbMesures;
-	map<string, float> moyenneValeurs;
+	map<string, double> moyenneValeurs;
 
-	map<string, float>::iterator it;
+	map<string, double>::iterator it;
 
 	Mesure mesure;
 	string tmp;
@@ -541,15 +553,15 @@ map<string, float> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 		if (capteurConcernee.find(mesure.GetIdCapteur()) != capteurConcernee.end() && contexte->EstDedans(mesure.GetDate())) {
 			it = moyenneValeurs.find(mesure.GetIdAttribut());
 			if (it != moyenneValeurs.end()) {
-				it->second += (float)mesure.GetValeur();
+				it->second += mesure.GetValeur();
 				nbMesures.find(mesure.GetIdAttribut())->second++;
 			}
 			else {
-				moyenneValeurs[mesure.GetIdAttribut()] = (float)mesure.GetValeur();
+				moyenneValeurs[mesure.GetIdAttribut()] = mesure.GetValeur();
 			}
 		}
 	}
-	for (pair<string,float> p : moyenneValeurs) {
+	for (pair<string,double> p : moyenneValeurs) {
 		p.second /= nbMesures.find(p.first)->second;
 	}
 
