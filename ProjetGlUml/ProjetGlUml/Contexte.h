@@ -12,6 +12,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "Date.h"
 #include "Point.h"
+#include "Capteur.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -31,8 +32,6 @@ class Contexte
 
 public:
 	//----------------------------------------------------- Méthodes publiques
-	bool EstDedans(double latitude, double longitude) const; 
-
 	bool EstDedans(Point p) const;
 
 	bool EstDedans(const Date d) const;

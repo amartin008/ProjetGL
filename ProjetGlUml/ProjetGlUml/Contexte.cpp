@@ -15,22 +15,23 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Contexte.h"
-
+#include "math.h"
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-bool Contexte::EstDedans(double latitude, double longitude) const
-{
-
-}
-
 bool Contexte::EstDedans(Point p) const
 {
-	double dist = sqrt(pow(p.GetLatitude() - centre.GetLatitude(), 2) + pow(p.GetLongitude() - centre.GetLongitude(), 2));
-	return (rayon >= dist);
+	if (6371 * acos(sin(centre.GetLatitude())*sin(p.GetLatitude()) + cos(centre.GetLatitude())*cos(p.GetLatitude())*cos(p.GetLongitude() - centre.GetLongitude())) <= rayon)
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
 }
+
 
 bool Contexte::EstDedans(const Date d) const
 {
