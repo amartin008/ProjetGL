@@ -34,14 +34,9 @@ void Outil::lancerOutil() {
 	int quitterSurveillance = 0;
 
 	string input;
-	FILE* buffer;
 
 	Contexte * contexte;
 	set<Capteur>* capteursDefectueux;
-
-	Capteur capteur;
-	Attribut attribut;
-	Mesure mesure;
 
 	do {
 		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
@@ -70,43 +65,12 @@ void Outil::lancerOutil() {
 						if (cin.good()) {
 							switch (choix) {
 								case 1:
-									float lat, lng, rayon;
+									contexte = saisieDate();
+									contexte->SetPoint(*saisiePoint());
 
-									cout << "Saisie du point - " << endl;
-									cout << "Longitude: ";
-									cin >> input;
-									lng = stof(input);
-									
-									cout << "Latitude : ";
-									cin >> input;
-									lat = stof(input);
+									float rayon;
+									cin >> rayon;
 
-									cout << "Rayon : ";
-									cin >> input;
-									rayon = stof(input);
-
-									int anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut, anneeFin, moisFin, jourFin, heureFin, minFin, secFin;
-									cout << "Mode surveillance - veuillez selectionner la periode souhaitee" << endl;
-									cout << "Date de debut de periode (AAAA/MM/JJ-hh:mm:ss) : ";
-									cin >> input;
-									anneeDebut = atoi(input.substr(0, 4).c_str());
-									moisDebut = atoi(input.substr(5, 2).c_str());
-									jourDebut = atoi(input.substr(8, 2).c_str());
-									heureDebut = atoi(input.substr(11, 2).c_str());
-									minDebut = atoi(input.substr(14, 2).c_str());
-									secDebut = atoi(input.substr(17, 2).c_str());
-									cout << "Date de fin de periode (AAAA/MM/JJ-hh:mm:ss) : ";
-									cin >> input;
-									cout << endl;
-									anneeFin = atoi(input.substr(0, 4).c_str());
-									moisFin = atoi(input.substr(5, 2).c_str());
-									jourFin = atoi(input.substr(8, 2).c_str());
-									heureFin = atoi(input.substr(11, 2).c_str());
-									minFin = atoi(input.substr(14, 2).c_str());
-									secFin = atoi(input.substr(17, 2).c_str());
-
-									contexte = new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
-									contexte->SetPoint(*(new Point(lat, lng)));
 									contexte->SetRayon(rayon);
 
 									for (pair<string, float> p : calculerQualiteMoyenne(contexte)) {
@@ -141,27 +105,7 @@ void Outil::lancerOutil() {
 					} while (quitterAnalyse != 1);
 					break;
 				case 2:
-					int anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut, anneeFin, moisFin, jourFin, heureFin, minFin, secFin;
-					cout << "Mode surveillance - veuillez selectionner la periode souhaitee" << endl;
-					cout << "Date de debut de periode (AAAA/MM/JJ-hh:mm:ss) : ";
-					cin >> input;
-					anneeDebut = atoi(input.substr(0,4).c_str());
-					moisDebut = atoi(input.substr(5,2).c_str());
-					jourDebut = atoi(input.substr(8,2).c_str());
-					heureDebut = atoi(input.substr(11,2).c_str());
-					minDebut = atoi(input.substr(14,2).c_str());
-					secDebut = atoi(input.substr(17,2).c_str());
-					cout << "Date de fin de periode (AAAA/MM/JJ-hh:mm:ss) : ";
-					cin >> input;
-					cout << endl;
-					anneeFin = atoi(input.substr(0, 4).c_str());
-					moisFin = atoi(input.substr(5, 2).c_str());
-					jourFin = atoi(input.substr(8, 2).c_str());
-					heureFin = atoi(input.substr(11, 2).c_str());
-					minFin = atoi(input.substr(14, 2).c_str());
-					secFin = atoi(input.substr(17, 2).c_str());
-
-					contexte = new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
+					contexte = saisieDate();
 
 					quitterSurveillance = 0;
 					do {
@@ -221,109 +165,7 @@ void Outil::lancerOutil() {
 					delete contexte;
 					break;
 				case 3:
-					cout << "Les fichiers doivent etre dans le repertoire data_folder" << endl;
-					cout << endl;
-					
-					do{
-						cout << "Fichier concernant les capteurs (N pour annuler): ";
-						cin >> input;
-
-						cout << endl;
-						buffer = fopen(("data_folder/"+input).c_str(), "r");
-						if (!input.compare("N")) {
-							break;
-						} else if(buffer == NULL){
-							cerr << "Fichier inexistant" << endl;
-							cout << endl;
-						} else {
-							SetFichierCapteurs("data_folder/" + input);
-							ifstream flux(fichierCapteurs);
-							getline(flux, input);
-							while (flux >> capteur) {
-								listeCapteurs.push_back(capteur);
-							}
-						}
-					} while (buffer == NULL);
-					
-					if (buffer != NULL) {
-						fclose(buffer);
-					}					
-
-					do {
-						cout << "Fichier concernant les attributs (N pour annuler): ";
-						cin >> input;
-
-						cout << endl;
-						buffer = fopen(("data_folder/" + input).c_str(), "r");
-
-						if (!input.compare("N")) {
-							break;
-						} else if (buffer == NULL) {
-							cerr << "Fichier inexistant" << endl;
-							cout << endl;
-						} else {
-							SetFichierAttributs("data_folder/" + input);
-							ifstream flux(fichierAttributs);
-							getline(flux, input);
-							while (flux >> attribut) {
-								listeAttributs.push_back(attribut);
-							}
-						}
-					} while (buffer == NULL);
-
-					if (buffer != NULL) {
-						fclose(buffer);
-					}
-
-					do{
-						cout << "Fichier concernant les mesures (N pour annuler): ";
-						cin >> input;
-
-						cout << endl;
-						buffer = fopen(("data_folder/" + input).c_str(), "r");
-
-						if (!input.compare("N")) {
-							break;
-						} else if (buffer == NULL){
-							cerr << "Fichier inexistant" << endl;
-							cout << endl;
-						} else {
-							SetFichierMesures("data_folder/" + input);
-							ifstream flux(fichierMesures);
-							flux.seekg(0, ios::end);
-							long long int length = flux.tellg();
-							flux.seekg(0, ios::beg);
-							int pos = -1;
-							map<pair<string,string>, long int> nbValeursCapteurs;
-							map<pair<string, string>, double>::iterator itMoyenneCapteurs;
-							pair<string, string> pairTmp;
-							getline(flux, input);
-							while (flux >> mesure) {
-								if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
-									pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
-									cout << "Initialisation de l'application en cours : " << pos << " %\r";
-								}
-								pairTmp = make_pair(mesure.GetIdCapteur(), mesure.GetIdAttribut());
-								itMoyenneCapteurs = moyenneCapteurs.find(pairTmp);
-								if (itMoyenneCapteurs == moyenneCapteurs.end()) {
-									moyenneCapteurs.insert(make_pair(pairTmp, mesure.GetValeur()));
-									nbValeursCapteurs.insert(make_pair(pairTmp, 1));
-								} else {
-									itMoyenneCapteurs->second += mesure.GetValeur();
-									nbValeursCapteurs.find(pairTmp)->second += 1;
-								}
-							}
-							cout << endl << endl;
-							for (itMoyenneCapteurs = moyenneCapteurs.begin(); itMoyenneCapteurs != moyenneCapteurs.end(); ++itMoyenneCapteurs) {
-								itMoyenneCapteurs->second /= nbValeursCapteurs.find(itMoyenneCapteurs->first)->second;
-							}
-						}
-					} while (buffer == NULL);
-					
-					if (buffer != NULL) {
-						fclose(buffer);
-					}
-
+					specifierFichiers();
 					break;
 				case 4:
 					do {
@@ -435,6 +277,172 @@ Outil::~Outil()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+
+Contexte* Outil::saisieDate() {
+	int anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut, anneeFin, moisFin, jourFin, heureFin, minFin, secFin;
+	
+	cout << "Date de debut de periode : " << endl;
+	cout << "Annee : ";
+	cin >> anneeDebut;
+	cout << "Mois : ";
+	cin >> moisDebut;
+	cout << "Jour : ";
+	cin >> jourDebut;
+	cout << "Heure : ";
+	cin >> heureDebut;
+	cout << "Minute : ";
+	cin >> minDebut;
+	cout << "Seconde : ";
+	cin >> secDebut;
+
+	cout << "Date de fin de periode : ";
+	cout << "Annee : ";
+	cin >> anneeFin;
+	cout << "Mois : ";
+	cin >> moisFin;
+	cout << "Jour : ";
+	cin >> jourFin;
+	cout << "Heure : ";
+	cin >> heureFin;
+	cout << "Minute : ";
+	cin >> minFin;
+	cout << "Seconde : ";
+	cin >> secFin;
+
+	return new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
+}
+
+Point * Outil::saisiePoint() {
+	float lat, lng;
+	
+	cout << "Saisie de point : " << endl;
+	cout << "Latitude : ";
+	cin >> lat;
+	cout << "Longitude : ";
+	cin >> lng;
+
+	return new Point(lat, lng);
+}
+
+void Outil::specifierFichiers() {
+	string input;
+	FILE* buffer;
+
+	Capteur capteur;
+	Attribut attribut;
+	Mesure mesure;
+
+	cout << "Les fichiers doivent etre dans le repertoire data_folder" << endl;
+	cout << endl;
+
+	do {
+		cout << "Fichier concernant les capteurs (N pour annuler): ";
+		cin >> input;
+
+		cout << endl;
+		buffer = fopen(("data_folder/" + input).c_str(), "r");
+		if (!input.compare("N")) {
+			break;
+		}
+		else if (buffer == NULL) {
+			cerr << "Fichier inexistant" << endl;
+			cout << endl;
+		}
+		else {
+			SetFichierCapteurs("data_folder/" + input);
+			ifstream flux(fichierCapteurs);
+			getline(flux, input);
+			while (flux >> capteur) {
+				listeCapteurs.push_back(capteur);
+			}
+		}
+	} while (buffer == NULL);
+
+	if (buffer != NULL) {
+		fclose(buffer);
+	}
+
+	do {
+		cout << "Fichier concernant les attributs (N pour annuler): ";
+		cin >> input;
+
+		cout << endl;
+		buffer = fopen(("data_folder/" + input).c_str(), "r");
+
+		if (!input.compare("N")) {
+			break;
+	}
+		else if (buffer == NULL) {
+			cerr << "Fichier inexistant" << endl;
+			cout << endl;
+		}
+		else {
+			SetFichierAttributs("data_folder/" + input);
+			ifstream flux(fichierAttributs);
+			getline(flux, input);
+			while (flux >> attribut) {
+				listeAttributs.push_back(attribut);
+			}
+		}
+} while (buffer == NULL);
+
+	if (buffer != NULL) {
+		fclose(buffer);
+	}
+
+	do {
+		cout << "Fichier concernant les mesures (N pour annuler): ";
+		cin >> input;
+
+		cout << endl;
+		buffer = fopen(("data_folder/" + input).c_str(), "r");
+
+		if (!input.compare("N")) {
+			break;
+		}
+		else if (buffer == NULL) {
+			cerr << "Fichier inexistant" << endl;
+			cout << endl;
+		}
+		else {
+			SetFichierMesures("data_folder/" + input);
+			ifstream flux(fichierMesures);
+			flux.seekg(0, ios::end);
+			long long int length = flux.tellg();
+			flux.seekg(0, ios::beg);
+			int pos = -1;
+			map<pair<string, string>, long int> nbValeursCapteurs;
+			map<pair<string, string>, double>::iterator itMoyenneCapteurs;
+			pair<string, string> pairTmp;
+			getline(flux, input);
+			while (flux >> mesure) {
+				if ((int)((double)(flux.tellg()) / (double)(length) * 100) > pos) {
+					pos = (int)((double)(flux.tellg()) / (double)(length) * 100);
+					cout << "Initialisation de l'application en cours : " << pos << " %\r";
+				}
+				pairTmp = make_pair(mesure.GetIdCapteur(), mesure.GetIdAttribut());
+				itMoyenneCapteurs = moyenneCapteurs.find(pairTmp);
+				if (itMoyenneCapteurs == moyenneCapteurs.end()) {
+					moyenneCapteurs.insert(make_pair(pairTmp, mesure.GetValeur()));
+					nbValeursCapteurs.insert(make_pair(pairTmp, 1));
+				}
+				else {
+					itMoyenneCapteurs->second += mesure.GetValeur();
+					nbValeursCapteurs.find(pairTmp)->second += 1;
+				}
+			}
+			cout << endl << endl;
+			for (itMoyenneCapteurs = moyenneCapteurs.begin(); itMoyenneCapteurs != moyenneCapteurs.end(); ++itMoyenneCapteurs) {
+				itMoyenneCapteurs->second /= nbValeursCapteurs.find(itMoyenneCapteurs->first)->second;
+			}
+		}
+	} while (buffer == NULL);
+
+	if (buffer != NULL) {
+		fclose(buffer);
+	}
+}
+
 set<Capteur> * Outil::verifierDonneesCapteurs(const Contexte * contexte) const
 {
 	set<string> idCapteursDefectueux;
@@ -522,7 +530,7 @@ map<string, float> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 	Mesure mesure;
 	string tmp;
 
-	for (Capteur c : listeCapteurs){
+	for (Capteur c : listeCapteurs) {
 		if (contexte->EstDedans(c.GetLocalisation())) {
 			capteurConcernee.insert(c.GetId());
 		}

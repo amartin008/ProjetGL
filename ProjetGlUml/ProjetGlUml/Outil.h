@@ -70,6 +70,12 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
+	Contexte * saisieDate();
+
+	Point * saisiePoint();
+
+	void specifierFichiers();
+
 	set<Capteur> * verifierDonneesCapteurs(const Contexte * contexte) const;
 	//Mode d'emploi :
 	//méthode permettant de vérifier les données envoyées par les capteurs
@@ -101,7 +107,7 @@ protected:
 	//Elle retourne la multimap contenant les paires de capteurs ayant envoyé 
 	//des données similaires lors de leurs dix dernieres mesures
 
-	map <string, float> trouverValeursCaract(const Contexte * contexte);
+	map <string, float> trouverValeursCaract(const Point * point);
 	//Mode d'emploi :
 	//méthode permettant de trouver les caractéristiques de l'air en un point
 	//donné dans le contexte passé en paramètre.
