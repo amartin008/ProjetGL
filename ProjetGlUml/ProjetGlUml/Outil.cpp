@@ -84,6 +84,9 @@ void Outil::lancerOutil() {
 
 									contexte->SetRayon(rayon);
 
+									cout << "Fin d'analyse." << endl;
+									cout << endl;
+
 									for (pair<string, double> p : calculerQualiteMoyenne(contexte)) {
 										cout << p.first << " : " << p.second << endl;
 									}
@@ -340,7 +343,7 @@ Contexte* Outil::saisieDate() {
 		}
 		cout << "Minute : ";
 		cin >> minDebut;
-	} while (!cin.good() || minDebut < 0 || minDebut > 69);
+	} while (!cin.good() || minDebut < 0 || minDebut > 59);
 
 	do {
 		if (!cin.good()) {
@@ -401,7 +404,7 @@ Contexte* Outil::saisieDate() {
 		}
 		cout << "Minute : ";
 		cin >> minFin;
-	} while (!cin.good() || minFin < 0 || minFin > 69);
+	} while (!cin.good() || minFin < 0 || minFin > 59);
 
 	do {
 		if (!cin.good()) {
@@ -492,7 +495,7 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 				listeAttributs.push_back(attribut);
 			}
 		}
-} while (buffer == NULL);
+	} while (buffer == NULL);
 
 	if (buffer != NULL) {
 		fclose(buffer);
