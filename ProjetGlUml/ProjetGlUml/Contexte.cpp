@@ -23,7 +23,8 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 bool Contexte::EstDedans(Point p) const
 {
-	if (6371 * acos(sin(centre.GetLatitude())*sin(p.GetLatitude()) + cos(centre.GetLatitude())*cos(p.GetLatitude())*cos(p.GetLongitude() - centre.GetLongitude())) <= rayon)
+	//if (6371 * acos(sin(centre.GetLatitude())*sin(p.GetLatitude()) + cos(centre.GetLatitude())*cos(p.GetLatitude())*cos(p.GetLongitude() - centre.GetLongitude())) <= rayon)
+	if(sqrt(pow(p.GetLatitude() - centre.GetLatitude(),2) + pow(p.GetLongitude()-centre.GetLongitude(),2)) <= rayon)
 	{
 		return true;
 	}

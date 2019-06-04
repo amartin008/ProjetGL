@@ -52,6 +52,8 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
 	friend std::istream & operator >> (std::istream & flux, Mesure & mesure);
 
+	friend std::ostream& operator << (std::ostream& flux, Mesure& mesure);
+
 //-------------------------------------------- Constructeurs - destructeur
     Mesure();
 	//Mode d'emploi : 

@@ -90,12 +90,18 @@ istream & operator >> (istream & flux, Mesure & mesure)
 	mesure.SetIdCapteur(tmp);
 	getline(flux, tmp, ';');
 	mesure.SetIdAttribut(tmp);
-	getline(flux, tmp, ';');
-	mesure.SetValeur(atof(tmp.c_str()));
 	getline(flux, tmp);
+	mesure.SetValeur(atof(tmp.c_str()));
 
 	return flux;
 } //----- Fin de operator >>
+
+ostream& operator << (ostream& flux, Mesure& mesure)
+// Algorithme :
+{
+	flux << mesure.GetIdAttribut() << " " << mesure.GetValeur() << endl;
+	return flux;
+}
 
 
 //-------------------------------------------- Constructeurs - destructeur

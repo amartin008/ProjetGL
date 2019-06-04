@@ -77,7 +77,7 @@ protected:
 
 	Point * saisiePoint();
 
-	void specifierFichiers(bool & fichiersSpecifies);
+	void specifierFichiers();
 
 	set<Capteur> * verifierDonneesCapteurs(const Contexte * contexte) const;
 	//Mode d'emploi :
@@ -103,14 +103,15 @@ protected:
 	//La méthode retourne la map qui à chaque type de gaz associe les moyennes
 	//des mesures effectuées dans le contexte.
 
-	multimap<Capteur, Capteur> chercherCaptSimilaires(const Contexte * contexte);
+	multimap<pair<Capteur, Capteur>,string> chercherCaptSimilaires(const Contexte * contexte);
 	//Mode d'emploi :
 	//méthode permettant de trouver les capteurs ayant des comportements similaires
 	//se trouvant dans la zone définie par le contexte passé en paramètre.
 	//Elle retourne la multimap contenant les paires de capteurs ayant envoyé 
-	//des données similaires lors de leurs dix dernieres mesures
+	//des données similaires dans l'ensemble, associées aux types
+	//de mesure correspondants.
 
-	map <string, float> trouverValeursCaract(const Point * point);
+	map <string, double> trouverValeursCaract(const Contexte * contexte);
 	//Mode d'emploi :
 	//méthode permettant de trouver les caractéristiques de l'air en un point
 	//donné dans le contexte passé en paramètre.

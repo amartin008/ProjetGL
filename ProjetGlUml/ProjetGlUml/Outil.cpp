@@ -30,24 +30,21 @@ using namespace std;
 void Outil::lancerOutil() {
 	int choix = 0;
 	int confirmation = 0;
-
+	int nbSim = 0;
 	bool quitterAnalyse = false;
 	bool quitterSurveillance = false;
-	bool fichiersSpecifies = false;
 
 	string input;
 
-	Contexte * contexte;
+	Contexte * contexte = new Contexte();
 	set<Capteur>* capteursDefectueux;
 
+	cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
+
+	cout << "Veuillez specifier les fichiers avant de commencer." << endl;
+	specifierFichiers();
+
 	do {
-		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
-
-		while (!fichiersSpecifies) {
-			cout << "Veuillez specifier les fichiers avant de commencer." << endl;
-			specifierFichiers(fichiersSpecifies);
-		}
-
 		cout << "1. Lancer le mode analyse" << endl;
 		cout << "2. Lancer le mode surveillance" << endl;
 		cout << "3. Quitter l'application" << endl;
@@ -97,6 +94,28 @@ void Outil::lancerOutil() {
 
 									cout << "Recherche des comportements de capteurs similaires" << endl;
 									cout << endl;
+									cout << "Saisie du centre :" << endl;
+
+									contexte->SetPoint(*saisiePoint());
+									cout << "Rayon (km) : ";
+									cin >> rayon;
+
+									contexte->SetRayon(rayon);
+
+									
+									for (pair<pair<Capteur, Capteur>, string> p : chercherCaptSimilaires(contexte))
+									{
+										cout << (p.first).first << " a un comportement similaire a " << (p.first).second << "dans la mesure de " << p.second << endl;
+										nbSim++;
+									}
+
+									if (nbSim == 0)
+									{
+										cout << "Aucun couple de capteurs n'a un comportement similaire dans cette zone" << endl;
+									}
+
+									
+									
 									break;
 								case 3:
 									cout << "Recherche des caracteristiques de l'air a un point donne" << endl;
@@ -359,6 +378,8 @@ Contexte* Outil::saisieDate() {
 		cin >> secDebut;
 	} while (!cin.good() || secDebut < 0 || secDebut > 59);
 
+	cout << endl;
+	cout << "Date de fin de periode : " << endl;
 	
 	do {
 		if (!cin.good()) {
@@ -420,6 +441,8 @@ Contexte* Outil::saisieDate() {
 		cin >> secFin;
 	} while (!cin.good() || secFin < 0 || secFin > 59);
 
+	cout << endl;
+
 	return new Contexte(Date(anneeDebut, moisDebut, jourDebut, heureDebut, minDebut, secDebut), Date(anneeFin, moisFin, jourFin, heureFin, minFin, secFin));
 }
 
@@ -435,9 +458,7 @@ Point * Outil::saisiePoint() {
 	return new Point(lat, lng);
 }
 
-void Outil::specifierFichiers(bool & fichierSpecifies) {
-	bool succes = true;
-
+void Outil::specifierFichiers() {
 	string input;
 	FILE* buffer;
 
@@ -449,16 +470,12 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	cout << endl;
 
 	do {
-		cout << "Fichier concernant les capteurs (N pour annuler): ";
+		cout << "Fichier concernant les capteurs : ";
 		cin >> input;
 
 		cout << endl;
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
-		if (!input.compare("N")) {
-			succes = false;
-			break;
-		}
-		else if (buffer == NULL) {
+		if (buffer == NULL) {
 			cerr << "Fichier inexistant" << endl;
 			cout << endl;
 		}
@@ -477,17 +494,13 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	}
 
 	do {
-		cout << "Fichier concernant les attributs (N pour annuler): ";
+		cout << "Fichier concernant les attributs : ";
 		cin >> input;
 
 		cout << endl;
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
 
-		if (!input.compare("N")) {
-			succes = false;
-			break;
-	}
-		else if (buffer == NULL) {
+		if (buffer == NULL) {
 			cerr << "Fichier inexistant" << endl;
 			cout << endl;
 		}
@@ -506,17 +519,13 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	}
 
 	do {
-		cout << "Fichier concernant les mesures (N pour annuler): ";
+		cout << "Fichier concernant les mesures : ";
 		cin >> input;
 
 		cout << endl;
 		buffer = fopen(("data_folder/" + input).c_str(), "r");
 
-		if (!input.compare("N")) {
-			succes = false;
-			break;
-		}
-		else if (buffer == NULL) {
+		if (buffer == NULL) {
 			cerr << "Fichier inexistant" << endl;
 			cout << endl;
 		}
@@ -557,8 +566,6 @@ void Outil::specifierFichiers(bool & fichierSpecifies) {
 	if (buffer != NULL) {
 		fclose(buffer);
 	}
-
-	fichierSpecifies = succes;
 }
 
 set<Capteur> * Outil::verifierDonneesCapteurs(const Contexte * contexte) const
@@ -660,7 +667,7 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 			it = moyenneValeurs.find(mesure.GetIdAttribut());
 			if (it != moyenneValeurs.end()) {
 				it->second += mesure.GetValeur();
-				nbMesures.find(mesure.GetIdAttribut())->second++;
+				nbMesures[mesure.GetIdAttribut()]++;
 			}
 			else {
 				moyenneValeurs[mesure.GetIdAttribut()] = mesure.GetValeur();
@@ -669,9 +676,95 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 	}
 	for (pair<string,double> p : moyenneValeurs) {
 		p.second /= nbMesures.find(p.first)->second;
+		moyenneValeurs[p.first] = p.second;
 	}
 
 	return moyenneValeurs;
 }
+
+map <string, double> Outil::trouverValeursCaract(const Contexte* contexte) {
+	map <string, double> valeursCaract;
+	set<string> capteurConcernee;
+
+	for (Capteur c : listeCapteurs) {
+		if (contexte->EstDedans(c.GetLocalisation())) {
+			capteurConcernee.insert(c.GetId());
+		}
+	}
+
+	if (capteurConcernee.empty()) {
+
+	}
+	else {
+
+	}
+
+	return valeursCaract;
+}
+
+multimap<pair<Capteur, Capteur>, string> Outil::chercherCaptSimilaires(const Contexte * contexte)
+{
+	ifstream flux(fichierMesures);
+	set<Capteur> capteursConcernes;
+	multimap <pair<Capteur, Capteur>, string> capteursSimilaires;
+	map<pair<string, string>, double> moyenneCapteursConcernes;
+
+	set<Capteur>::iterator itSet1;
+	set<Capteur>::iterator itSet2;
+	map<pair<string, string>, double>::iterator itMoyenneValeurs;
+	map<pair<string, string>, double>::iterator itMoyenneValeurs2;
+
+	Mesure mesure;
+	string tmp;
+
+	for (Capteur c : listeCapteurs) {
+		if (contexte->EstDedans(c.GetLocalisation()))
+		{
+			capteursConcernes.insert(c);
+			for (pair<pair<string, string>, double> p : moyenneCapteurs)
+			{
+				if ((p.first).first == c.GetId())
+				{
+					moyenneCapteursConcernes.insert(p);
+				}
+			}
+		}
+	}
+
+	bool comportSimilaire = false;
+	for (itSet1 = capteursConcernes.begin(); itSet1 != capteursConcernes.end(); ++itSet1)
+	{
+		for (Attribut attr : listeAttributs)
+		{
+			//Recup de la moyenne des mesures pour cet attribut
+			itMoyenneValeurs = moyenneCapteursConcernes.find(make_pair(itSet1->GetId(), attr.GetId()));
+			if (itMoyenneValeurs != moyenneCapteursConcernes.end()) //s'il existe une mesure pour cet attribut
+			{
+				double valeurMoy = itMoyenneValeurs->second;
+
+				//Comparaison avec les autres capteurs
+				for (itSet2 = capteursConcernes.begin(); itSet2 != capteursConcernes.end(); ++itSet2)
+				{
+					if (itSet2->GetId() != itSet1->GetId())
+					{
+						itMoyenneValeurs2 = moyenneCapteursConcernes.find(make_pair(itSet2->GetId(), attr.GetId()));
+						if (itMoyenneValeurs2 != moyenneCapteursConcernes.end())
+						{
+							double valeurMoy2 = itMoyenneValeurs2->second;
+							if (abs(valeurMoy2 - valeurMoy) <= 1)
+							{
+								capteursSimilaires.insert(make_pair(make_pair(*itSet1, *itSet2), attr.GetId()));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return capteursSimilaires;
+
+}
+
+
 
 

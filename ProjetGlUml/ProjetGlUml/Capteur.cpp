@@ -47,19 +47,25 @@ Point Capteur::GetLocalisation() const {
 	return localisation;
 }
 
+void Capteur::SetLocalisation(Point& p) {
+	this->localisation = p;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 istream & operator >> (istream & flux, Capteur & capteur)
 // Algorithme :
 //
 {
 	string tmp;
+	double lat, lng;
 
 	getline(flux, tmp, ';');
 	capteur.SetId(tmp);
 	getline(flux, tmp, ';');
-	capteur.GetLocalisation().SetLatitude((float)atof(tmp.c_str()));
+	lat = atof(tmp.c_str());
 	getline(flux, tmp, ';');
-	capteur.GetLocalisation().SetLongitude((float)atof(tmp.c_str()));
+	lng = atof(tmp.c_str());
+	capteur.SetLocalisation(*new Point(lat, lng));
 	getline(flux, tmp);
 	capteur.SetDescription(tmp);
 
