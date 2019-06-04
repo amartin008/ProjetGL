@@ -30,7 +30,7 @@ using namespace std;
 void Outil::lancerOutil() {
 	int choix = 0;
 	int confirmation = 0;
-
+	int nbSim = 0;
 	bool quitterAnalyse = false;
 	bool quitterSurveillance = false;
 
@@ -94,25 +94,26 @@ void Outil::lancerOutil() {
 
 									cout << "Recherche des comportements de capteurs similaires" << endl;
 									cout << endl;
-									cout<<"Saisie du centre :"<<endl;
-									
+									cout << "Saisie du centre :" << endl;
+
 									contexte->SetPoint(*saisiePoint());
 									cout << "Rayon (km) : ";
 									cin >> rayon;
-									
+
 									contexte->SetRayon(rayon);
+
 									
-									int nbSim = 0;
-									for (pair<pair<Capteur,Capteur>,string> p : chercherCaptSimilaires(contexte))
+									for (pair<pair<Capteur, Capteur>, string> p : chercherCaptSimilaires(contexte))
 									{
-										cout<<(p.first).first<<" a un comportement similaire à "<<(p.first).second<<"dans la mesure de "<<p.second<<endl;
+										cout << (p.first).first << " a un comportement similaire a " << (p.first).second << "dans la mesure de " << p.second << endl;
 										nbSim++;
 									}
-									
-									if (nbSim==0)
+
+									if (nbSim == 0)
 									{
-										cout<<"Aucun couple de capteurs n'a un comportement similaire dans cette zone"<<endl;
+										cout << "Aucun couple de capteurs n'a un comportement similaire dans cette zone" << endl;
 									}
+
 									
 									
 									break;
