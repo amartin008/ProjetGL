@@ -39,12 +39,12 @@ void Outil::lancerOutil() {
 	Contexte * contexte;
 	set<Capteur>* capteursDefectueux;
 
+	cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
+
+	cout << "Veuillez specifier les fichiers avant de commencer." << endl;
+	specifierFichiers();
+
 	do {
-		cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
-
-		cout << "Veuillez specifier les fichiers avant de commencer." << endl;
-		specifierFichiers();
-
 		cout << "1. Lancer le mode analyse" << endl;
 		cout << "2. Lancer le mode surveillance" << endl;
 		cout << "3. Quitter l'application" << endl;
@@ -83,6 +83,7 @@ void Outil::lancerOutil() {
 
 									cout << "Fin d'analyse." << endl;
 									cout << endl;
+
 									for (pair<string, double> p : calculerQualiteMoyenne(contexte)) {
 										cout << p.first << " : " << p.second << endl;
 									}
@@ -634,10 +635,6 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 		}
 	}
 
-	for (string s : capteurConcernee) {
-		cout << s << endl;
-	}
-
 	getline(flux, tmp);
 	while (flux >> mesure) {
 		if (capteurConcernee.find(mesure.GetIdCapteur()) != capteurConcernee.end() && contexte->EstDedans(mesure.GetDate())) {
@@ -652,8 +649,6 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 		}
 	}
 	for (pair<string,double> p : moyenneValeurs) {
-		cout << p.second << endl;
-		cout << nbMesures.find(p.first)->second << endl;
 		p.second /= nbMesures.find(p.first)->second;
 		moyenneValeurs[p.first] = p.second;
 	}
@@ -661,9 +656,25 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 	return moyenneValeurs;
 }
 
-//map <string, double> Outil::trouverValeursCaract(const Point* point) {
+map <string, double> Outil::trouverValeursCaract(const Contexte* contexte) {
+	map <string, double> valeursCaract;
+	set<string> capteurConcernee;
 
-//}
+	for (Capteur c : listeCapteurs) {
+		if (contexte->EstDedans(c.GetLocalisation())) {
+			capteurConcernee.insert(c.GetId());
+		}
+	}
+
+	if (capteurConcernee.empty()) {
+
+	}
+	else {
+
+	}
+
+	return valeursCaract;
+}
 
 
 
