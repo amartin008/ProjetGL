@@ -56,6 +56,8 @@ public:
     
     void SetFichierAttributs(string fichierAttributs);
 
+	vector<Capteur> GetListeCapteurs() const;
+
 //-------------------------------------------- Constructeurs - destructeur
 
     Outil();

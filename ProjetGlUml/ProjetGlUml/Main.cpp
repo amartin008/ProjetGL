@@ -41,6 +41,7 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////  PUBLIC
 //---------------------------------------------------- Fonctions publiques
+
 int main() {
 	Outil* outil = new Outil();
 	outil->lancerOutil();

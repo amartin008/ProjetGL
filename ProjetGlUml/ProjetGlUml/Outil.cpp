@@ -242,6 +242,10 @@ void Outil::SetFichierAttributs(string fichierAttributs)
 	this->fichierAttributs = fichierAttributs;
 } //----- Fin de SetFichierAttributs
 
+vector<Capteur> Outil::GetListeCapteurs() const
+{
+	return listeCapteurs;
+}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
