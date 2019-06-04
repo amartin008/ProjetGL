@@ -36,7 +36,7 @@ void Outil::lancerOutil() {
 
 	string input;
 
-	Contexte * contexte;
+	Contexte * contexte = new Contexte();
 	set<Capteur>* capteursDefectueux;
 
 	cout << "Bienvenue ! Que voulez-vous faire ?" << endl;
@@ -96,21 +96,20 @@ void Outil::lancerOutil() {
 									cout << endl;
 									cout<<"Saisie du centre :"<<endl;
 									
-									contexte->setPoint(*saisiePoint());
+									contexte->SetPoint(*saisiePoint());
 									cout << "Rayon (km) : ";
 									cin >> rayon;
 									
 									contexte->SetRayon(rayon);
 									
-									multimap<pair<Capteur,Capteur>,string> captSimilaires = chercherCaptSimilaires(contexte);
-									if (captSimilaires.size()!=0) 
+									int nbSim = 0;
+									for (pair<pair<Capteur,Capteur>,string> p : chercherCaptSimilaires(contexte))
 									{
-										for (pair<pair<Capteur,Capteur>,string> p : captSimilaires)
-										{
-											cout<<(p.first).first<<" a un comportement similaire à "<<(p.first).second<<"dans la mesure de "<<p.second<<endl;
-										}
+										cout<<(p.first).first<<" a un comportement similaire à "<<(p.first).second<<"dans la mesure de "<<p.second<<endl;
+										nbSim++;
 									}
-									else 
+									
+									if (nbSim==0)
 									{
 										cout<<"Aucun couple de capteurs n'a un comportement similaire dans cette zone"<<endl;
 									}
