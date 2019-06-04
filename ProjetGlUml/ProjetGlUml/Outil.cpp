@@ -82,6 +82,7 @@ void Outil::lancerOutil() {
 									contexte->SetRayon(rayon);
 
 									cout << "Fin d'analyse." << endl;
+									cout << endl;
 									for (pair<string, double> p : calculerQualiteMoyenne(contexte)) {
 										cout << p.first << " : " << p.second << endl;
 									}
@@ -484,7 +485,7 @@ void Outil::specifierFichiers() {
 				listeAttributs.push_back(attribut);
 			}
 		}
-} while (buffer == NULL);
+	} while (buffer == NULL);
 
 	if (buffer != NULL) {
 		fclose(buffer);
