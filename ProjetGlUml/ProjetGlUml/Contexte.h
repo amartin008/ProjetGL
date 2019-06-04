@@ -31,14 +31,15 @@ class Contexte
 
 public:
 	//----------------------------------------------------- Méthodes publiques
+	bool EstDedans(double latitude, double longitude) const; 
 
 	bool EstDedans(Point p) const;
 
 	bool EstDedans(const Date d) const;
 
-	float GetRayon() const;
+	double GetRayon() const;
 
-	void SetRayon(float rayon);
+	void SetRayon(double rayon);
 
 	Point GetPoint() const;
 	
@@ -58,7 +59,7 @@ public:
 	//Mode d'emploi : 
 	//Constructeur par défaut de la classe Contexte
 
-	Contexte(float r, Point c);
+	Contexte(double r, Point c);
 	//Mode d'emploi :
 	//Constructeur de la classe contexte permettant de définir un contexte
 	//géographique
@@ -76,7 +77,7 @@ public:
 
 protected:
 	//----------------------------------------------------- Attributs protégés
-	float rayon;
+	double rayon;
 	Point centre;
 	
 	Date debut;

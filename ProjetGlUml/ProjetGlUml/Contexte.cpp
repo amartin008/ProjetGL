@@ -21,6 +21,10 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+bool Contexte::EstDedans(double latitude, double longitude) const
+{
+
+}
 
 bool Contexte::EstDedans(Point p) const
 {
@@ -37,7 +41,7 @@ bool Contexte::EstDedans(const Date d) const
 	}
 }
 
-float Contexte::GetRayon() const
+double Contexte::GetRayon() const
 {
 	return rayon;
 }
@@ -57,7 +61,7 @@ Date Contexte::GetFin() const
 	return fin;
 }
 
-void Contexte::SetRayon(float rayon) {
+void Contexte::SetRayon(double rayon) {
 	this->rayon = rayon;
 }
 
@@ -92,7 +96,7 @@ Contexte::Contexte()
 #endif
 } //----- Fin de Contexte (constructeur par défaut)
 
-Contexte::Contexte(float rayon, Point centre)
+Contexte::Contexte(double rayon, Point centre)
 	:rayon(rayon), centre(centre)
 {
 #ifdef MAP
