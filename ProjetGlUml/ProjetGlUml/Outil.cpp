@@ -741,8 +741,8 @@ map <string, double> Outil::trouverValeursCaract(const Contexte* contexte) {
 		}
 
 		while (flux >> mesure) {
-			if (captDehors.find(mesure.GetIdCapteur) != captDehors.end()) {
-				dixDerniers[make_pair(mesure.GetIdCapteur, mesure.GetIdAttribut())][compteur[make_pair(mesure.GetIdCapteur(), mesure.GetIdAttribut())]++ % 10] = mesure.GetValeur();
+			if (captDehors.find(mesure.GetIdCapteur()) != captDehors.end()) {
+				dixDerniers[make_pair(mesure.GetIdCapteur(), mesure.GetIdAttribut())][compteur[make_pair(mesure.GetIdCapteur(), mesure.GetIdAttribut())]++ % 10] = mesure.GetValeur();
 			}
 		}
 
@@ -783,7 +783,7 @@ map <string, double> Outil::trouverValeursCaract(const Contexte* contexte) {
 		}
 
 		while (flux >> mesure) {
-			if (!captDedans.first.compare(mesure.GetIdCapteur)) {
+			if (!captDedans.first.compare(mesure.GetIdCapteur())) {
 				dixDerniers[mesure.GetIdAttribut()][compteur[mesure.GetIdAttribut()]++ % 10] = mesure.GetValeur();
 			}
 		}
