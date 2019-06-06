@@ -10,8 +10,10 @@
 #define OUTIL_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <iostream>
+
 using namespace std;
+
+#include <iostream>
 #include <string>
 #include <map>
 #include <set>
@@ -36,11 +38,13 @@ using namespace std;
 //
 //------------------------------------------------------------------------
 
-class Outil
+class Outil 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
+
+
 //----------------------------------------------------- Méthodes publiques
     void lancerOutil();
 	
@@ -57,6 +61,29 @@ public:
     void SetFichierAttributs(string fichierAttributs);
 
 	vector<Capteur> GetListeCapteurs() const;
+
+	void setListeCapteurs(vector<Capteur> capteurs);
+	
+	vector<Attribut> GetListeAttributs();
+
+	void setListeAttributs(vector<Attribut> attributs);
+
+	set<Capteur> * verifierCapteurs(const Contexte * contexte) const;
+	//Mode d'emploi :
+	//méthode permettant de vérifier le bon fonctionnement des capteurs
+	//durant la période définie dans l'objet Contexte passé en paramètre.
+	//Elle retourne la liste des capteurs n'ayant pas effectué de mesures
+	//pendant cette période.
+
+	map<string, double> calculerQualiteMoyenne(const Contexte * contexte);
+	//Mode d'emploi :
+	//méthode permettant de calculer la qualité moyenne de l'air dans la zone
+	//définie par le contexte passé en paramètre.
+	//Si une date de fin est définie dans le contexte, le calcul
+	//est fait entre la date de début et cette date de fin. Sinon, le calcul est 
+	//effectué à un moment donné, correspondant à la date de début renseignée.
+	//La méthode retourne la map qui à chaque type de gaz associe les moyennes
+	//des mesures effectuées dans le contexte.
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -85,23 +112,6 @@ protected:
 	//durant la période définie dans l'objet Contexte passé en paramètre.
 	//Elle retourne la liste des capteurs ayant effectué des mesures abherrantes
 	//sur cette période.
-
-	set<Capteur> * verifierCapteurs(const Contexte * contexte) const;
-	//Mode d'emploi :
-	//méthode permettant de vérifier le bon fonctionnement des capteurs
-	//durant la période définie dans l'objet Contexte passé en paramètre.
-	//Elle retourne la liste des capteurs n'ayant pas effectué de mesures
-	//pendant cette période.
-
-	map<string, double> calculerQualiteMoyenne(const Contexte * contexte);
-	//Mode d'emploi :
-	//méthode permettant de calculer la qualité moyenne de l'air dans la zone
-	//définie par le contexte passé en paramètre.
-	//Si une date de fin est définie dans le contexte, le calcul
-	//est fait entre la date de début et cette date de fin. Sinon, le calcul est 
-	//effectué à un moment donné, correspondant à la date de début renseignée.
-	//La méthode retourne la map qui à chaque type de gaz associe les moyennes
-	//des mesures effectuées dans le contexte.
 
 	multimap<pair<Capteur, Capteur>,string> chercherCaptSimilaires(const Contexte * contexte);
 	//Mode d'emploi :
@@ -147,6 +157,8 @@ protected:
 	vector<Attribut> listeAttributs;
 	//liste de tous les types de mesures effectuées par les capteurs
 	//initialisée par la lecture du fichier fichiersAttributs
+
+	
 };
 
 

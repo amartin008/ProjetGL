@@ -117,8 +117,6 @@ void Outil::lancerOutil() {
 										cout << "Aucun couple de capteurs n'a un comportement similaire dans cette zone" << endl;
 									}
 
-									
-									
 									break;
 								case 3:
 									cout << "Recherche des caracteristiques de l'air a un point donne" << endl;
@@ -863,7 +861,3 @@ multimap<pair<Capteur, Capteur>, string> Outil::chercherCaptSimilaires(const Con
 	return capteursSimilaires;
 
 }
-
-
-
-
