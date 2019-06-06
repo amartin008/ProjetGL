@@ -71,7 +71,6 @@ namespace UnitTest1
 			outil->SetFichierMesures("../ProjetGlUml/data_folder/MesuresTestVerifierCapteurs.csv");
 			Contexte * contexte = new Contexte(Date(2017,1,1,0,0,0),Date(2017,1,1,0,30,0));
 
-
 			string tmp;
 			Capteur capteur;
 			ifstream flux(outil ->GetFichierCapteurs());
@@ -101,6 +100,90 @@ namespace UnitTest1
 			Assert::AreEqual(
 				true,
 				resultat,
+				L"Test failed",
+				LINE_INFO()
+			);
+
+		}
+
+		TEST_METHOD(TestCalculerQualiteMoyenne)
+		{
+			Outil * outil = new Outil();
+			outil->SetFichierCapteurs("../ProjetGlUml/data_folder/CapteursTest.csv");
+			outil->SetFichierAttributs("../ProjetGlUml/data_folder/attributs.csv");
+			outil->SetFichierMesures("../ProjetGlUml/data_folder/MesuresTestCalculQualiteMoyenne.csv");
+
+
+			string tmp;
+
+			//remplissage de la liste de capteurs
+			Capteur capteur;
+			ifstream flux(outil->GetFichierCapteurs());
+			vector<Capteur> listeCapteurs;
+			getline(flux, tmp);
+			while (flux >> capteur) {
+				listeCapteurs.push_back(capteur);
+			}
+			outil->setListeCapteurs(listeCapteurs);
+
+
+			//remplissage de la liste d'attributs
+			Attribut attribut;
+			ifstream flux2(outil->GetFichierAttributs());
+			vector<Attribut> listeAttributs;
+			getline(flux2, tmp);
+			while (flux2 >> attribut) {
+				listeAttributs.push_back(attribut);
+			}
+			outil->setListeAttributs(listeAttributs);
+
+			Contexte * contexte = new Contexte(10.0, Point(10.0, 10.0));
+			Date debut = Date(2017, 1, 1, 0, 0, 0);
+			Date fin = Date(2017, 12, 31, 23, 59, 59);
+			contexte->SetDateDebut(debut);
+			contexte->SetDateFin(fin);
+
+			map<string, double> resultats = outil ->calculerQualiteMoyenne(contexte);
+			
+
+			double moyO3 = 11.51;
+			double moyNo2 = 31.00;
+			double moySo2 = 10.92;
+			double moyPM10 = 0.52;
+
+			double resultatO3 = resultats.at("O3");
+			double resultatNO2 = resultats.at("NO2");
+			double resultatSO2 = resultats.at("SO2");
+			double resultatPM10 = resultats.at("PM10");
+
+			Assert::AreEqual(
+				moyO3,
+				resultatO3,
+				0.01,
+				L"Test failed",
+				LINE_INFO()
+			);
+
+			Assert::AreEqual(
+				moyNo2,
+				resultatNO2,
+				0.01,
+				L"Test failed",
+				LINE_INFO()
+			);
+
+			Assert::AreEqual(
+				moySo2,
+				resultatSO2,
+				0.01,
+				L"Test failed",
+				LINE_INFO()
+			);
+
+			Assert::AreEqual(
+				moyPM10,
+				resultatPM10,
+				0.01,
 				L"Test failed",
 				LINE_INFO()
 			);
