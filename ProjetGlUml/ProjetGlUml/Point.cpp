@@ -43,6 +43,9 @@ void Point::SetLongitude(double lng)
 	longitude = lng;
 }
 
+double Point::GetDistance(Point p) {
+	return sqrt(pow(latitude - p.GetLatitude(),2) + pow(longitude - p.GetLongitude(),2));
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 

@@ -23,9 +23,14 @@ class Point
 public:
 	//----------------------------------------------------- Méthodes publiques
 	double GetLatitude() const;
+
 	void SetLatitude(double lat);
+
 	double GetLongitude() const;
+
 	void SetLongitude(double lng);
+
+	double GetDistance(Point p);
 
 	//-------------------------------------------- Constructeurs - destructeurs
 	Point();

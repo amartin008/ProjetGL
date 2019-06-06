@@ -72,6 +72,9 @@ void Outil::lancerOutil() {
 						if (cin.good()) {
 							switch (choix) {
 								case 1:
+									cout << "Calcul de la qualite de l'air" << endl;
+									cout << endl;
+
 									contexte = saisieDate();
 									contexte->SetPoint(*saisiePoint());
 
@@ -120,6 +123,15 @@ void Outil::lancerOutil() {
 								case 3:
 									cout << "Recherche des caracteristiques de l'air a un point donne" << endl;
 									cout << endl;
+
+									cout << "Saisie du centre :" << endl;
+
+									contexte->SetPoint(*saisiePoint());
+
+									for (pair<string, double> p : trouverValeursCaract(contexte)) {
+										cout << p.first << " : " << p.second << endl;
+									}
+
 									break;
 								case 4:
 									quitterAnalyse = 1;
@@ -683,28 +695,115 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 }
 
 map <string, double> Outil::trouverValeursCaract(const Contexte* contexte) {
+	ifstream flux(fichierMesures);
+
 	map <string, double> valeursCaract;
-	set<string> capteurConcernee;
+	map<double, string> distanceCapteurs;
+	
+	pair<string, double> captDedans;
+	map<string, double> captDehors;
+	bool dehors = false;
+
+	Mesure mesure;
+	string tmp;
 
 	for (Capteur c : listeCapteurs) {
-		if (contexte->EstDedans(c.GetLocalisation())) {
-			capteurConcernee.insert(c.GetId());
-		}
+		double distance = c.GetLocalisation().GetDistance(contexte->GetPoint());
+		distanceCapteurs.insert(make_pair(distance, c.GetId()));
 	}
 
-	if (capteurConcernee.empty()) {
+	if ((*distanceCapteurs.begin()).first > 30) {
+		dehors = true;
+		for (pair<double, string> p : distanceCapteurs) {
+			if (captDehors.size() <= 4) {
+				captDehors.insert(make_pair(p.second, p.first));
+			}
+			else {
+				break;
+			}
+		}
+	}
+	else {
+		captDedans = make_pair((*distanceCapteurs.begin()).second, (*distanceCapteurs.begin()).first);
+	}
 
+	getline(flux, tmp);
+	if (dehors) {
+
+		map<pair<string, string>, double> nbMesures;
+		map<pair<string, string>, int> compteur;
+		map<pair<string, string>, double*> dixDerniers;
+		map<string, double> sommeDistance;
+
+		for (pair<string,double> c : captDehors) {
+			for (Attribut a : listeAttributs) {
+				dixDerniers.insert(make_pair(make_pair(c.first, a.GetId()), new double[10]));
+				compteur.insert(make_pair(make_pair(c.first, a.GetId()), 0));
+			}
+		}
+
+		while (flux >> mesure) {
+			if (captDehors.find(mesure.GetIdCapteur) != captDehors.end()) {
+				dixDerniers[make_pair(mesure.GetIdCapteur, mesure.GetIdAttribut())][compteur[make_pair(mesure.GetIdCapteur(), mesure.GetIdAttribut())]++ % 10] = mesure.GetValeur();
+			}
+		}
+
+		for (Attribut a : listeAttributs) {
+			valeursCaract[a.GetId()] = 0;
+		}
+
+		for (pair<pair<string, string>, double*> p : dixDerniers) {
+			string attrId = p.first.second;
+			string captId = p.first.first;
+
+			double sum = 0;			
+
+			for (int i = 0; i < 10; i++) {
+				sum += p.second[i];
+			}
+
+			sommeDistance[p.first.second] += 1/captDehors[p.first.second];
+			delete[] p.second;
+
+			valeursCaract[p.first.second] = sum / (captDehors[p.first.second]*10);
+		}
+
+		for (pair<string, double> p : valeursCaract) {
+			p.second /= sommeDistance[p.first];
+			valeursCaract[p.first] = p.second;
+		}
 	}
 	else {
 
-	}
+		map<string, double> nbMesures;
+		map<string, int> compteur;
+		map<string, double*> dixDerniers;
 
+		for (Attribut a : listeAttributs) {
+			dixDerniers.insert(make_pair(a.GetId(), new double[10]));
+			compteur.insert(make_pair(a.GetId(), 0));
+		}
+
+		while (flux >> mesure) {
+			if (!captDedans.first.compare(mesure.GetIdCapteur)) {
+				dixDerniers[mesure.GetIdAttribut()][compteur[mesure.GetIdAttribut()]++ % 10] = mesure.GetValeur();
+			}
+		}
+
+		for (pair<string, double*> p : dixDerniers) {
+			double sum = 0;
+			for (int i = 0; i < 10; i++) {
+				sum += p.second[i];
+			}
+			delete[] p.second;
+			valeursCaract[p.first] = sum/10;
+		}
+	}
 	return valeursCaract;
 }
 
 multimap<pair<Capteur, Capteur>, string> Outil::chercherCaptSimilaires(const Contexte * contexte)
 {
-	ifstream flux(fichierMesures);
 	set<Capteur> capteursConcernes;
 	multimap <pair<Capteur, Capteur>, string> capteursSimilaires;
 	map<pair<string, string>, double> moyenneCapteursConcernes;
