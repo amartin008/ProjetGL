@@ -100,7 +100,9 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	Contexte * saisieDate();
+	Contexte * saisieDatePeriode();
+
+	Contexte* saisieDateMoment();
 
 	Point * saisiePoint();
 
