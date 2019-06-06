@@ -10,8 +10,10 @@
 #define OUTIL_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <iostream>
+
 using namespace std;
+
+#include <iostream>
 #include <string>
 #include <map>
 #include <set>
@@ -36,11 +38,13 @@ using namespace std;
 //
 //------------------------------------------------------------------------
 
-class Outil
+class Outil 
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
+
+
 //----------------------------------------------------- Méthodes publiques
     void lancerOutil();
 	
@@ -57,6 +61,15 @@ public:
     void SetFichierAttributs(string fichierAttributs);
 
 	vector<Capteur> GetListeCapteurs() const;
+
+	void setListeCapteurs(vector<Capteur> capteurs);
+
+	set<Capteur> * verifierCapteurs(const Contexte * contexte) const;
+	//Mode d'emploi :
+	//méthode permettant de vérifier le bon fonctionnement des capteurs
+	//durant la période définie dans l'objet Contexte passé en paramètre.
+	//Elle retourne la liste des capteurs n'ayant pas effectué de mesures
+	//pendant cette période.
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -86,12 +99,6 @@ protected:
 	//Elle retourne la liste des capteurs ayant effectué des mesures abherrantes
 	//sur cette période.
 
-	set<Capteur> * verifierCapteurs(const Contexte * contexte) const;
-	//Mode d'emploi :
-	//méthode permettant de vérifier le bon fonctionnement des capteurs
-	//durant la période définie dans l'objet Contexte passé en paramètre.
-	//Elle retourne la liste des capteurs n'ayant pas effectué de mesures
-	//pendant cette période.
 
 	map<string, double> calculerQualiteMoyenne(const Contexte * contexte);
 	//Mode d'emploi :
@@ -147,6 +154,8 @@ protected:
 	vector<Attribut> listeAttributs;
 	//liste de tous les types de mesures effectuées par les capteurs
 	//initialisée par la lecture du fichier fichiersAttributs
+
+	
 };
 
 

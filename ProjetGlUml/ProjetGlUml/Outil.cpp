@@ -266,6 +266,11 @@ vector<Capteur> Outil::GetListeCapteurs() const
 	return listeCapteurs;
 }
 
+void Outil::setListeCapteurs(vector<Capteur> capteurs)
+{
+	this->listeCapteurs = capteurs;
+}
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 //Outil & Outil::operator = ( const Outil & unOutil )
@@ -293,6 +298,7 @@ Outil::Outil()
 	#ifdef MAP
 		cout << "Appel au constructeur par défaut de <Outil>" << endl;
 	#endif
+	
 } //----- Fin de Outil (constructeur par défaut)
 
 

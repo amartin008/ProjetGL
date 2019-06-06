@@ -15,12 +15,14 @@ namespace UnitTest1
 	TEST_CLASS(UnitTest1)
 	{
 	public:
+
+		// TESTS UNITAIRES
 		
 		TEST_METHOD(TestEstDedansPoint)
 		{
 			Contexte contexte(10.0,Point(-5.0,50.0));
 			bool res1 = contexte.EstDedans(Point(-5.0,50.0));
-			bool res2 = contexte.EstDedans(Point(-5.1, 51.0));
+			bool res2 = contexte.EstDedans(Point(-75.1, 51.0));
 
 			Assert::AreEqual(
 				true,
@@ -58,63 +60,51 @@ namespace UnitTest1
 			);
 		}
 
+
+		// TESTS D'INTEGRATION
+
 		TEST_METHOD(TestVerifierCapteurs)
 		{
 			Outil * outil = new Outil();
-			outil->SetFichierCapteurs("data_folder/capteurs.csv");
-			outil->SetFichierAttributs("data_folder/attributs.csv");
-			outil->SetFichierMesures("data_folder/MesuresTestVerifierCapteurs.csv");
+			outil->SetFichierCapteurs("../ProjetGlUml/data_folder/capteurs.csv");
+			outil->SetFichierAttributs("../ProjetGlUml/data_folder/attributs.csv");
+			outil->SetFichierMesures("../ProjetGlUml/data_folder/MesuresTestVerifierCapteurs.csv");
 			Contexte * contexte = new Contexte(Date(2017,1,1,0,0,0),Date(2017,1,1,0,30,0));
 
-			set<string> capteursFonctionnels;
-			set<Capteur> capteursDefectueux;
-			ifstream flux(outil->GetFichierMesures());
-			Mesure mesure;
+
 			string tmp;
+			Capteur capteur;
+			ifstream flux(outil ->GetFichierCapteurs());
+			vector<Capteur> listeCapteurs;
 			getline(flux, tmp);
-			while (flux >> mesure)
-			{
-				if (contexte->EstDedans(mesure.GetDate()))
-				{
-					capteursFonctionnels.insert(mesure.GetIdCapteur());
-				}
+			while (flux >> capteur) {
+				listeCapteurs.push_back(capteur);
 			}
-			vector<Capteur> listeCapteurs = outil->GetListeCapteurs();
-			for (vector<Capteur>::const_iterator it = listeCapteurs.cbegin(); it != listeCapteurs.cend(); ++it)
-			{
-				if (capteursFonctionnels.find(it->GetId()) == capteursFonctionnels.end())
-				{
-					capteursDefectueux.insert(*it);
-				}
-			}
-			delete contexte;
-			delete outil;
+			outil->setListeCapteurs(listeCapteurs);
+			set<Capteur>* capteursDefectueux =  outil->verifierCapteurs(contexte);
 
 			set<string> resultatAttendu;
-			ifstream fluxResultat("data_folder/ResultatTestVerifierCapteurs.csv");
-			while (getline(fluxResultat, tmp))
+			set<string> resultatObtenu;
+
+			ifstream flux2("../ProjetGlUml/data_folder/ResultatTestVerifierCapteurs.csv");
+			while (getline(flux2, tmp))
 			{
 				resultatAttendu.insert(tmp);
 			}
 
-			set<string> resultatObtenu;
-			for (set<Capteur>::const_iterator it = capteursDefectueux.cbegin(); it != capteursDefectueux.cend(); ++it)
-			{
-				resultatObtenu.insert(it->GetId());
+			for (auto e : *capteursDefectueux) {
+				resultatObtenu.insert(e.GetId());
 			}
 
-			bool res = false;
-			if (resultatObtenu == resultatAttendu)
-			{
-				res = true;
-			}
+			bool resultat = (resultatAttendu == resultatObtenu);
 
 			Assert::AreEqual(
 				true,
-				res,
+				resultat,
 				L"Test failed",
 				LINE_INFO()
 			);
+
 		}
 	};
 }
