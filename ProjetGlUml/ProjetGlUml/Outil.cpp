@@ -289,6 +289,20 @@ vector<Capteur> Outil::GetListeCapteurs() const
 	return listeCapteurs;
 }
 
+void Outil::setListeCapteurs(vector<Capteur> v) 
+{
+	listeCapteurs = v;
+}
+
+vector<Attribut> Outil::GetListeAttributs()
+{
+	return listeAttributs;
+}
+
+void Outil::setListeAttributs(vector<Attribut> attributs)
+{
+	this->listeAttributs = attributs;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 //Outil & Outil::operator = ( const Outil & unOutil )
@@ -784,11 +798,11 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 			it = moyenneValeurs.find(mesure.GetIdAttribut());
 			if (it != moyenneValeurs.end()) {
 				it->second += mesure.GetValeur();
-				nbMesures[mesure.GetIdAttribut()]++;
 			}
 			else {
 				moyenneValeurs[mesure.GetIdAttribut()] = mesure.GetValeur();
 			}
+			nbMesures[mesure.GetIdAttribut()]++;
 		}
 	}
 	for (pair<string,double> p : moyenneValeurs) {

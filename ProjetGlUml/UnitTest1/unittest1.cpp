@@ -145,6 +145,8 @@ namespace UnitTest1
 
 			map<string, double> resultats = outil ->calculerQualiteMoyenne(contexte);
 			
+			outil->SetFichierMesures("../ProjetGlUml/data_folder/MesuresTestCalculQualiteMoyenne.csv");
+
 
 			double moyO3 = 11.51;
 			double moyNo2 = 31.00;
