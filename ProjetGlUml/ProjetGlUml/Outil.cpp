@@ -786,6 +786,12 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 	Mesure mesure;
 	string tmp;
 
+	bool moment = false;
+
+	if (contexte->GetDebut() == contexte->GetFin()) {
+		moment = true;
+	}
+
 	for (Capteur c : listeCapteurs) {
 		if (contexte->EstDedans(c.GetLocalisation())) {
 			capteurConcernee.insert(c.GetId());
@@ -794,15 +800,38 @@ map<string, double> Outil::calculerQualiteMoyenne(const Contexte* contexte) {
 
 	getline(flux, tmp);
 	while (flux >> mesure) {
-		if (capteurConcernee.find(mesure.GetIdCapteur()) != capteurConcernee.end() && contexte->EstDedans(mesure.GetDate())) {
-			it = moyenneValeurs.find(mesure.GetIdAttribut());
-			if (it != moyenneValeurs.end()) {
-				it->second += mesure.GetValeur();
+		if (!moment) {
+			if (capteurConcernee.find(mesure.GetIdCapteur()) != capteurConcernee.end() && contexte->EstDedans(mesure.GetDate())) {
+				it = moyenneValeurs.find(mesure.GetIdAttribut());
+				if (it != moyenneValeurs.end()) {
+					it->second += mesure.GetValeur();
+				}
+				else {
+					moyenneValeurs[mesure.GetIdAttribut()] = mesure.GetValeur();
+				}
+				nbMesures[mesure.GetIdAttribut()]++;
 			}
-			else {
-				moyenneValeurs[mesure.GetIdAttribut()] = mesure.GetValeur();
+		}
+		else {
+			unsigned int compteur = 0;
+			Date instantDate = contexte->GetDebut();
+
+			for (Attribut a : listeAttributs) {
+				nbMesures[a.GetId()] = capteurConcernee.size();
 			}
-			nbMesures[mesure.GetIdAttribut()]++;
+
+			if (capteurConcernee.find(mesure.GetIdCapteur()) != capteurConcernee.end() && contexte->GetDebut() <= mesure.GetDate()) {
+				if (compteur++ > listeAttributs.size() * capteurConcernee.size()) {
+					break;
+				}
+				it = moyenneValeurs.find(mesure.GetIdAttribut());
+				if (it != moyenneValeurs.end()) {
+					it->second += mesure.GetValeur();
+				}
+				else {
+					moyenneValeurs[mesure.GetIdAttribut()] = mesure.GetValeur();
+				}
+			}
 		}
 	}
 	for (pair<string,double> p : moyenneValeurs) {

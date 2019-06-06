@@ -51,6 +51,8 @@ public:
 
 	friend bool operator <= (const Date & d1, const Date & d2);
 
+	bool operator == (const Date & d);
+
 //-------------------------------------------- Constructeurs - destructeur
 	
     Date();

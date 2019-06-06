@@ -88,8 +88,7 @@ void Date::SetSec(int sec)
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-bool operator <= (const Date & d1, const Date & d2)
-{
+bool operator <= (const Date & d1, const Date & d2) {
 	if (d1.annee < d2.annee) {
 		return true;
 	} else if (d1.annee == d2.annee) {
@@ -116,15 +115,50 @@ bool operator <= (const Date & d1, const Date & d2)
 	return false;
 }
 
+bool Date::operator == (const Date& d) {
+	if (annee == d.annee) {
+		if (mois == d.mois) {
+			if (jour == d.jour) {
+				if (heure == d.heure) {
+					if (min == d.min) {
+						if (sec == d.sec) {
+							return true;
+						}
+						else {
+							return false;
+						}
+					}
+					else {
+						return false;
+					}
+				}
+				else {
+					return false;
+				}
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
+
 
 //-------------------------------------------- Constructeurs - destructeur
 
 
 Date::Date()
+	:annee(0), mois(0), jour(0), heure(0), min(0), sec(0)
 {
-	#ifdef MAP
-	    cout << "Appel au constructeur par défaut de <Date>" << endl;
-	#endif
+#ifdef MAP
+	cout << "Appel au constructeur par défaut de <Date>" << endl;
+#endif
 } //----- Fin de Date (constructeur par défaut)
 
 Date::Date (int annee, int mois, int jour, int heure, int min, int sec)

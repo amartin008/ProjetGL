@@ -52,6 +52,7 @@ double Point::GetDistance(Point p) {
 //-------------------------------------------- Constructeurs - destructeur
 
 Point::Point()
+	:latitude(0), longitude(0)
 {
 #ifdef MAP
 	cout << "Appel au constructeur par défaut de <Point>" << endl;
